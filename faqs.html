@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQs — Dekoris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .faq-content { background: var(--white); }
+    .faq-category {
+      margin-bottom: 48px;
+    }
+    .faq-category-title {
+      font-family: var(--font-body); font-size: 12px;
+      color: var(--gold); letter-spacing: 3px;
+      text-transform: uppercase; font-weight: 600;
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--cream-dark); overflow: hidden;
+    }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 0; cursor: pointer; gap: 20px;
+      transition: color 0.3s;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-question h3 {
+      font-family: var(--font-heading); font-size: 20px;
+      font-weight: 600; flex: 1;
+    }
+    .faq-toggle {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid var(--cream-dark); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+    }
+    .faq-toggle svg {
+      width: 14px; height: 14px; stroke: var(--gold);
+      fill: none; stroke-width: 2; transition: transform 0.3s;
+    }
+    .faq-item.open .faq-toggle {
+      background: var(--gold); border-color: var(--gold);
+    }
+    .faq-item.open .faq-toggle svg {
+      stroke: var(--white); transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px; padding-bottom: 20px;
+    }
+    .faq-answer p {
+      font-size: 15px; color: var(--text-body); line-height: 1.8;
+      max-width: 700px;
+    }
+
+    .faq-cta {
+      background: var(--cream); text-align: center;
+      padding: 80px 40px;
+    }
+    .faq-cta h2 {
+      font-family: var(--font-heading); font-size: clamp(28px, 4vw, 42px);
+      color: var(--text-dark); font-weight: 600; margin-bottom: 12px;
+    }
+    .faq-cta p {
+      font-size: 16px; color: var(--text-body); margin-bottom: 28px;
+    }
+
+    @media (max-width: 768px) {
+      .faq-question h3 { font-size: 17px; }
+      .faq-cta { padding: 60px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav"><div class="nav-inner"><a href="index.html" class="nav-logo"><span class="nav-logo-text">DEKORIS</span><span class="nav-logo-tagline">Crafting Beautiful Spaces</span></a><div class="nav-links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="gallery.html">Gallery</a><a href="inspiration.html">Inspiration</a><a href="faqs.html" class="active">FAQs</a><a href="contact.html">Contact</a><a href="quote.html" class="nav-cta">Get a Quote</a></div><button class="nav-mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="page-hero">
+    <div class="section-label">Support</div>
+    <h1>Frequently Asked Questions</h1>
+    <p>Everything you need to know about our products, services, and process.</p>
+  </div>
+
+  <section class="section faq-content">
+    <div class="section-inner" style="max-width: 800px;">
+
+      <div class="faq-category fade-up">
+        <div class="faq-category-title">General</div>
+        <div class="faq-item open">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>What areas do you serve?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>We are based in Windhoek and serve clients across Namibia. For projects outside Windhoek, please contact us to discuss logistics and availability.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Do you offer free consultations?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Yes. We offer complimentary in-home or on-site consultations where we assess your space, discuss your preferences, and take professional measurements.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-category fade-up">
+        <div class="faq-category-title">Products</div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>What types of blinds and curtains do you offer?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>We offer a wide range including Roman blinds, Venetian blinds, Honeycomb blinds (25mm and 38mm), Zebra blinds, Roller blinds, and custom curtains. All are available in a variety of colours and fabrics.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Do you offer motorised blinds?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Yes. We offer both manual and motorised options for most of our blind and curtain products. Motorised solutions are ideal for hard-to-reach windows or for added convenience.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Can I see samples before ordering?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Absolutely. During your consultation, we bring fabric and material samples so you can see and feel the options in your own space before making a decision.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-category fade-up">
+        <div class="faq-category-title">Pricing & Orders</div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>How is pricing determined?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Pricing depends on the product type, window dimensions, fabric selection, and whether you choose manual or motorised operation. We provide a detailed quote after your consultation and measurement.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Do you require a deposit?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Yes, a deposit is required to confirm your order and begin manufacturing. The balance is due upon completion of installation. Full details are provided with your quote.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>How long does delivery and installation take?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Turnaround times vary depending on the product and order size, but most orders are manufactured and installed within 2–3 weeks of confirmation.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-category fade-up">
+        <div class="faq-category-title">Installation & Aftercare</div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Do you handle the full installation?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Yes. Our team handles everything from measurement to final installation. You don't need to arrange anything separately.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>What if something goes wrong after installation?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>We stand behind our work. If you experience any issues after installation, contact us and we'll arrange a service visit to resolve it.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <h3>Do you work with businesses and institutions?</h3>
+            <div class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-answer"><p>Yes. We provide commercial installations for offices, healthcare facilities, hospitality venues, and other institutional spaces. We can handle large-scale projects with multiple windows and rooms.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="faq-cta">
+    <h2>Still Have Questions?</h2>
+    <p>We're happy to help. Reach out and we'll get back to you as soon as possible.</p>
+    <a href="contact.html" class="btn btn-gold">Contact Us</a>
+  </section>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="nav-logo"><span class="nav-logo-text">DEKORIS</span><span class="nav-logo-tagline">Crafting Beautiful Spaces</span></div><p>Proudly Namibian, 100% female-owned interiors company delivering premium blinds, curtains, and décor solutions.</p></div><div><div class="footer-heading">Navigation</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="contact.html">Contact Us</a></li></ul></div><div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a href="tel:+264816430940">+264 81 6430940</a></li><li><a href="/cdn-cgi/l/email-protection#bdcec9d8d1d1dcfdd9d8d6d2cfd4ce93ded2d093d3dc"><span class="__cf_email__" data-cfemail="e29196878e8e83a28687898d908b91cc818d8fcc8c83">[email&#160;protected]</span></a></li><li><a href="https://www.dekoris.com.na">www.dekoris.com.na</a></li><li><a href="https://wa.me/264816430940">WhatsApp</a></li></ul></div><div class="footer-newsletter"><div class="footer-heading">Subscribe for Updates</div><p>Get the latest on new products, trends, and exclusive offers.</p><div class="footer-newsletter-form"><input type="email" placeholder="Your email"><button>Subscribe</button></div></div></div><div class="footer-bottom"><p>&copy; 2026 Dekoris. All rights reserved.</p><p>Website by <a href="http://www.fontein.digital" target="_blank">Fontein.Digital</a></p></div></footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const wasOpen = i

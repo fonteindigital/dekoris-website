@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Quote — Dekoris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .process-section { background: var(--cream); padding: 60px 40px; }
+    .process-inner { max-width: 1100px; margin: 0 auto; }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+      position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute;
+      top: 24px; left: 8%; right: 8%;
+      height: 2px; background: var(--cream-dark);
+    }
+    .process-step { text-align: center; position: relative; z-index: 1; }
+    .process-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--gold); color: var(--white);
+      font-family: var(--font-heading); font-size: 20px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .process-label {
+      font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px;
+    }
+    .process-desc { font-size: 11px; color: var(--text-light); line-height: 1.5; }
+
+    .quote-section { background: var(--white); }
+    .quote-form-container { max-width: 720px; margin: 0 auto; }
+
+    .form-group { margin-bottom: 24px; }
+    .form-group-title {
+      font-family: var(--font-body); font-size: 12px;
+      color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 16px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-row-2 { grid-template-columns: 1fr 1fr; }
+
+    .quote-form label {
+      font-size: 12px; color: var(--text-light); text-transform: uppercase;
+      letter-spacing: 1px; font-weight: 500; margin-bottom: 6px; display: block;
+    }
+    .quote-form input,
+    .quote-form textarea,
+    .quote-form select {
+      width: 100%; padding: 14px 18px;
+      background: var(--white); border: 1.5px solid var(--cream-dark);
+      border-radius: 6px; color: var(--text-dark);
+      font-family: var(--font-body); font-size: 14px;
+      transition: border-color 0.3s; outline: none;
+    }
+    .quote-form input:focus,
+    .quote-form textarea:focus,
+    .quote-form select:focus { border-color: var(--gold); }
+    .quote-form textarea { height: 120px; resize: vertical; }
+    .quote-form select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A8480' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center;
+    }
+
+    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .radio-option {
+      padding: 10px 20px; border: 1.5px solid var(--cream-dark);
+      border-radius: 6px; cursor: pointer; font-size: 13px;
+      color: var(--text-body); transition: all 0.3s; font-weight: 500;
+    }
+    .radio-option:hover { border-color: var(--gold); }
+    .radio-option.selected {
+      background: var(--gold); color: var(--white); border-color: var(--gold);
+    }
+    .radio-option input { display: none; }
+
+    .size-presets { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .size-preset {
+      padding: 12px 8px; border: 1.5px solid var(--cream-dark);
+      border-radius: 6px; text-align: center; cursor: pointer;
+      transition: all 0.3s; font-size: 12px; color: var(--text-body);
+    }
+    .size-preset:hover { border-color: var(--gold); }
+    .size-preset.selected { background: var(--charcoal); color: var(--white); border-color: var(--charcoal); }
+    .size-preset strong { display: block; font-size: 13px; margin-bottom: 2px; }
+
+    .window-counter {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .counter-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1.5px solid var(--cream-dark); background: var(--white);
+      font-size: 20px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      transition: all 0.3s; color: var(--text-dark);
+    }
+    .counter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .counter-value {
+      font-size: 24px; font-weight: 700; color: var(--text-dark);
+      min-width: 40px; text-align: center;
+      font-family: var(--font-heading);
+    }
+
+    .quote-form .btn-gold {
+      border: none; cursor: pointer; font-family: var(--font-body);
+      width: 100%; padding: 16px; font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .process-steps { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .process-steps::before { display: none; }
+      .process-section { padding: 48px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .size-presets { grid-template-columns: repeat(2, 1fr); }
+      .radio-group { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav"><div class="nav-inner"><a href="index.html" class="nav-logo"><span class="nav-logo-text">DEKORIS</span><span class="nav-logo-tagline">Crafting Beautiful Spaces</span></a><div class="nav-links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="gallery.html">Gallery</a><a href="inspiration.html">Inspiration</a><a href="faqs.html">FAQs</a><a href="contact.html">Contact</a><a href="quote.html" class="nav-cta active">Get a Quote</a></div><button class="nav-mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="page-hero">
+    <div class="section-label">Free Quote</div>
+    <h1>Request a Quote</h1>
+    <p>Tell us about your space and we'll get back to you with a tailored solution.</p>
+  </div>
+
+  <section class="process-section">
+    <div class="process-inner">
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-num">1</div>
+          <div class="process-label">Enquire</div>
+          <div class="process-desc">Tell us your preferences</div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">2</div>
+          <div class="process-label">Consult</div>
+          <div class="process-desc">Free on-site consultation</div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">3</div>
+          <div class="process-label">Measure</div>
+          <div class="process-desc">Professional measurements</div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">4</div>
+          <div class="process-label">Quote</div>
+          <div class="process-desc">Detailed, no obligation</div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">5</div>
+          <div class="process-label">Install</div>
+          <div class="process-desc">Manufacture & install</div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">6</div>
+          <div class="process-label">Aftercare</div>
+          <div class="process-desc">Ongoing support</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quote-section">
+    <div class="section-inner">
+      <div class="quote-form-container">
+        <form class="quote-form" onsubmit="return false;">
+
+          <div class="form-group fade-up">
+            <div class="form-group-title">Your Details</div>
+            <div class="form-row form-row-2" style="margin-bottom: 16px;">
+              <div><label>Full Name</label><input type="text" placeholder="Full Name" required></div>
+              <div><label>Phone Number</label><input type="tel" placeholder="+264..." required></div>
+            </div>
+            <div><label>Email</label><input type="email" placeholder="Email Address" required></div>
+          </div>
+
+          <div class="form-group fade-up">
+            <div class="form-group-title">Product Selection</div>
+            <div class="form-row form-row-2" style="margin-bottom: 16px;">
+              <div>
+                <label>Product Type</label>
+                <select required>
+                  <option value="">Select a product...</option>
+                  <option>Roman Blinds</option>
+                  <option>Venetian Blinds</option>
+                  <option>Honeycomb 38mm Blinds</option>
+                  <option>Honeycomb 25mm Blinds</option>
+                  <option>Zebra Blinds</option>
+                  <option>Roller Blinds</option>
+                  <option>Curtains</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label>Colour Preference</label>
+                <select>
+                  <option value="">Select a colour...</option>
+                  <option>White</option>
+                  <option>Cream</option>
+                  <option>Beige</option>
+                  <option>Grey</option>
+                  <option>Charcoal</option>
+                  <option>Brown</option>
+                  <option>Black</option>
+                  <option>Other (specify in notes)</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label>Operation Type</label>
+              <div class="radio-group">
+                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="manual">Manual</label>
+                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="motorised">Motorised</label>
+                <label class="radio-option selected" onclick="selectRadio(this)"><input type="radio" name="operation" value="unsure" checked>Not sure yet</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group fade-up">
+            <div class="form-group-title">Window Details</div>
+            <div style="margin-bottom: 20px;">
+              <label>Number of Windows</label>
+              <div class="window-counter">
+                <button type="button" class="counter-btn" onclick="changeCount(-1)">−</button>
+                <div class="counter-value" id="windowCount">1</div>
+                <button type="button" class="counter-btn" onclick="changeCount(1)">+</button>
+              </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label>Approximate Window Size</label>
+              <div class="size-presets">
+                <div class="size-preset" onclick="selectSize(this)"><strong>Small</strong>up to 600×900mm</div>
+                <div class="size-preset selected" onclick="selectSize(this)"><strong>Medium</strong>up to 1200×1500mm</div>
+                <div class="size-preset" onclick="selectSize(this)"><strong>Large</strong>up to 1800×2100mm</div>
+                <div class="size-preset" onclick="selectSize(this)"><strong>XL / Slider</strong>2400mm+</div>
+                <div class="size-preset" onclick="selectSize(this)"><strong>Custom</strong>specify below</div>
+              </div>
+            </div>
+            <div>
+              <label>Space Type</label>
+              <select>
+                <option value="">Select space type...</option>
+                <option>Living Room</option>
+                <option>Bedroom</option>
+                <option>Kitchen</option>
+                <option>Bathroom</option>
+                <option>Office</option>
+                <option>Conference Room</option>
+                <option>Healthcare Facility</option>
+                <option>Hotel / Lodge</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group fade-up">
+            <div class="form-group-title">Additional Information</div>
+            <textarea placeholder="Any special requirements, custom dimensions, or questions..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-gold fade-up">Get My Quote</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="nav-logo"><span class="nav-logo-text">DEKORIS</span><span class="nav-logo-tagline">Crafting Beautiful Spaces</span></div><p>Proudly Namibian, 100% female-owned interiors company delivering premium blinds, curtains, and décor solutions.</p></div><div><div class="footer-heading">Navigation</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="contact.html">Contact Us</a></li></ul></div><div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a href="tel:+264816430940">+264 81 6430940</a></li><li><a href="/cdn-cgi/l/email-protection#0e7d7a6b62626f4e6a6b65617c677d206d616320606f"><span class="__cf_email__" data-cfemail="d5a6a1b0b9b9b495b1b0bebaa7bca6fbb6bab8fbbbb4">[email&#160;protected]</span></a></li><li><a href="https://www.dekoris.com.na">www.dekoris.com.na</a></li><li><a href="https://wa.me/264816430940">WhatsApp</a></li></ul></div><div class="footer-newsletter"><div class="footer-heading">Subscribe for Updates</div><p>Get the latest on new products, trends, and exclusive offers.</p><div class="footer-newsletter-form"><input type="email" placeholder="Your email"><button>Subscribe</button></div></div></div><div class="footer-bottom"><p>&copy; 2026 Dekoris. All rights reserved.</p><p>Website by <a href="http://www.fontein.digital" target="_blank">Fontein.Digital</a></p></div></footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    function selectRadio(el) {
+      el.closest('.radio-group').querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      el.querySelector('input').checked = true;
+    }
+    function selectSize(el) {
+      el.parentElement.querySelectorAll('.size-preset').forEach(s => s.classList.remove('selected'));
+    

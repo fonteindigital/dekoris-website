@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Dekoris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .gallery-filters {
+      display: flex; gap: 8px; justify-content: center;
+      flex-wrap: wrap; padding: 32px 40px;
+      background: var(--white); border-bottom: 1px solid var(--cream-dark);
+    }
+    .filter-btn {
+      padding: 8px 20px; border-radius: 24px; border: 1.5px solid var(--cream-dark);
+      background: var(--white); font-family: var(--font-body);
+      font-size: 13px; color: var(--text-body); cursor: pointer;
+      transition: all 0.3s; font-weight: 500;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--charcoal); color: var(--white); border-color: var(--charcoal);
+    }
+
+    .gallery-section { background: var(--cream); padding: 48px 40px 100px; }
+    .gallery-grid {
+      max-width: 1280px; margin: 0 auto;
+      columns: 3; column-gap: 16px;
+    }
+    .gallery-item {
+      break-inside: avoid; margin-bottom: 16px;
+      border-radius: 8px; overflow: hidden;
+      cursor: pointer; position: relative;
+    }
+    .gallery-item img {
+      width: 100%; display: block;
+      transition: transform 0.6s;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item-overlay {
+      position: absolute; inset: 0; background: rgba(42,38,36,0);
+      transition: background 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-item:hover .gallery-item-overlay {
+      background: rgba(42,38,36,0.3);
+    }
+    .gallery-item-overlay svg {
+      width: 32px; height: 32px; stroke: var(--white);
+      fill: none; stroke-width: 1.5;
+      opacity: 0; transition: opacity 0.3s; transform: scale(0.8);
+    }
+    .gallery-item:hover .gallery-item-overlay svg { opacity: 1; transform: scale(1); }
+
+    .gallery-cta {
+      background: var(--charcoal); text-align: center; padding: 80px 40px;
+    }
+    .gallery-cta h2 {
+      font-family: var(--font-heading); font-size: clamp(28px, 4vw, 42px);
+      color: var(--white); font-weight: 600; margin-bottom: 12px;
+    }
+    .gallery-cta p {
+      font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 28px;
+      max-width: 420px; margin-left: auto; margin-right: auto;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92); display: none;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh; object-fit: contain;
+      border-radius: 4px;
+    }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 24px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close svg { width: 20px; height: 20px; stroke: var(--white); fill: none; stroke-width: 2; }
+
+    @media (max-width: 1024px) { .gallery-grid { columns: 2; } }
+    @media (max-width: 768px) {
+      .gallery-grid { columns: 1; }
+      .gallery-section { padding: 32px 24px 64px; }
+      .gallery-filters { padding: 24px 24px; }
+      .gallery-cta { padding: 60px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav"><div class="nav-inner"><a href="index.html" class="nav-logo"><span class="nav-logo-text">DEKORIS</span><span class="nav-logo-tagline">Crafting Beautiful Spaces</span></a><div class="nav-links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="gallery.html" class="active">Gallery</a><a href="inspiration.html">Inspiration</a><a href="faqs.html">FAQs</a><a href="contact.html">Contact</a><a href="quote.html" class="nav-cta">Get a Quote</a></div><button class="nav-mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="page-hero">
+    <div class="section-label">Portfolio</div>
+    <h1>Gallery</h1>
+    <p>Explore our range of blinds, curtains, and décor — designed to elevate any space.</p>
+  </div>
+
+  <div class="gallery-filters">
+    <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+    <button class="filter-btn" onclick="filterGallery('blinds', this)">Blinds</button>
+    <button class="filter-btn" onclick="filterGallery('curtains', this)">Curtains</button>
+    <button class="filter-btn" onclick="filterGallery('spaces', this)">Spaces</button>
+  </div>
+
+  <section class="gallery-section">
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-cat="blinds" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_82d9b99e49e5477db2b11bc2790fce64~mv2.jpg/v1/fill/w_600,h_800,al_c,q_80/06bb1b_82d9b99e49e5477db2b11bc2790fce64~mv2.jpg" alt="Roman Blinds">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="blinds" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_d338777339a04a068712cbe85ac8e528~mv2.jpg/v1/fill/w_600,h_850,al_c,q_80/06bb1b_d338777339a04a068712cbe85ac8e528~mv2.jpg" alt="Venetian Blinds">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="spaces" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_7e48319a0d7b4169aa01f0916998faa4~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80/06bb1b_7e48319a0d7b4169aa01f0916998faa4~mv2.jpg" alt="Living room installation">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="blinds" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_09b6bcab4f4e4ced883e914bd0600e01~mv2.jpg/v1/fill/w_600,h_800,al_c,q_80/06bb1b_09b6bcab4f4e4ced883e914bd0600e01~mv2.jpg" alt="Honeycomb Blinds">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="blinds" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_e8582f5ccbe740289bc44f63563162e4~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80/06bb1b_e8582f5ccbe740289bc44f63563162e4~mv2.jpg" alt="Zebra Blinds">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="spaces" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_2f184c440e2346d4bc27117ed561ee96~mv2.jpg/v1/fill/w_600,h_900,al_c,q_80/06bb1b_2f184c440e2346d4bc27117ed561ee96~mv2.jpg" alt="Window treatment">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="blinds" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg/v1/fill/w_600,h_700,al_c,q_80/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg" alt="Roller Blinds">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="spaces" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_1cc1fc63dd804326b0cd0a539df6f1e8~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80/06bb1b_1cc1fc63dd804326b0cd0a539df6f1e8~mv2.jpg" alt="Room detail">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="blinds" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_673bef8b35ec45a1a71b3a2a1374c281~mv2.jpg/v1/fill/w_600,h_700,al_c,q_80/06bb1b_673bef8b35ec45a1a71b3a2a1374c281~mv2.jpg" alt="Roman Blinds Classic">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="curtains" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_79fba89213994f3fa54d53d4433bbcfd~mv2.jpg/v1/fill/w_600,h_900,al_c,q_80/06bb1b_79fba89213994f3fa54d53d4433bbcfd~mv2.jpg" alt="Curtain installation">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="spaces" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_9a271d6dfa06498c87a018ad80d7adaf~mv2.jpg/v1/fill/w_600,h_700,al_c,q_80/06bb1b_9a271d6dfa06498c87a018ad80d7adaf~mv2.jpg" alt="Interior space">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      <div class="gallery-item" data-cat="blinds" onclick="openLightbox(this)">
+        <img src="https://static.wixstatic.com/media/06bb1b_4868bf03372a428da74ad1f99b87c497~mv2.jpg/v1/fill/w_600,h_750,al_c,q_80/06bb1b_4868bf03372a428da74ad1f99b87c497~mv2.jpg" alt="Blinds detail">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-cta">
+    <h2>Love What You See?</h2>
+    <p>Let's create something beautiful for your space.</p>
+    <a href="quote.html" class="btn btn-gold">Request a Quote</a>
+  </section>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-brand"><div class="nav-logo"><span class="nav-logo-text">DEKORIS</span><span class="nav-logo-tagline">Crafting Beautiful Spaces</span></div><p>Proudly Namibian, 100% female-owned interiors company delivering premium blinds, curtains, and décor solutions.</p></div><div><div class="footer-heading">Navigation</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="contact.html">Contact Us</a></li></ul></div><div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a href="tel:+264816430940">+264 81 6430940</a></li><li><a href="/cdn-cgi/l/email-protection#e39097868f8f82a38786888c918a90cd808c8ecd8d82"><span class="__cf_email__" data-cfemail="d0a3a4b5bcbcb190b4b5bbbfa2b9a3feb3bfbdfebeb1">[email&#160;protected]</span></a></li><li><a href="https://www.dekoris.com.na">www.dekoris.com.na</a></li><li><a href="https://wa.me/264816430940">WhatsApp</a></li></ul></div><div class="footer-newsletter"><div class="footer-heading">Subscribe for Updates</div><p>Get the latest on new products, trends, and exclusive offers.</p><div class="footer-newsletter-form"><input type="email" placeholder="Your email"><button>Subscribe</button></div></div></div><div class="footer-bottom"><p>&copy; 2026 Dekoris. All rights reserved.</p><p>Website by <a href="http://www.fontein.digital" target="_blank">Fontein.Digital</a></p></div></footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20); });
+
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+
+    function openLightbox(el) {
+      const src = el.querySelector('img').src.replace(/w_600/, 'w_1200').replace(/h_\d+/, 'h_1200');
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLigh
