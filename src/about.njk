@@ -1,0 +1,200 @@
+---
+layout: base.njk
+pageTitle: "About Us — Dekoris"
+activePage: about
+permalink: /about/
+---
+  <style>
+    .about-hero-images {
+      margin-top: 80px;
+      display: flex; gap: 6px; height: 320px; overflow: hidden;
+    }
+    .about-hero-images img {
+      flex: 1; min-width: 0; height: 100%; object-fit: cover;
+    }
+    .about-hero-images img:nth-child(1),
+    .about-hero-images img:nth-child(4) { flex: 0.7; }
+
+    .about-content { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .about-text p {
+      font-size: 15px; color: var(--text-body); line-height: 1.8; margin-bottom: 16px;
+    }
+    .about-text .mission-box {
+      background: var(--cream); border-left: 3px solid var(--gold);
+      padding: 24px 28px; margin: 28px 0; border-radius: 0 6px 6px 0;
+    }
+    .about-text .mission-box h3 {
+      font-family: var(--font-heading); font-size: 20px;
+      color: var(--gold); font-weight: 600; margin-bottom: 8px;
+    }
+    .about-text .mission-box p { margin-bottom: 0; }
+
+    .about-image-side {
+      position: sticky; top: 120px;
+    }
+    .about-image-side img {
+      width: 100%; height: 500px; object-fit: cover; border-radius: 8px;
+    }
+
+    .why-section { background: var(--cream); }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 48px;
+    }
+    .why-card {
+      background: var(--white); padding: 32px; border-radius: 8px;
+      border-top: 3px solid var(--gold);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .why-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    }
+    .why-card h3 {
+      font-family: var(--font-heading); font-size: 22px;
+      font-weight: 600; color: var(--text-dark); margin-bottom: 10px;
+    }
+    .why-card p {
+      font-size: 14px; color: var(--text-body); line-height: 1.7;
+    }
+    .why-card .why-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--cream); display: flex;
+      align-items: center; justify-content: center; margin-bottom: 16px;
+    }
+    .why-card .why-icon svg {
+      width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.5;
+    }
+
+    .cta-banner {
+      background: var(--charcoal); padding: 80px 40px; text-align: center;
+    }
+    .cta-banner h2 {
+      font-family: var(--font-heading); font-size: clamp(28px, 4vw, 42px);
+      color: var(--white); font-weight: 600; margin-bottom: 16px;
+    }
+    .cta-banner p {
+      font-size: 16px; color: rgba(255,255,255,0.6);
+      margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto;
+    }
+
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-image-side { position: static; }
+      .about-image-side img { height: 350px; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .about-hero-images { height: 200px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .cta-banner { padding: 60px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="about-hero-images">
+    <img src="https://static.wixstatic.com/media/06bb1b_f4c5d209635e4b359dbcc3a4679ca3bb~mv2.jpg/v1/fill/w_400,h_600,al_c,q_80/06bb1b_f4c5d209635e4b359dbcc3a4679ca3bb~mv2.jpg" alt="">
+    <img src="https://static.wixstatic.com/media/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg" alt="">
+    <img src="https://static.wixstatic.com/media/06bb1b_6cc9db0386b34de9b5b1c0830b7595ed~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80/06bb1b_6cc9db0386b34de9b5b1c0830b7595ed~mv2.jpg" alt="">
+    <img src="https://static.wixstatic.com/media/06bb1b_1a55bfba8ca9416d9c542c5a47a151f9~mv2.jpg/v1/fill/w_400,h_600,al_c,q_80/06bb1b_1a55bfba8ca9416d9c542c5a47a151f9~mv2.jpg" alt="">
+  </div>
+
+  <section class="section about-content">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text fade-up">
+          <div class="section-label">About Us</div>
+          <h2 class="section-title">Who We Are</h2>
+          <p>Dekoris is a proudly Namibian, 100% female-owned interiors company specialising in blinds, curtains, wall panelling, décor, and soft finishes for residential, commercial, and institutional spaces.</p>
+          <p>With a commitment to excellence and customer satisfaction, we offer tailored window treatment solutions to enhance the aesthetic and functional aspects of any environment.</p>
+          <p>We elevate both homes and businesses through refined craftsmanship and tailored design.</p>
+
+          <div class="mission-box">
+            <h3>Our Mission</h3>
+            <p>At Dekoris, we are committed to excellence in design and craftsmanship, striving to exceed the expectations of our clients with innovative solutions and unparalleled service. Our mission is to create inspiring spaces that enrich lives and foster lasting connections.</p>
+          </div>
+
+          <p>We believe that a living space is a reflection of the individual — speaking to their hopes, beliefs, and unique lifestyle. That's why every solution we offer is tailored to bring beauty, comfort, and functionality to your environment.</p>
+        </div>
+        <div class="about-image-side fade-up" style="transition-delay: 0.15s">
+          <img src="https://static.wixstatic.com/media/06bb1b_d338777339a04a068712cbe85ac8e528~mv2.jpg/v1/fill/w_800,h_1000,al_c,q_80/06bb1b_d338777339a04a068712cbe85ac8e528~mv2.jpg" alt="Venetian blinds installation">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section why-section">
+    <div class="section-inner">
+      <div class="section-label fade-up">Why Dekoris</div>
+      <h2 class="section-title fade-up" style="transition-delay: 0.1s">Why Choose Us?</h2>
+      <div class="why-grid">
+        <div class="why-card fade-up">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <h3>Expertise</h3>
+          <p>Years of experience delivering professional, efficient installation services.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay: 0.1s">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h3>Quality Products</h3>
+          <p>A wide range of blinds and curtains from leading brands, ensuring durability and style.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay: 0.2s">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Customisation</h3>
+          <p>Solutions tailored to the unique needs and preferences of each client.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay: 0.05s">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Customer Service</h3>
+          <p>Exceptional support from initial consultation to post-installation aftercare.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay: 0.15s">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Female Empowerment</h3>
+          <p>As a 100% female-owned business, we are committed to empowering women and promoting gender equality.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay: 0.25s">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg></div>
+          <h3>Local Expertise</h3>
+          <p>Proudly Namibian, we understand the local market and the unique needs of our community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values">
+    <div class="values-inner">
+      <div class="value-item fade-up">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="value-title">Quality Products</div>
+        <div class="value-desc">Premium materials from trusted brands.</div>
+      </div>
+      <div class="value-item fade-up" style="transition-delay: 0.1s">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="value-title">Exceptional Service</div>
+        <div class="value-desc">From consultation to aftercare.</div>
+      </div>
+      <div class="value-item fade-up" style="transition-delay: 0.2s">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="value-title">Competitive Pricing</div>
+        <div class="value-desc">Value without compromise.</div>
+      </div>
+      <div class="value-item fade-up" style="transition-delay: 0.3s">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg></div>
+        <div class="value-title">Local Knowledge</div>
+        <div class="value-desc">Deep understanding of the Namibian market.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Ready to Transform Your Space?</h2>
+    <p>Get in touch today for a free consultation and let us bring your vision to life.</p>
+    <a href="/quote/" class="btn btn-gold">Request a Quote</a>
+  </section>
+

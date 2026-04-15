@@ -1,0 +1,234 @@
+---
+layout: base.njk
+pageTitle: "Inspiration — Dekoris"
+activePage: inspiration
+permalink: /inspiration/
+---
+  <style>
+    .blog-filters {
+      display: flex; gap: 8px; justify-content: center;
+      flex-wrap: wrap; padding: 32px 40px;
+      background: var(--white); border-bottom: 1px solid var(--cream-dark);
+    }
+    .blog-filter {
+      padding: 8px 20px; border-radius: 24px; border: 1.5px solid var(--cream-dark);
+      background: var(--white); font-family: var(--font-body);
+      font-size: 13px; color: var(--text-body); cursor: pointer;
+      transition: all 0.3s; font-weight: 500;
+    }
+    .blog-filter:hover, .blog-filter.active {
+      background: var(--charcoal); color: var(--white); border-color: var(--charcoal);
+    }
+
+    .blog-section { background: var(--cream); }
+
+    .featured-post {
+      max-width: 1280px; margin: 0 auto 48px;
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 0;
+      border-radius: 12px; overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .featured-post-image {
+      height: 420px; overflow: hidden;
+    }
+    .featured-post-image img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .featured-post-content {
+      padding: 48px; display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .featured-post-tag {
+      font-size: 11px; color: var(--gold); letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 600; margin-bottom: 16px;
+    }
+    .featured-post-title {
+      font-family: var(--font-heading); font-size: 32px;
+      font-weight: 600; color: var(--text-dark); line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .featured-post-excerpt {
+      font-size: 15px; color: var(--text-body); line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .featured-post-meta {
+      font-size: 12px; color: var(--text-light); margin-bottom: 24px;
+    }
+
+    .blog-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .blog-card {
+      background: var(--white); border-radius: 8px; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    .blog-card-image { height: 220px; overflow: hidden; }
+    .blog-card-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .blog-card:hover .blog-card-image img { transform: scale(1.05); }
+    .blog-card-content { padding: 24px; }
+    .blog-card-tag {
+      font-size: 10px; color: var(--gold); letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 600; margin-bottom: 10px;
+    }
+    .blog-card-title {
+      font-family: var(--font-heading); font-size: 22px;
+      font-weight: 600; color: var(--text-dark); line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .blog-card-excerpt {
+      font-size: 13px; color: var(--text-body); line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .blog-card-link {
+      font-size: 12px; color: var(--gold); font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .blog-card-link svg {
+      width: 14px; height: 14px; stroke: var(--gold);
+      fill: none; stroke-width: 2; transition: transform 0.3s;
+    }
+    .blog-card:hover .blog-card-link svg { transform: translateX(4px); }
+
+    .blog-newsletter {
+      background: var(--charcoal); text-align: center; padding: 80px 40px;
+    }
+    .blog-newsletter h2 {
+      font-family: var(--font-heading); font-size: clamp(28px, 4vw, 42px);
+      color: var(--white); font-weight: 600; margin-bottom: 12px;
+    }
+    .blog-newsletter p {
+      font-size: 16px; color: rgba(255,255,255,0.6);
+      margin-bottom: 28px; max-width: 420px; margin-left: auto; margin-right: auto;
+    }
+    .blog-newsletter-form {
+      display: flex; gap: 10px; max-width: 440px; margin: 0 auto;
+    }
+    .blog-newsletter-form input {
+      flex: 1; padding: 14px 18px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px; color: var(--white);
+      font-family: var(--font-body); font-size: 14px; outline: none;
+    }
+    .blog-newsletter-form input:focus { border-color: var(--gold); }
+    .blog-newsletter-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .blog-newsletter-form button {
+      padding: 14px 28px; background: var(--gold); color: var(--white);
+      border: none; border-radius: 6px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: var(--font-body); letter-spacing: 1px;
+      transition: background 0.3s;
+    }
+    .blog-newsletter-form button:hover { background: var(--gold-dark); }
+
+    @media (max-width: 1024px) {
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-post-image { height: 300px; }
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .featured-post-content { padding: 28px; }
+      .featured-post-title { font-size: 26px; }
+      .blog-filters { padding: 24px; }
+      .blog-newsletter { padding: 60px 24px; }
+      .blog-newsletter-form { flex-direction: column; }
+    }
+  </style>
+
+
+  <div class="page-hero">
+    <div class="section-label">Blog</div>
+    <h1>Inspiration</h1>
+    <p>Ideas, tips, and trends to help you create beautiful spaces.</p>
+  </div>
+
+  <div class="blog-filters">
+    <button class="blog-filter active">All</button>
+    <button class="blog-filter">Tips & Guides</button>
+    <button class="blog-filter">Trends</button>
+    <button class="blog-filter">Product Spotlights</button>
+  </div>
+
+  <section class="section blog-section">
+    <div class="featured-post fade-up">
+      <div class="featured-post-image">
+        <img src="https://static.wixstatic.com/media/06bb1b_7e48319a0d7b4169aa01f0916998faa4~mv2.jpg/v1/fill/w_900,h_600,al_c,q_80/06bb1b_7e48319a0d7b4169aa01f0916998faa4~mv2.jpg" alt="Blinds vs Curtains">
+      </div>
+      <div class="featured-post-content">
+        <div class="featured-post-tag">Tips & Guides</div>
+        <h2 class="featured-post-title">Blinds vs Curtains: Which is Right for Your Space?</h2>
+        <p class="featured-post-excerpt">A comprehensive guide covering aesthetics, light control, privacy, maintenance, and cost to help you choose the perfect window treatment.</p>
+        <div class="featured-post-meta">April 2026 · 5 min read</div>
+        <a href="#" class="btn btn-gold" style="align-self: flex-start; padding: 12px 28px;">Read Article</a>
+      </div>
+    </div>
+
+    <div class="blog-grid">
+      <div class="blog-card fade-up">
+        <div class="blog-card-image">
+          <img src="https://static.wixstatic.com/media/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg" alt="Trends">
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-tag">Trends</div>
+          <h3 class="blog-card-title">5 Window Treatment Trends for Namibian Homes in 2026</h3>
+          <p class="blog-card-excerpt">From natural textures to motorised solutions, discover what's trending in window treatments this year.</p>
+          <a href="#" class="blog-card-link">Read More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+
+      <div class="blog-card fade-up" style="transition-delay: 0.1s">
+        <div class="blog-card-image">
+          <img src="https://static.wixstatic.com/media/06bb1b_2f184c440e2346d4bc27117ed561ee96~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80/06bb1b_2f184c440e2346d4bc27117ed561ee96~mv2.jpg" alt="Windhoek climate">
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-tag">Tips & Guides</div>
+          <h3 class="blog-card-title">How to Choose the Perfect Blinds for Windhoek's Climate</h3>
+          <p class="blog-card-excerpt">UV protection, heat management, and dust resistance — real concerns for Namibian homeowners answered.</p>
+          <a href="#" class="blog-card-link">Read More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+
+      <div class="blog-card fade-up" style="transition-delay: 0.2s">
+        <div class="blog-card-image">
+          <img src="https://static.wixstatic.com/media/06bb1b_e8582f5ccbe740289bc44f63563162e4~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80/06bb1b_e8582f5ccbe740289bc44f63563162e4~mv2.jpg" alt="Motorised blinds">
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-tag">Product Spotlights</div>
+          <h3 class="blog-card-title">A Guide to Motorised Blinds: Convenience Meets Style</h3>
+          <p class="blog-card-excerpt">Everything you need to know about motorised window treatments — benefits, use cases, and how they work.</p>
+          <a href="#" class="blog-card-link">Read More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+
+      <div class="blog-card fade-up">
+        <div class="blog-card-image">
+          <img src="https://static.wixstatic.com/media/11062b_b2a88fae29a24406aee5e162858814af~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80/Business%20Meeting.jpg" alt="Office blinds">
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-tag">Tips & Guides</div>
+          <h3 class="blog-card-title">Transforming Your Office: Window Treatments That Boost Productivity</h3>
+          <p class="blog-card-excerpt">Glare reduction, temperature control, and professional aesthetics for the modern workplace.</p>
+          <a href="#" class="blog-card-link">Read More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-newsletter">
+    <h2>Get Inspiration Delivered</h2>
+    <p>Subscribe for the latest ideas, tips, and trends straight to your inbox.</p>
+    <div class="blog-newsletter-form">
+      <input type="email" placeholder="Your email address">
+      <button>Subscribe</button>
+    </div>
+  </section>
+

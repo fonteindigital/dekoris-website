@@ -1,0 +1,97 @@
+---
+layout: base.njk
+pageTitle: "FAQs — Dekoris"
+activePage: faqs
+permalink: /faqs/
+---
+  <style>
+    .faq-section { background: var(--white); padding: 60px 40px 100px; }
+    .faq-inner { max-width: 800px; margin: 0 auto; }
+    .faq-category { margin-bottom: 40px; }
+    .faq-category-title {
+      font-family: var(--font-heading); font-size: 24px;
+      color: var(--gold); font-weight: 600; margin-bottom: 20px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--cream-dark);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--cream-dark);
+      cursor: pointer;
+    }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 0; gap: 16px;
+    }
+    .faq-question h3 {
+      font-family: var(--font-body); font-size: 16px;
+      font-weight: 600; color: var(--text-dark); line-height: 1.4;
+    }
+    .faq-toggle {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1.5px solid var(--cream-dark); background: none;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; cursor: pointer; transition: all 0.3s;
+    }
+    .faq-toggle svg {
+      width: 14px; height: 14px; stroke: var(--text-light);
+      fill: none; stroke-width: 2; transition: transform 0.3s;
+    }
+    .faq-item.open .faq-toggle {
+      background: var(--gold); border-color: var(--gold);
+    }
+    .faq-item.open .faq-toggle svg {
+      stroke: var(--white); transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+    .faq-answer p {
+      padding: 0 0 20px; font-size: 15px;
+      color: var(--text-body); line-height: 1.7;
+    }
+    .faq-cta {
+      background: var(--charcoal); text-align: center; padding: 80px 40px;
+    }
+    .faq-cta h2 {
+      font-family: var(--font-heading); font-size: clamp(28px, 4vw, 42px);
+      color: var(--white); font-weight: 600; margin-bottom: 12px;
+    }
+    .faq-cta p {
+      font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 28px;
+      max-width: 420px; margin-left: auto; margin-right: auto;
+    }
+    @media (max-width: 768px) {
+      .faq-section { padding: 40px 24px 64px; }
+      .faq-cta { padding: 60px 24px; }
+    }
+  </style>
+
+  <div class="page-hero">
+    <div class="section-label">Support</div>
+    <h1>Frequently Asked Questions</h1>
+    <p>Find answers to common questions about our products, services, and process.</p>
+  </div>
+
+  <section class="faq-section">
+    <div class="faq-inner">
+      {% for faq in collections.faqs %}
+      <div class="faq-item{% if loop.first %} open{% endif %}" onclick="this.classList.toggle('open')">
+        <div class="faq-question">
+          <h3>{{ faq.data.title }}</h3>
+          <button class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div>
+        <div class="faq-answer">
+          <p>{{ faq.data.answer }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="faq-cta">
+    <h2>Still Have Questions?</h2>
+    <p>We're here to help. Reach out and we'll get back to you promptly.</p>
+    <a href="/contact/" class="btn btn-gold">Contact Us</a>
+  </section>

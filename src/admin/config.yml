@@ -1,0 +1,55 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Inspiration Articles"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "select", options: ["Tips & Guides", "Trends", "Product Spotlights", "Behind the Scenes"] }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+
+  - name: "products"
+    label: "Products"
+    folder: "src/content/products"
+    create: true
+    fields:
+      - { label: "Product Name", name: "title", widget: "string" }
+      - { label: "Price (N$)", name: "price", widget: "number", value_type: "float" }
+      - { label: "Product Image", name: "image", widget: "image" }
+      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Décor"] }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Available Colours", name: "colours", widget: "list", field: { label: "Colour", name: "colour", widget: "string" } }
+      - { label: "Motorised Option", name: "motorised", widget: "boolean", default: true }
+      - { label: "Display Order", name: "order", widget: "number", default: 10 }
+
+  - name: "gallery"
+    label: "Gallery Images"
+    folder: "src/content/gallery"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Décor", "Spaces", "Completed Projects"] }
+      - { label: "Alt Text", name: "alt", widget: "string" }
+
+  - name: "faqs"
+    label: "FAQs"
+    folder: "src/content/faqs"
+    create: true
+    fields:
+      - { label: "Question", name: "title", widget: "string" }
+      - { label: "Answer", name: "answer", widget: "text" }
+      - { label: "Category", name: "category", widget: "select", options: ["General", "Products", "Pricing & Orders", "Installation & Aftercare"] }
+      - { label: "Order", name: "order", widget: "number", default: 10 }

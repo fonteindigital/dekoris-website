@@ -1,0 +1,137 @@
+---
+layout: base.njk
+pageTitle: "Gallery — Dekoris"
+activePage: gallery
+permalink: /gallery/
+---
+  <style>
+    .gallery-filters {
+      display: flex; gap: 8px; justify-content: center;
+      flex-wrap: wrap; padding: 32px 40px;
+      background: var(--white); border-bottom: 1px solid var(--cream-dark);
+    }
+    .filter-btn {
+      padding: 8px 20px; border-radius: 24px; border: 1.5px solid var(--cream-dark);
+      background: var(--white); font-family: var(--font-body);
+      font-size: 13px; color: var(--text-body); cursor: pointer;
+      transition: all 0.3s; font-weight: 500;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--charcoal); color: var(--white); border-color: var(--charcoal);
+    }
+    .gallery-section { background: var(--cream); padding: 48px 40px 100px; }
+    .gallery-grid {
+      max-width: 1280px; margin: 0 auto;
+      columns: 3; column-gap: 16px;
+    }
+    .gallery-item {
+      break-inside: avoid; margin-bottom: 16px;
+      border-radius: 8px; overflow: hidden;
+      cursor: pointer; position: relative;
+    }
+    .gallery-item img {
+      width: 100%; display: block; transition: transform 0.6s;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item-overlay {
+      position: absolute; inset: 0; background: rgba(42,38,36,0);
+      transition: background 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-item:hover .gallery-item-overlay { background: rgba(42,38,36,0.3); }
+    .gallery-item-overlay svg {
+      width: 32px; height: 32px; stroke: var(--white);
+      fill: none; stroke-width: 1.5;
+      opacity: 0; transition: opacity 0.3s; transform: scale(0.8);
+    }
+    .gallery-item:hover .gallery-item-overlay svg { opacity: 1; transform: scale(1); }
+    .gallery-cta {
+      background: var(--charcoal); text-align: center; padding: 80px 40px;
+    }
+    .gallery-cta h2 {
+      font-family: var(--font-heading); font-size: clamp(28px, 4vw, 42px);
+      color: var(--white); font-weight: 600; margin-bottom: 12px;
+    }
+    .gallery-cta p {
+      font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 28px;
+      max-width: 420px; margin-left: auto; margin-right: auto;
+    }
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92); display: none;
+      align-items: center; justify-content: center; cursor: pointer;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 4px; }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 24px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close svg { width: 20px; height: 20px; stroke: var(--white); fill: none; stroke-width: 2; }
+    @media (max-width: 1024px) { .gallery-grid { columns: 2; } }
+    @media (max-width: 768px) {
+      .gallery-grid { columns: 1; }
+      .gallery-section { padding: 32px 24px 64px; }
+      .gallery-filters { padding: 24px 24px; }
+      .gallery-cta { padding: 60px 24px; }
+    }
+  </style>
+
+  <div class="page-hero">
+    <div class="section-label">Portfolio</div>
+    <h1>Gallery</h1>
+    <p>Explore our range of blinds, curtains, and décor — designed to elevate any space.</p>
+  </div>
+
+  <div class="gallery-filters">
+    <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+    <button class="filter-btn" onclick="filterGallery('Blinds', this)">Blinds</button>
+    <button class="filter-btn" onclick="filterGallery('Curtains', this)">Curtains</button>
+    <button class="filter-btn" onclick="filterGallery('Spaces', this)">Spaces</button>
+    <button class="filter-btn" onclick="filterGallery('Completed Projects', this)">Projects</button>
+  </div>
+
+  <section class="gallery-section">
+    <div class="gallery-grid" id="galleryGrid">
+      {% for item in collections.gallery %}
+      <div class="gallery-item" data-cat="{{ item.data.category }}" onclick="openLightbox(this)">
+        <img src="{{ item.data.image }}" alt="{{ item.data.alt | default(item.data.title) }}">
+        <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="gallery-cta">
+    <h2>Love What You See?</h2>
+    <p>Let's create something beautiful for your space.</p>
+    <a href="/quote/" class="btn btn-gold">Request a Quote</a>
+  </section>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <script>
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+    function openLightbox(el) {
+      const src = el.querySelector('img').src;
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>

@@ -1,0 +1,20 @@
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-text">DEKORIS</span>
+        <span class="nav-logo-tagline">Crafting Beautiful Spaces</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" {% if activePage == "home" %}class="active"{% endif %}>Home</a>
+        <a href="/about/" {% if activePage == "about" %}class="active"{% endif %}>About Us</a>
+        <a href="/gallery/" {% if activePage == "gallery" %}class="active"{% endif %}>Gallery</a>
+        <a href="/inspiration/" {% if activePage == "inspiration" %}class="active"{% endif %}>Inspiration</a>
+        <a href="/faqs/" {% if activePage == "faqs" %}class="active"{% endif %}>FAQs</a>
+        <a href="/contact/" {% if activePage == "contact" %}class="active"{% endif %}>Contact</a>
+        <a href="/quote/" class="nav-cta">Get a Quote</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
