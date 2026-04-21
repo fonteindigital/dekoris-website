@@ -53,3 +53,19 @@ collections:
       - { label: "Answer", name: "answer", widget: "text" }
       - { label: "Category", name: "category", widget: "select", options: ["General", "Products", "Pricing & Orders", "Installation & Aftercare"] }
       - { label: "Order", name: "order", widget: "number", default: 10 }
+
+      - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "src/_data/settings.json"
+        fields:
+          - { label: "Site Name", name: "siteName", widget: "string", default: "Dekoris" }
+          - { label: "Tagline", name: "tagline", widget: "string", default: "Crafting Beautiful Spaces" }
+          - { label: "Logo (light background)", name: "logo", widget: "image" }
+          - { label: "Logo (dark background)", name: "logoDark", widget: "image" }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "WhatsApp Number", name: "whatsapp", widget: "string" }
+          - { label: "Address", name: "address", widget: "string" }
