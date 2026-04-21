@@ -26,11 +26,14 @@ collections:
     create: true
     fields:
       - { label: "Product Name", name: "title", widget: "string" }
-      - { label: "Price (N$)", name: "price", widget: "number", value_type: "float" }
+      - { label: "Price", name: "price", widget: "number", value_type: "float" }
       - { label: "Product Image", name: "image", widget: "image" }
-      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Décor"] }
+      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Decor"] }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Available Colours", name: "colours", widget: "list", field: { label: "Colour", name: "colour", widget: "string" } }
+      - label: "Available Colours"
+        name: "colours"
+        widget: "list"
+        field: { label: "Colour", name: "colour", widget: "string" }
       - { label: "Motorised Option", name: "motorised", widget: "boolean", default: true }
       - { label: "Display Order", name: "order", widget: "number", default: 10 }
 
@@ -41,7 +44,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Décor", "Spaces", "Completed Projects"] }
+      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Decor", "Spaces", "Completed Projects"] }
       - { label: "Alt Text", name: "alt", widget: "string" }
 
   - name: "faqs"
@@ -51,10 +54,10 @@ collections:
     fields:
       - { label: "Question", name: "title", widget: "string" }
       - { label: "Answer", name: "answer", widget: "text" }
-      - { label: "Category", name: "category", widget: "select", options: ["General", "Products", "Pricing & Orders", "Installation & Aftercare"] }
+      - { label: "Category", name: "category", widget: "select", options: ["General", "Products", "Pricing and Orders", "Installation and Aftercare"] }
       - { label: "Order", name: "order", widget: "number", default: 10 }
 
-      - name: "settings"
+  - name: "settings"
     label: "Site Settings"
     files:
       - label: "General Settings"
@@ -63,9 +66,9 @@ collections:
         fields:
           - { label: "Site Name", name: "siteName", widget: "string", default: "Dekoris" }
           - { label: "Tagline", name: "tagline", widget: "string", default: "Crafting Beautiful Spaces" }
-          - { label: "Logo (light background)", name: "logo", widget: "image" }
-          - { label: "Logo (dark background)", name: "logoDark", widget: "image" }
-          - { label: "Phone", name: "phone", widget: "string" }
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "WhatsApp Number", name: "whatsapp", widget: "string" }
-          - { label: "Address", name: "address", widget: "string" }
+          - { label: "Logo Light Background", name: "logo", widget: "image", required: false }
+          - { label: "Logo Dark Background", name: "logoDark", widget: "image", required: false }
+          - { label: "Phone", name: "phone", widget: "string", required: false }
+          - { label: "Email", name: "email", widget: "string", required: false }
+          - { label: "WhatsApp Number", name: "whatsapp", widget: "string", required: false }
+          - { label: "Address", name: "address", widget: "string", required: false }
