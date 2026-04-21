@@ -2,13 +2,13 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images/uploads"
+media_folder: "src/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
   - name: "blog"
     label: "Inspiration Articles"
-    folder: "content/blog"
+    folder: "src/content/blog"
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
@@ -22,53 +22,50 @@ collections:
 
   - name: "products"
     label: "Products"
-    folder: "content/products"
+    folder: "src/content/products"
     create: true
     fields:
       - { label: "Product Name", name: "title", widget: "string" }
       - { label: "Price (N$)", name: "price", widget: "number", value_type: "float" }
       - { label: "Product Image", name: "image", widget: "image" }
-      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Décor"] }
+      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Decor"] }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Available Colours", name: "colours", widget: "list", field: { label: "Colour", name: "colour", widget: "string" } }
       - { label: "Motorised Option", name: "motorised", widget: "boolean", default: true }
+      - { label: "Display Order", name: "order", widget: "number", default: 10 }
 
   - name: "gallery"
     label: "Gallery Images"
-    folder: "content/gallery"
+    folder: "src/content/gallery"
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Décor", "Spaces", "Completed Projects"] }
+      - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Decor", "Spaces", "Completed Projects"] }
       - { label: "Alt Text", name: "alt", widget: "string" }
-
-  - name: "pages"
-    label: "Pages"
-    files:
-      - label: "About Page"
-        name: "about"
-        file: "content/pages/about.md"
-        fields:
-          - { label: "Intro Text", name: "intro", widget: "text" }
-          - { label: "Mission Statement", name: "mission", widget: "text" }
-          - { label: "Body Text", name: "body", widget: "markdown" }
-
-      - label: "Contact Info"
-        name: "contact"
-        file: "content/pages/contact.md"
-        fields:
-          - { label: "Phone", name: "phone", widget: "string" }
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "Location", name: "location", widget: "string" }
-          - { label: "WhatsApp Number", name: "whatsapp", widget: "string" }
 
   - name: "faqs"
     label: "FAQs"
-    folder: "content/faqs"
+    folder: "src/content/faqs"
     create: true
     fields:
       - { label: "Question", name: "title", widget: "string" }
       - { label: "Answer", name: "answer", widget: "text" }
-      - { label: "Category", name: "category", widget: "select", options: ["General", "Products", "Pricing & Orders", "Installation & Aftercare"] }
+      - { label: "Category", name: "category", widget: "select", options: ["General", "Products", "Pricing and Orders", "Installation and Aftercare"] }
       - { label: "Order", name: "order", widget: "number", default: 10 }
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "src/_data/settings.json"
+        fields:
+          - { label: "Site Name", name: "siteName", widget: "string", default: "Dekoris" }
+          - { label: "Tagline", name: "tagline", widget: "string", default: "Crafting Beautiful Spaces" }
+          - { label: "Logo (light background)", name: "logo", widget: "image" }
+          - { label: "Logo (dark background)", name: "logoDark", widget: "image" }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "WhatsApp Number", name: "whatsapp", widget: "string" }
+          - { label: "Address", name: "address", widget: "string" }
