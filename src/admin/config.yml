@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: fontenidigital/dekoris-website
   branch: main
 
 media_folder: "src/images/uploads"
