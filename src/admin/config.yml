@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: fontenidigital/dekoris-website
+  repo: fonteindigital/dekoris-website
   branch: main
 
 media_folder: "src/images/uploads"
