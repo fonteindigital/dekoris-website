@@ -2,6 +2,8 @@ backend:
   name: github
   repo: fonteindigital/dekoris-website
   branch: main
+  base_url: https://www.dekoris.com.na
+  auth_endpoint: api/auth
 
 media_folder: "src/images/uploads"
 public_folder: "/images/uploads"
