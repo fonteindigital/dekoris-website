@@ -57,7 +57,7 @@ collections:
     fields:
       - { label: "Question", name: "title", widget: "string" }
       - { label: "Answer", name: "answer", widget: "text" }
-      - { label: "Category", name: "category", widget: "select", options: ["General", "Products", "Pricing and Orders", "Installation and Aftercare"] }
+      - { label: "Category", name: "category", widget: "select", options: ["General", "Products", "Pricing & Orders", "Installation & Aftercare"] }
       - { label: "Order", name: "order", widget: "number", default: 10 }
 
   - name: "settings"
@@ -69,8 +69,8 @@ collections:
         fields:
           - { label: "Site Name", name: "siteName", widget: "string", default: "Dekoris" }
           - { label: "Tagline", name: "tagline", widget: "string", default: "Crafting Beautiful Spaces" }
-          - { label: "Logo Light Background", name: "logo", widget: "image", required: false }
-          - { label: "Logo Dark Background", name: "logoDark", widget: "image", required: false }
+          - { label: "Header Logo", name: "logo", widget: "image", required: false, hint: "Used in the top navigation bar (dark background)." }
+          - { label: "Footer Logo", name: "logoDark", widget: "image", required: false, hint: "Used in the page footer (dark background)." }
           - { label: "Phone", name: "phone", widget: "string", required: false }
           - { label: "Email", name: "email", widget: "string", required: false }
           - { label: "WhatsApp Number", name: "whatsapp", widget: "string", required: false }
