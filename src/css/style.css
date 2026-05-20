@@ -47,9 +47,15 @@
       --text-light: #8A8480;
       --sage: #E8EDE8;
 
-      /* ───── Typography (brand-licensed) ───── */
-      --font-heading: 'TAN Mon Cheri', 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Neue Montreal', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      /* ───── Typography (brand-licensed) ─────
+         TAN Mon Cheri is reserved for ACCENT moments only — the small gold
+         uppercase eyebrow labels and the wordmark fallback. Every heading
+         (h1/h2/h3, page titles, card titles) uses Neue Montreal Bold. Per
+         the Brand Guidelines page 8 "Typography Usage Guidelines": Titles
+         + L1 Headings = Neue Montreal Bold; TAN Mon Cheri = accents only. */
+      --font-heading: 'Neue Montreal', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body:    'Neue Montreal', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-accent:  'TAN Mon Cheri', 'Cormorant Garamond', Georgia, serif;
 
       /* Type scale */
       --type-display: clamp(48px, 6vw, 80px);   /* hero page title */
@@ -94,12 +100,12 @@
     }
     .nav-logo { display: flex; flex-direction: column; }
     .nav-logo-text {
-      font-family: var(--font-heading); font-size: 28px;
-      font-weight: 600; color: var(--charcoal);
+      font-family: var(--font-accent); font-size: 28px;
+      font-weight: 400; color: var(--gold);
       letter-spacing: 3px;
     }
     .nav-logo-tagline {
-      font-family: var(--font-heading); font-size: 11px;
+      font-family: var(--font-accent); font-size: 11px;
       color: var(--gold); letter-spacing: 1.5px; margin-top: -2px;
       font-style: italic;
     }
@@ -160,7 +166,7 @@
       justify-content: center;
     }
     .hero-label {
-      font-family: var(--font-body); font-size: 12px;
+      font-family: var(--font-accent); font-size: 13px;
       color: var(--gold-light); letter-spacing: 3px;
       text-transform: uppercase; margin-bottom: 20px;
       font-weight: 500;
@@ -200,7 +206,7 @@
     .section { padding: 100px 40px; }
     .section-inner { max-width: 1280px; margin: 0 auto; }
     .section-label {
-      font-family: var(--font-body); font-size: 12px;
+      font-family: var(--font-accent); font-size: 13px;
       color: var(--gold); letter-spacing: 3px;
       text-transform: uppercase; font-weight: 500;
       margin-bottom: 12px;
