@@ -2,6 +2,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/admin");
   eleventyConfig.addPassthroughCopy("src/images");
+  eleventyConfig.addPassthroughCopy("src/fonts");
 
   eleventyConfig.addCollection("products", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/content/products/*.md").sort((a, b) => {

@@ -1,9 +1,44 @@
+    /* ═══════════════════════════════════════════
+       BRAND FONTS  (Neue Montreal + TAN Mon Cheri)
+       Self-hosted, woff2. Licensed via Pangram Pangram
+       and TAN-Type respectively. See src/fonts/.
+    ═══════════════════════════════════════════ */
+    @font-face {
+      font-family: 'Neue Montreal';
+      src: url('/fonts/NeueMontreal-Regular.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Neue Montreal';
+      src: url('/fonts/NeueMontreal-Italic.woff2') format('woff2');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Neue Montreal';
+      src: url('/fonts/NeueMontreal-Medium.woff2') format('woff2');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Neue Montreal';
+      src: url('/fonts/NeueMontreal-Bold.woff2') format('woff2');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TAN Mon Cheri';
+      src: url('/fonts/TANMonCheri-Regular.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+
     :root {
-      --charcoal: #4A4543;
+      /* ───── Brand palette (Dekoris Brand Guidelines) ───── */
+      --charcoal: #545454;          /* primary text + dark surfaces */
+      --gold: #AF9B6B;              /* accent only — eyebrows, dividers, hover */
+      --light-grey: #A6A6A6;        /* secondary text, captions */
+
+      /* Extended palette (derived) */
       --charcoal-deep: #3A3735;
-      --gold: #C4A265;
-      --gold-light: #D4B87A;
-      --gold-dark: #A8883F;
+      --gold-light: #C4B189;
+      --gold-dark: #8B7B54;
       --cream: #F5F2EE;
       --cream-dark: #EDE8E2;
       --white: #FFFFFF;
@@ -11,8 +46,20 @@
       --text-body: #5A5450;
       --text-light: #8A8480;
       --sage: #E8EDE8;
-      --font-heading: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'DM Sans', -apple-system, sans-serif;
+
+      /* ───── Typography (brand-licensed) ───── */
+      --font-heading: 'TAN Mon Cheri', 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Neue Montreal', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Type scale */
+      --type-display: clamp(48px, 6vw, 80px);   /* hero page title */
+      --type-h1:      clamp(36px, 4vw, 56px);   /* page titles */
+      --type-h2:      clamp(28px, 3vw, 36px);   /* section headings */
+      --type-h3:      clamp(20px, 2vw, 24px);   /* sub-headings */
+      --type-lead:    clamp(18px, 1.3vw, 20px); /* hero subhead, lead paragraphs */
+      --type-body:    16px;                      /* default body */
+      --type-small:   14px;                      /* captions, meta */
+      --type-eyebrow: 12px;                      /* "OUR PRODUCTS" eyebrows */
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -70,12 +117,12 @@
     }
     .nav-links a:hover::after { width: 100%; }
     .nav-cta {
-      background: var(--gold) !important; color: var(--white) !important;
+      background: var(--charcoal) !important; color: var(--white) !important;
       padding: 10px 24px !important; border-radius: 4px;
       font-weight: 600 !important; letter-spacing: 1px !important;
       transition: background 0.3s !important;
     }
-    .nav-cta:hover { background: var(--gold-dark) !important; }
+    .nav-cta:hover { background: var(--charcoal-deep) !important; }
     .nav-cta::after { display: none !important; }
 
     .nav-mobile-toggle {
@@ -136,9 +183,11 @@
       transition: all 0.3s; cursor: pointer;
     }
     .btn-gold {
-      background: var(--gold); color: var(--white); border: none;
+      /* Class name kept for backward compatibility; styling is now charcoal
+         per brand guidelines: gold reserved for accents only, not primary CTAs. */
+      background: var(--charcoal); color: var(--white); border: none;
     }
-    .btn-gold:hover { background: var(--gold-dark); transform: translateY(-1px); }
+    .btn-gold:hover { background: var(--charcoal-deep); transform: translateY(-1px); }
     .btn-outline {
       background: transparent; color: var(--white);
       border: 1.5px solid rgba(255,255,255,0.4);
