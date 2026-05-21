@@ -33,6 +33,14 @@ includeSnipcart: true
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
+    @media (max-width: 1024px) {
+      .shop-grid { grid-template-columns: repeat(2, 1fr); }
+      .shop-section { padding: 40px 24px 80px; }
+      .shop-intro { padding: 64px 24px 24px; }
+    }
+    @media (max-width: 640px) {
+      .shop-grid { grid-template-columns: 1fr; }
+    }
     .shop-footnote {
       max-width: 720px; margin: 56px auto 0;
       text-align: center;
