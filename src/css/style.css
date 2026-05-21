@@ -198,6 +198,10 @@
       background: transparent; color: var(--white);
       border: 1.5px solid rgba(255,255,255,0.4);
     }
+    .btn-on-dark {
+      background: var(--white); color: var(--text-dark); border: none;
+    }
+    .btn-on-dark:hover { background: var(--cream); transform: translateY(-1px); }
     .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
 
     /* ═══════════════════════════════════════════
