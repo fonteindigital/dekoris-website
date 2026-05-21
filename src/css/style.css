@@ -173,7 +173,7 @@
     }
     .hero h1 {
       font-family: var(--font-heading); font-size: clamp(42px, 6vw, 72px);
-      font-weight: 600; color: var(--white);
+      font-weight: 500; color: var(--white);
       line-height: 1.1; max-width: 650px; margin-bottom: 20px;
     }
     .hero p {
@@ -184,7 +184,7 @@
     .btn {
       display: inline-block; padding: 14px 36px;
       font-family: var(--font-body); font-size: 13px;
-      font-weight: 600; letter-spacing: 1.5px;
+      font-weight: 500; letter-spacing: 1.5px;
       text-transform: uppercase; border-radius: 4px;
       transition: all 0.3s; cursor: pointer;
     }
@@ -213,7 +213,7 @@
     }
     .section-title {
       font-family: var(--font-heading); font-size: clamp(32px, 4vw, 48px);
-      font-weight: 600; color: var(--text-dark);
+      font-weight: 500; color: var(--text-dark);
       line-height: 1.15; margin-bottom: 20px;
     }
     .section-subtitle {
@@ -242,7 +242,7 @@
     }
     .about-text .highlight {
       font-family: var(--font-heading); font-size: 20px;
-      color: var(--text-dark); font-weight: 600;
+      color: var(--text-dark); font-weight: 500;
       line-height: 1.5; font-style: italic;
       border-left: 3px solid var(--gold); padding-left: 20px;
       margin: 28px 0;
@@ -251,7 +251,7 @@
     /* ═══════════════════════════════════════════
        VALUE PROPS
     ═══════════════════════════════════════════ */
-    .values { background: var(--charcoal); padding: 60px 40px; }
+    .values { background: var(--cream); padding: 80px 40px; }
     .values-inner {
       max-width: 1280px; margin: 0 auto;
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
@@ -259,15 +259,15 @@
     .value-item { text-align: center; }
     .value-icon {
       width: 48px; height: 48px; margin: 0 auto 16px;
-      border: 1.5px solid var(--gold); border-radius: 50%;
+      border: 1.5px solid var(--charcoal); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
     }
-    .value-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .value-icon svg { width: 22px; height: 22px; stroke: var(--charcoal); fill: none; stroke-width: 1.5; }
     .value-title {
       font-family: var(--font-heading); font-size: 18px;
-      color: var(--white); font-weight: 600; margin-bottom: 8px;
+      color: var(--text-dark); font-weight: 500; margin-bottom: 8px;
     }
-    .value-desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .value-desc { font-size: 13px; color: var(--text-body); line-height: 1.6; }
 
     /* ═══════════════════════════════════════════
        PRODUCTS
@@ -299,10 +299,10 @@
     .product-info { padding: 20px 24px; }
     .product-name {
       font-family: var(--font-heading); font-size: 20px;
-      font-weight: 600; color: var(--text-dark); margin-bottom: 6px;
+      font-weight: 500; color: var(--text-dark); margin-bottom: 6px;
     }
     .product-price {
-      font-size: 15px; color: var(--gold); font-weight: 600;
+      font-size: 15px; color: var(--gold); font-weight: 500;
     }
     .product-from {
       font-size: 11px; color: var(--text-light); font-weight: 400;
@@ -312,7 +312,7 @@
       margin-top: 12px; padding: 10px 20px; width: 100%;
       background: var(--charcoal); color: var(--white); border: none;
       border-radius: 4px; font-family: var(--font-body);
-      font-size: 12px; font-weight: 600; letter-spacing: 1px;
+      font-size: 12px; font-weight: 500; letter-spacing: 1px;
       text-transform: uppercase; cursor: pointer; transition: background 0.3s;
     }
     .product-buy:hover { background: var(--gold); }
@@ -340,7 +340,7 @@
     }
     .service-card-title {
       font-family: var(--font-heading); font-size: 24px;
-      font-weight: 600; color: var(--white); margin-bottom: 8px;
+      font-weight: 500; color: var(--white); margin-bottom: 8px;
     }
     .service-card-desc {
       font-size: 13px; color: rgba(255,255,255,0.75);
@@ -361,7 +361,7 @@
        CTA / CONTACT
     ═══════════════════════════════════════════ */
     .cta-section {
-      background: var(--charcoal);
+      background: var(--charcoal-deep);
       padding: 100px 40px;
     }
     .cta-grid {
@@ -431,10 +431,10 @@
     }
     .footer-heading {
       font-family: var(--font-heading); font-size: 16px;
-      color: var(--white); font-weight: 600; margin-bottom: 20px;
+      color: var(--white); font-weight: 500; margin-bottom: 20px;
     }
     .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 10px; }
+    .footer-links li { margin-bottom: 10px; font-size: 13px; color: rgba(255,255,255,0.5); }
     .footer-links a {
       font-size: 13px; color: rgba(255,255,255,0.5);
       transition: color 0.3s;
@@ -455,7 +455,7 @@
     .footer-newsletter-form input:focus { border-color: var(--gold); }
     .footer-newsletter-form button {
       padding: 10px 20px; background: var(--gold); color: var(--white);
-      border: none; border-radius: 4px; font-size: 13px; font-weight: 600;
+      border: none; border-radius: 4px; font-size: 13px; font-weight: 500;
       cursor: pointer; font-family: var(--font-body);
       transition: background 0.3s;
     }
@@ -527,7 +527,7 @@
     .page-hero .section-label { color: var(--gold-light); }
     .page-hero h1 {
       font-family: var(--font-heading); font-size: clamp(36px, 5vw, 56px);
-      font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 16px;
+      font-weight: 500; color: var(--white); line-height: 1.15; margin-bottom: 16px;
     }
     .page-hero p {
       font-size: 16px; color: rgba(255,255,255,0.65);
