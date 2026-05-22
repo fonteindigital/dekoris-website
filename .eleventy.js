@@ -34,6 +34,16 @@ module.exports = function(eleventyConfig) {
     return Number(num).toLocaleString();
   });
 
+  eleventyConfig.addFilter("date", function(value, format) {
+    const d = (value instanceof Date) ? value : new Date(value);
+    if (isNaN(d.getTime())) return "";
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    if (format === "MMMM YYYY") return months[d.getMonth()] + " " + d.getFullYear();
+    if (format === "MMM YYYY") return months[d.getMonth()].slice(0,3) + " " + d.getFullYear();
+    if (format === "YYYY-MM-DD") return d.toISOString().slice(0,10);
+    return d.toDateString();
+  });
+
   return {
     dir: {
       input: "src",

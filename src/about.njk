@@ -5,9 +5,15 @@ activePage: about
 permalink: /about/
 ---
   <style>
-    .about-hero-images {
+    .about-hero-strip {
       margin-top: 80px;
+      max-width: 1280px; margin-left: auto; margin-right: auto;
+      padding: 0 40px;
+    }
+    @media (max-width: 768px) { .about-hero-strip { padding: 0 24px; } }
+    .about-hero-images {
       display: flex; gap: 6px; height: 320px; overflow: hidden;
+      border-radius: 8px;
     }
     .about-hero-images img {
       flex: 1; min-width: 0; height: 100%; object-fit: cover;
@@ -28,7 +34,7 @@ permalink: /about/
     }
     .about-text .mission-box h3 {
       font-family: var(--font-heading); font-size: 20px;
-      color: var(--gold); font-weight: 600; margin-bottom: 8px;
+      color: var(--gold); font-weight: 500; margin-bottom: 8px;
     }
     .about-text .mission-box p { margin-bottom: 0; }
 
@@ -54,7 +60,7 @@ permalink: /about/
     }
     .why-card h3 {
       font-family: var(--font-heading); font-size: 22px;
-      font-weight: 600; color: var(--text-dark); margin-bottom: 10px;
+      font-weight: 500; color: var(--text-dark); margin-bottom: 10px;
     }
     .why-card p {
       font-size: 14px; color: var(--text-body); line-height: 1.7;
@@ -73,10 +79,10 @@ permalink: /about/
     }
     .cta-banner h2 {
       font-family: var(--font-heading); font-size: clamp(28px, 4vw, 42px);
-      color: var(--white); font-weight: 600; margin-bottom: 16px;
+      color: var(--white); font-weight: 500; margin-bottom: 16px;
     }
     .cta-banner p {
-      font-size: 16px; color: rgba(255,255,255,0.6);
+      font-size: 16px; color: rgba(255,255,255,0.85);
       margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto;
     }
 
@@ -96,11 +102,13 @@ permalink: /about/
 <body>
 
 
-  <div class="about-hero-images">
-    <img src="https://static.wixstatic.com/media/06bb1b_f4c5d209635e4b359dbcc3a4679ca3bb~mv2.jpg/v1/fill/w_400,h_600,al_c,q_80/06bb1b_f4c5d209635e4b359dbcc3a4679ca3bb~mv2.jpg" alt="">
-    <img src="https://static.wixstatic.com/media/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg" alt="">
-    <img src="https://static.wixstatic.com/media/06bb1b_6cc9db0386b34de9b5b1c0830b7595ed~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80/06bb1b_6cc9db0386b34de9b5b1c0830b7595ed~mv2.jpg" alt="">
-    <img src="https://static.wixstatic.com/media/06bb1b_1a55bfba8ca9416d9c542c5a47a151f9~mv2.jpg/v1/fill/w_400,h_600,al_c,q_80/06bb1b_1a55bfba8ca9416d9c542c5a47a151f9~mv2.jpg" alt="">
+  <div class="about-hero-strip">
+    <div class="about-hero-images">
+      <img src="https://static.wixstatic.com/media/06bb1b_f4c5d209635e4b359dbcc3a4679ca3bb~mv2.jpg/v1/fill/w_400,h_600,al_c,q_80/06bb1b_f4c5d209635e4b359dbcc3a4679ca3bb~mv2.jpg" alt="">
+      <img src="https://static.wixstatic.com/media/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80/06bb1b_bf97003d5b3b486eacb3fc65935806ef~mv2.jpg" alt="">
+      <img src="https://static.wixstatic.com/media/06bb1b_6cc9db0386b34de9b5b1c0830b7595ed~mv2.jpg/v1/fill/w_800,h_600,al_c,q_80/06bb1b_6cc9db0386b34de9b5b1c0830b7595ed~mv2.jpg" alt="">
+      <img src="https://static.wixstatic.com/media/06bb1b_1a55bfba8ca9416d9c542c5a47a151f9~mv2.jpg/v1/fill/w_400,h_600,al_c,q_80/06bb1b_1a55bfba8ca9416d9c542c5a47a151f9~mv2.jpg" alt="">
+    </div>
   </div>
 
   <section class="section about-content">

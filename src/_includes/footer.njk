@@ -2,13 +2,10 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="nav-logo">
-        {% if settings.logoDark %}
-          <img src="{{ settings.logoDark }}" alt="{{ settings.siteName or 'Dekoris' }}" style="height: 50px; width: auto;">
-        {% elif settings.logo %}
-          <img src="{{ settings.logo }}" alt="{{ settings.siteName or 'Dekoris' }}" style="height: 50px; width: auto;">
+        {% if settings.logo %}
+          <img src="{{ settings.logo }}" alt="{{ settings.siteName or 'Dekoris' }}" style="height: 32px; width: auto;">
         {% else %}
           <span class="nav-logo-text">{{ settings.siteName or "DEKORIS" }}</span>
-          <span class="nav-logo-tagline">{{ settings.tagline or "Crafting Beautiful Spaces" }}</span>
         {% endif %}
       </div>
       <p>Proudly Namibian, 100% female-owned interiors company delivering premium blinds, curtains, and décor solutions.</p>

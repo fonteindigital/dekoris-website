@@ -125,7 +125,7 @@
     .nav-cta {
       background: var(--charcoal) !important; color: var(--white) !important;
       padding: 10px 24px !important; border-radius: 4px;
-      font-weight: 600 !important; letter-spacing: 1px !important;
+      font-weight: 500 !important; letter-spacing: 1px !important;
       transition: background 0.3s !important;
     }
     .nav-cta:hover { background: var(--charcoal-deep) !important; }
@@ -177,7 +177,7 @@
       line-height: 1.1; max-width: 650px; margin-bottom: 20px;
     }
     .hero p {
-      font-size: 17px; color: rgba(255,255,255,0.8);
+      font-size: 17px; color: rgba(255,255,255,0.92);
       max-width: 480px; line-height: 1.7; margin-bottom: 36px;
     }
     .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -245,9 +245,9 @@
       line-height: 1.8; margin-bottom: 16px;
     }
     .about-text .highlight {
-      font-family: var(--font-heading); font-size: 20px;
-      color: var(--text-dark); font-weight: 500;
-      line-height: 1.5; font-style: italic;
+      font-family: var(--font-body); font-size: 15px;
+      color: var(--text-body); font-weight: 400;
+      line-height: 1.8;
       border-left: 3px solid var(--gold); padding-left: 20px;
       margin: 28px 0;
     }
@@ -379,7 +379,7 @@
       align-items: start;
     }
     .cta-section .section-title { color: var(--white); }
-    .cta-section .section-subtitle { color: rgba(255,255,255,0.65); }
+    .cta-section .section-subtitle { color: rgba(255,255,255,0.88); }
     .cta-details { margin-top: 36px; }
     .cta-detail {
       display: flex; align-items: center; gap: 12px;
@@ -483,6 +483,15 @@
     /* ═══════════════════════════════════════════
        RESPONSIVE
     ═══════════════════════════════════════════ */
+
+
+    /* Footer logo — uses the header logo asset, recoloured cream on charcoal for perfect alignment */
+    .footer-brand .nav-logo img {
+      filter: brightness(0) invert(1);
+      opacity: 0.92;
+    }
+    .footer-brand .nav-logo-tagline { display: none; }
+
     @media (max-width: 1024px) {
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
