@@ -41,6 +41,7 @@
       --gold-dark: #8B7B54;
       --cream: #F5F2EE;
       --cream-dark: #EDE8E2;
+      --grey-soft: #ECEAE8;   /* faint warm grey for section breaks */
       --white: #FFFFFF;
       --text-dark: #2D2926;
       --text-body: #5A5450;
@@ -255,7 +256,7 @@
     /* ═══════════════════════════════════════════
        VALUE PROPS
     ═══════════════════════════════════════════ */
-    .values { background: var(--cream); padding: 80px 40px; }
+    .values { background: var(--grey-soft); padding: 80px 40px; }
     .values-inner {
       max-width: 1280px; margin: 0 auto;
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;

@@ -109,15 +109,15 @@ permalink: /inspiration/
     .blog-card.hidden { display: none; }
 
     .blog-newsletter {
-      background: var(--charcoal-deep); color: var(--white);
+      background: var(--grey-soft); color: var(--text-dark);
       padding: 64px 40px; text-align: center;
     }
     .blog-newsletter h2 {
       font-family: var(--font-heading); font-size: 28px;
-      font-weight: 500; margin-bottom: 12px;
+      font-weight: 500; color: var(--text-dark); margin-bottom: 12px;
     }
     .blog-newsletter p {
-      color: rgba(255,255,255,0.75); margin-bottom: 24px;
+      color: var(--text-body); margin-bottom: 24px;
       max-width: 520px; margin-left: auto; margin-right: auto;
     }
     .blog-newsletter-form {
@@ -126,17 +126,19 @@ permalink: /inspiration/
     }
     .blog-newsletter-form input {
       flex: 1; padding: 14px 18px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.06);
-      color: var(--white); border-radius: 6px; font-size: 14px;
+      border: 1.5px solid var(--cream-dark);
+      background: var(--white);
+      color: var(--text-dark); border-radius: 6px; font-size: 14px;
       font-family: var(--font-body); outline: none;
     }
+    .blog-newsletter-form input:focus { border-color: var(--gold); }
     .blog-newsletter-form button {
-      padding: 14px 28px; background: var(--gold); color: var(--white);
+      padding: 14px 28px; background: var(--charcoal); color: var(--white);
       border: none; border-radius: 6px; font-size: 13px;
       letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
       cursor: pointer;
     }
+    .blog-newsletter-form button:hover { background: var(--charcoal-deep); }
 
     @media (max-width: 900px) {
       .featured-post { grid-template-columns: 1fr; }
