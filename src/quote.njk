@@ -8,7 +8,7 @@ permalink: /quote/
     .process-section { background: var(--cream); padding: 60px 40px; }
     .process-inner { max-width: 1100px; margin: 0 auto; }
     .process-steps {
-      display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
       position: relative;
     }
     .process-steps::before {
@@ -118,6 +118,27 @@ permalink: /quote/
       .size-presets { grid-template-columns: repeat(2, 1fr); }
       .radio-group { flex-direction: column; }
     }
+
+    .prefill-banner {
+      padding: 14px 18px; margin-bottom: 24px;
+      background: var(--cream); border-left: 3px solid var(--gold);
+      border-radius: 6px; font-size: 14px; color: var(--text-body);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .prefill-banner a {
+      font-size: 12px; color: var(--text-light);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .prefill-banner a:hover { color: var(--gold); }
+    .form-success {
+      padding: 28px; background: var(--cream); border-radius: 8px;
+      border-left: 3px solid var(--gold); text-align: center;
+    }
+    .form-success h3 {
+      font-family: var(--font-heading); font-size: 22px; color: var(--text-dark);
+      font-weight: 500; margin-bottom: 8px;
+    }
+    .form-success p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
   </style>
 
 
@@ -132,33 +153,28 @@ permalink: /quote/
       <div class="process-steps">
         <div class="process-step">
           <div class="process-num">1</div>
-          <div class="process-label">Enquire</div>
-          <div class="process-desc">Tell us your preferences</div>
+          <div class="process-label">Consultation</div>
+          <div class="process-desc">A free on-site visit to understand your space</div>
         </div>
         <div class="process-step">
           <div class="process-num">2</div>
-          <div class="process-label">Consult</div>
-          <div class="process-desc">Free on-site consultation</div>
+          <div class="process-label">Measurement</div>
+          <div class="process-desc">Stella measures every window, no guesswork</div>
         </div>
         <div class="process-step">
           <div class="process-num">3</div>
-          <div class="process-label">Measure</div>
-          <div class="process-desc">Professional measurements</div>
+          <div class="process-label">Selection</div>
+          <div class="process-desc">Choose fabrics, colours, and operation</div>
         </div>
         <div class="process-step">
           <div class="process-num">4</div>
-          <div class="process-label">Quote</div>
-          <div class="process-desc">Detailed, no obligation</div>
+          <div class="process-label">Installation</div>
+          <div class="process-desc">Manufactured locally, installed by our team</div>
         </div>
         <div class="process-step">
           <div class="process-num">5</div>
-          <div class="process-label">Install</div>
-          <div class="process-desc">Manufacture & install</div>
-        </div>
-        <div class="process-step">
-          <div class="process-num">6</div>
           <div class="process-label">Aftercare</div>
-          <div class="process-desc">Ongoing support</div>
+          <div class="process-desc">Ongoing support and a 12-month warranty</div>
         </div>
       </div>
     </div>
@@ -167,7 +183,11 @@ permalink: /quote/
   <section class="section quote-section">
     <div class="section-inner">
       <div class="quote-form-container">
-        <form class="quote-form" onsubmit="return false;">
+        <form class="quote-form" id="quoteForm">
+          <div id="prefillBanner" class="prefill-banner" style="display:none">
+            <span id="prefillText"></span>
+            <a href="/quote/">clear</a>
+          </div>
 
           <div class="form-group fade-up">
             <div class="form-group-title">Your Details</div>
@@ -183,16 +203,15 @@ permalink: /quote/
             <div class="form-row form-row-2" style="margin-bottom: 16px;">
               <div>
                 <label>Product Type</label>
-                <select required>
+                <select id="quoteProduct" name="product" required>
                   <option value="">Select a product...</option>
-                  <option>Roman Blinds</option>
-                  <option>Venetian Blinds</option>
-                  <option>Honeycomb 38mm Blinds</option>
-                  <option>Honeycomb 25mm Blinds</option>
-                  <option>Zebra Blinds</option>
-                  <option>Roller Blinds</option>
-                  <option>Curtains</option>
-                  <option>Other</option>
+                  <option value="roman-blinds">Roman Blinds</option>
+                  <option value="venetian-blinds">Venetian Blinds</option>
+                  <option value="honeycomb-blinds">Honeycomb Blinds</option>
+                  <option value="zebra-blinds">Zebra Blinds</option>
+                  <option value="roller-blinds">Roller Blinds</option>
+                  <option value="curtains">Curtains</option>
+                  <option value="other">Other</option>
                 </select>
               </div>
               <div>
@@ -233,11 +252,11 @@ permalink: /quote/
             <div style="margin-bottom: 20px;">
               <label>Approximate Window Size</label>
               <div class="size-presets">
-                <div class="size-preset" onclick="selectSize(this)"><strong>Small</strong>up to 600×900mm</div>
-                <div class="size-preset selected" onclick="selectSize(this)"><strong>Medium</strong>up to 1200×1500mm</div>
-                <div class="size-preset" onclick="selectSize(this)"><strong>Large</strong>up to 1800×2100mm</div>
-                <div class="size-preset" onclick="selectSize(this)"><strong>XL / Slider</strong>2400mm+</div>
-                <div class="size-preset" onclick="selectSize(this)"><strong>Custom</strong>specify below</div>
+                <div class="size-preset" data-size="small" onclick="selectSize(this)"><strong>Small</strong>600 × 1000 mm</div>
+                <div class="size-preset selected" data-size="medium" onclick="selectSize(this)"><strong>Medium</strong>960 × 900 mm</div>
+                <div class="size-preset" data-size="large" onclick="selectSize(this)"><strong>Large</strong>1200 × 1600 mm</div>
+                <div class="size-preset" data-size="xl" onclick="selectSize(this)"><strong>XL / Slider</strong>2400 mm +</div>
+                <div class="size-preset" data-size="custom" onclick="selectSize(this)"><strong>Custom</strong>specify below</div>
               </div>
             </div>
             <div>
@@ -262,9 +281,131 @@ permalink: /quote/
             <textarea placeholder="Any special requirements, custom dimensions, or questions..."></textarea>
           </div>
 
-          <button type="submit" class="btn btn-gold fade-up">Get My Quote</button>
+          <button type="submit" class="btn btn-gold fade-up">Send Quote Request</button>
         </form>
+        <div id="quoteSuccess" class="form-success" style="display:none">
+          <h3>Thank you — request sent</h3>
+          <p>Your email client should have opened with the request pre-filled. If not, please email <a href="mailto:hello@dekoris.com.na" style="color:var(--gold)">hello@dekoris.com.na</a> directly. Stella will be in touch within one working day.</p>
+        </div>
       </div>
     </div>
   </section>
+
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const productSlug = params.get("product");
+      const sizeSlug = params.get("size");
+
+      const productSelect = document.getElementById("quoteProduct");
+      const banner = document.getElementById("prefillBanner");
+      const bannerText = document.getElementById("prefillText");
+
+      let bannerLabel = "";
+
+      if (productSlug && productSelect) {
+        const opt = productSelect.querySelector(`option[value="${productSlug}"]`);
+        if (opt) {
+          productSelect.value = productSlug;
+          bannerLabel = opt.textContent.trim();
+        }
+      }
+
+      if (sizeSlug) {
+        // sizeSlug looks like 'roman-blinds-small' — pull the last segment
+        const sizeKey = sizeSlug.split("-").pop();
+        const presets = document.querySelectorAll(".size-preset");
+        presets.forEach(p => p.classList.remove("selected"));
+        const match = document.querySelector(`.size-preset[data-size="${sizeKey}"]`);
+        if (match) {
+          match.classList.add("selected");
+          const label = match.querySelector("strong").textContent;
+          bannerLabel += bannerLabel ? ` — ${label}` : label;
+        }
+      }
+
+      if (bannerLabel) {
+        bannerText.textContent = `Quoting: ${bannerLabel}`;
+        banner.style.display = "flex";
+      }
+
+      // Form submission: build a mailto with all fields, opens user's mail client
+      const form = document.getElementById("quoteForm");
+      const successEl = document.getElementById("quoteSuccess");
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const inputs = form.querySelectorAll("input, select, textarea");
+        const lines = [];
+
+        // Pre-fill context
+        if (bannerLabel) lines.push(`From page: ${bannerLabel}`);
+
+        // Name / Phone / Email — first three text/email/tel inputs
+        const name = form.querySelector('input[type="text"]')?.value || "";
+        const phone = form.querySelector('input[type="tel"]')?.value || "";
+        const email = form.querySelector('input[type="email"]')?.value || "";
+        lines.push(`Name: ${name}`);
+        lines.push(`Phone: ${phone}`);
+        lines.push(`Email: ${email}`);
+
+        // Product + colour
+        const product = productSelect ? productSelect.options[productSelect.selectedIndex].text : "";
+        const colourSel = form.querySelectorAll("select")[1];
+        const colour = colourSel ? colourSel.value : "";
+        lines.push(`Product: ${product}`);
+        if (colour) lines.push(`Colour: ${colour}`);
+
+        // Operation
+        const op = form.querySelector('input[name="operation"]:checked')?.value || "";
+        if (op) lines.push(`Operation: ${op}`);
+
+        // Window count
+        const count = document.getElementById("windowCount")?.textContent || "1";
+        lines.push(`Windows: ${count}`);
+
+        // Selected size
+        const selSize = document.querySelector(".size-preset.selected strong")?.textContent || "";
+        if (selSize) lines.push(`Window size: ${selSize}`);
+
+        // Space type — third select
+        const spaceSel = form.querySelectorAll("select")[2];
+        const space = spaceSel ? spaceSel.value : "";
+        if (space) lines.push(`Space: ${space}`);
+
+        // Notes
+        const notes = form.querySelector("textarea")?.value || "";
+        if (notes) lines.push(`\nNotes:\n${notes}`);
+
+        const subject = encodeURIComponent(`Dekoris quote request — ${name || "new lead"}`);
+        const body = encodeURIComponent(lines.join("\n"));
+        const mailto = `mailto:hello@dekoris.com.na?subject=${subject}&body=${body}`;
+
+        window.location.href = mailto;
+
+        // Show success state shortly after launching mail client
+        setTimeout(function() {
+          form.style.display = "none";
+          successEl.style.display = "block";
+          successEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 400);
+      });
+
+      // Counter and radio/preset helpers (in case base.njk doesn't define them)
+      window.changeCount = window.changeCount || function(delta) {
+        const el = document.getElementById("windowCount");
+        const next = Math.max(1, (parseInt(el.textContent, 10) || 1) + delta);
+        el.textContent = next;
+      };
+      window.selectRadio = window.selectRadio || function(el) {
+        el.parentNode.querySelectorAll(".radio-option").forEach(o => o.classList.remove("selected"));
+        el.classList.add("selected");
+        el.querySelector("input").checked = true;
+      };
+      window.selectSize = window.selectSize || function(el) {
+        el.parentNode.querySelectorAll(".size-preset").forEach(o => o.classList.remove("selected"));
+        el.classList.add("selected");
+      };
+    })();
+  </script>
 
