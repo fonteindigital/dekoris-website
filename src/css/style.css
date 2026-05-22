@@ -361,7 +361,7 @@
        GALLERY STRIP
     ═══════════════════════════════════════════ */
     .gallery-strip {
-      display: flex; gap: 0; overflow: hidden; height: 300px;
+      display: flex; gap: 0; overflow: hidden; height: 420px;
     }
     .gallery-strip img {
       flex: 1; min-width: 0; height: 100%; object-fit: cover;
@@ -516,7 +516,7 @@
       .services-grid { grid-template-columns: 1fr; }
       .service-card { height: 320px; }
       .service-card:last-child { grid-column: span 1; }
-      .gallery-strip { height: 180px; }
+      .gallery-strip { height: 240px; }
       .cta-section { padding: 64px 24px; }
       .form-row { grid-template-columns: 1fr; }
       .footer { padding: 48px 24px 24px; }

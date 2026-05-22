@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ pageTitle | default("Dekoris — Crafting Beautiful Spaces") }}</title>
   <meta name="description" content="{{ pageDescription | default('Dekoris is a proudly Namibian, 100% female-owned interiors company specialising in blinds, curtains, wall panelling, décor, and soft finishes.') }}">
+
+  <!-- Open Graph / social card -->
+  <meta property="og:title" content="{{ pageTitle | default('Dekoris — Crafting Beautiful Spaces') }}">
+  <meta property="og:description" content="{{ pageDescription | default('Dekoris is a proudly Namibian, 100% female-owned interiors company specialising in blinds, curtains, wall panelling, décor, and soft finishes.') }}">
+  <meta property="og:image" content="{{ ogImage | default('https://static.wixstatic.com/media/06bb1b_c8fa1441e0eb492a957d7e581a6248f5~mv2.jpg/v1/fill/w_1200,h_630,al_c,q_85,enc_avif,quality_auto/06bb1b_c8fa1441e0eb492a957d7e581a6248f5~mv2.jpg') }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.dekoris.com.na{{ page.url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ pageTitle | default('Dekoris — Crafting Beautiful Spaces') }}">
+  <meta name="twitter:description" content="{{ pageDescription | default('Dekoris is a proudly Namibian, 100% female-owned interiors company specialising in blinds, curtains, wall panelling, décor, and soft finishes.') }}">
+  <meta name="twitter:image" content="{{ ogImage | default('https://static.wixstatic.com/media/06bb1b_c8fa1441e0eb492a957d7e581a6248f5~mv2.jpg/v1/fill/w_1200,h_630,al_c,q_85,enc_avif,quality_auto/06bb1b_c8fa1441e0eb492a957d7e581a6248f5~mv2.jpg') }}">
+
   <!-- Brand fonts (Neue Montreal + TAN Mon Cheri) are self-hosted; see src/css/style.css @font-face block. -->
   <link rel="preload" href="/fonts/NeueMontreal-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/TANMonCheri-Regular.woff2" as="font" type="font/woff2" crossorigin>
