@@ -90,22 +90,16 @@ permalink: /
       </div>
       <div class="products-grid">
         {% for product in collections.products %}
-        <div class="product-card fade-up" style="transition-delay: {{ loop.index0 * 0.05 }}s">
+        <a class="product-card fade-up" href="/shop/{{ product.data.slug }}/" style="transition-delay: {{ loop.index0 * 0.05 }}s">
           <div class="product-image">
             <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
           </div>
           <div class="product-info">
             <div class="product-name">{{ product.data.title }}</div>
             <div class="product-price"><span class="product-from">from</span>N${{ product.data.price | commaNumber }}</div>
-            <button class="snipcart-add-item product-buy"
-              data-item-id="{{ product.data.title | slug }}"
-              data-item-name="{{ product.data.title }}"
-              data-item-price="{{ product.data.price }}"
-              data-item-url="https://dekoris.com.na/"
-              data-item-image="{{ product.data.image }}"
-              data-item-description="{{ product.data.description }}">Add to Cart</button>
+            <span class="product-buy">View Sizes →</span>
           </div>
-        </div>
+        </a>
         {% endfor %}
       </div>
     </div>

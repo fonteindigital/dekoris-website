@@ -29,16 +29,26 @@ collections:
     create: true
     fields:
       - { label: "Product Name", name: "title", widget: "string" }
-      - { label: "Price", name: "price", widget: "number", value_type: "float" }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Used in the URL: /shop/{slug}/. Lowercase, hyphens only." }
+      - { label: "Starting Price (from)", name: "price", widget: "number", value_type: "float", hint: "Shown as 'from N$X' on the catalog card." }
       - { label: "Product Image", name: "image", widget: "image" }
       - { label: "Category", name: "category", widget: "select", options: ["Blinds", "Curtains", "Wall Panelling", "Home Decor"] }
-      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Short Description", name: "description", widget: "text" }
+      - { label: "Long Description (detail page)", name: "longDescription", widget: "text", required: false }
       - label: "Available Colours"
         name: "colours"
         widget: "list"
         field: { label: "Colour", name: "colour", widget: "string" }
       - { label: "Motorised Option", name: "motorised", widget: "boolean", default: true }
       - { label: "Display Order", name: "order", widget: "number", default: 10 }
+      - label: "Standard Sizes"
+        name: "sizes"
+        widget: "list"
+        summary: "{{ fields.name }} — N${{ fields.price }}"
+        fields:
+          - { label: "Size Name (include dimensions)", name: "name", widget: "string", hint: "e.g. 'Small (600 × 1000 mm)'" }
+          - { label: "Price (N$)", name: "price", widget: "number", value_type: "float" }
+          - { label: "SKU", name: "sku", widget: "string", hint: "Used as the cart line ID — lowercase-hyphenated. e.g. roman-blinds-small" }
 
   - name: "gallery"
     label: "Gallery Images"
