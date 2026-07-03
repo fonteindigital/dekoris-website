@@ -67,6 +67,12 @@ permalink: /shop/
         </div>
         <div class="product-info">
           <div class="product-name">{{ product.data.title }}</div>
+          {% if product.data.slug != "curtains" %}
+          <div class="product-badges">
+            <span class="badge badge-nodrill">No-Drill</span>
+            <span class="badge badge-motorised">Motorised</span>
+          </div>
+          {% endif %}
           <div class="product-price"><span class="product-from">from</span>N${{ product.data.price | commaNumber }}</div>
           <span class="product-buy">View Sizes →</span>
         </div>

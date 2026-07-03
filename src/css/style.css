@@ -392,6 +392,27 @@
       box-sizing: border-box;
     }
     .product-card:hover .product-buy { background: var(--charcoal-deep); }
+
+    /* Product card badges (Slice 15) */
+    .product-badges {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-top: 8px; margin-bottom: 10px;
+    }
+    .badge {
+      font-size: 10px; letter-spacing: 1px;
+      text-transform: uppercase; font-weight: 500;
+      padding: 4px 10px; border-radius: 12px;
+      line-height: 1;
+    }
+    .badge-nodrill {
+      background: var(--cream); color: var(--gold-dark);
+      border: 1px solid var(--gold);
+    }
+    .badge-motorised {
+      background: var(--cream); color: var(--charcoal);
+      border: 1px solid var(--charcoal);
+    }
+
     .snipcart-cart-header { font-family: var(--font-body) !important; }
 
     /* ═══════════════════════════════════════════

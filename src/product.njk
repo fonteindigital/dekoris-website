@@ -124,6 +124,39 @@ eleventyComputed:
     .back-to-shop a { color: var(--text-light); letter-spacing: 0.5px; }
     .back-to-shop a:hover { color: var(--gold); }
 
+
+    .signature-panels {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      margin: 24px 0;
+    }
+    .sig-panel {
+      display: block; padding: 20px 22px;
+      background: var(--cream); border-radius: 8px;
+      border-left: 3px solid var(--gold);
+      text-decoration: none; color: inherit;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .sig-panel:hover { transform: translateY(-2px); background: var(--cream-dark); }
+    .sig-panel h4 {
+      font-family: var(--font-heading);
+      font-size: 15px; font-weight: 500;
+      color: var(--text-dark); margin-bottom: 6px;
+    }
+    .sig-panel p {
+      font-size: 13px; color: var(--text-body);
+      line-height: 1.6; margin-bottom: 10px;
+    }
+    .sig-link {
+      font-size: 11px; letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold-dark); font-weight: 500;
+      border-bottom: 1px solid var(--gold-light);
+      padding-bottom: 1px;
+    }
+    @media (max-width: 900px) {
+      .signature-panels { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 900px) {
       .product-detail-inner { grid-template-columns: 1fr; gap: 32px; }
       .product-detail-hero { padding: 64px 24px 48px; }
@@ -181,6 +214,21 @@ eleventyComputed:
           </div>
           {% endfor %}
         </div>
+
+        {% if product.data.slug != "curtains" %}
+        <div class="signature-panels">
+          <a class="sig-panel" href="/no-drill/">
+            <h4>No-Drill installation available</h4>
+            <p>Zero wall damage. Ideal for renters and complexes. Same finish as a drilled install.</p>
+            <span class="sig-link">How No-Drill works →</span>
+          </a>
+          <a class="sig-panel" href="/motorised/">
+            <h4>Available with motorisation</h4>
+            <p>Remote, wall switch, or smart-home control. Perfect for large windows and multi-window rooms.</p>
+            <span class="sig-link">How motorisation works →</span>
+          </a>
+        </div>
+        {% endif %}
 
         <div class="custom-size-exit">
           <strong>Window a different size?</strong>
