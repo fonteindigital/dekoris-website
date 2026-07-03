@@ -253,6 +253,72 @@
       margin: 28px 0;
     }
 
+
+    /* ═══════════════════════════════════════════
+       SIGNATURE FEATURES STRIP (Slice 12) — homepage
+       Cream background for contrast against the dark hero
+    ═══════════════════════════════════════════ */
+    .signature-strip {
+      background: var(--cream);
+      padding: 72px 40px;
+      border-top: 1px solid var(--cream-dark);
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .signature-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+    .signature-col {
+      display: flex; gap: 24px; align-items: flex-start;
+      text-decoration: none; color: inherit;
+      padding: 8px; border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    .signature-col:hover { transform: translateY(-2px); }
+    .signature-icon {
+      flex-shrink: 0; width: 64px; height: 64px;
+      background: var(--white);
+      border: 1px solid var(--cream-dark);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.3s;
+    }
+    .signature-col:hover .signature-icon { border-color: var(--gold); }
+    .signature-icon svg {
+      width: 26px; height: 26px;
+      stroke: var(--gold);
+    }
+    .signature-text { flex: 1; }
+    .signature-text .section-label { margin-bottom: 8px; }
+    .signature-text h3 {
+      font-family: var(--font-heading);
+      font-size: 22px; font-weight: 500;
+      color: var(--text-dark); line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .signature-text p {
+      font-size: 14px; color: var(--text-body);
+      line-height: 1.65; margin-bottom: 14px;
+    }
+    .signature-link {
+      display: inline-block;
+      font-size: 12px; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--charcoal);
+      font-weight: 500;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .signature-col:hover .signature-link {
+      color: var(--gold-dark); border-color: var(--gold-dark);
+    }
+
+    @media (max-width: 900px) {
+      .signature-strip { padding: 48px 24px; }
+      .signature-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
     /* ═══════════════════════════════════════════
        VALUE PROPS
     ═══════════════════════════════════════════ */
