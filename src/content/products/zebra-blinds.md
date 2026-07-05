@@ -5,7 +5,9 @@ price: 1350
 image: "https://static.wixstatic.com/media/06bb1b_e8582f5ccbe740289bc44f63563162e4~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,enc_avif,quality_auto/06bb1b_e8582f5ccbe740289bc44f63563162e4~mv2.jpg"
 category: "Blinds"
 description: "Custom Zebra Blinds"
-longDescription: "Alternating sheer and opaque bands that roll over each other for instant light control — fully sheer, fully closed, or anywhere in between. Modern and minimal. Quiet operation with no cords near children."
+longDescription: "An innovative design that alternates sheer and opaque fabric bands. By shifting the layers, you transition seamlessly from filtered daylight to full privacy — without ever losing the view entirely. Contemporary and striking in appearance."
+bestSuitedFor: "Living rooms and open-plan spaces where you want to enjoy natural light without sacrificing privacy. Also excellent for home cinemas, dining areas, and modern apartments. Commercially, they perform well in showrooms, lobbies, and restaurants where ambiance matters."
+control: "Cordless · Corded · Motorised"
 colours: ["White", "Beige", "Charcoal"]
 motorised: true
 order: 4

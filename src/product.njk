@@ -47,7 +47,30 @@ eleventyComputed:
       border-bottom: 1px solid var(--cream-dark);
     }
     .product-meta { font-size: 13px; color: var(--text-body); }
-    .product-meta strong {
+    .best-suited {
+      margin: 24px 0 32px;
+      padding: 18px 22px;
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+    }
+    .best-suited strong {
+      font-family: var(--font-body); font-size: 12px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold-dark); font-weight: 500;
+      display: block; margin-bottom: 6px;
+    }
+    .best-suited p {
+      font-size: 14px; color: var(--text-body);
+      line-height: 1.65; margin: 0;
+    }
+    .catalogue-link {
+      color: var(--text-body);
+      border-bottom: 1px solid var(--gold);
+      font-weight: 500;
+    }
+    .catalogue-link:hover { color: var(--gold-dark); }
+        .product-meta strong {
       display: block;
       font-size: 11px; letter-spacing: 1.2px;
       text-transform: uppercase; color: var(--text-light);
@@ -182,17 +205,29 @@ eleventyComputed:
         <h1>{{ product.data.title }}</h1>
         <p class="lead">{{ product.data.longDescription or product.data.description }}</p>
 
+        {% if product.data.bestSuitedFor %}
+        <div class="best-suited">
+          <strong>Best suited for:</strong>
+          <p>{{ product.data.bestSuitedFor }}</p>
+        </div>
+        {% endif %}
+
         <div class="product-meta-row">
           {% if product.data.colours and product.data.colours.length %}
           <div class="product-meta">
             <strong>Colours</strong>
-            {{ product.data.colours | join(" · ") }}
+            {{ product.data.colours | join(" · ") }} · <a href="mailto:hello@dekoris.com.na?subject=Colour%20catalogue%20request&body=Hi%20Dekoris%2C%20please%20send%20me%20the%20full%20colour%20and%20fabric%20catalogue." class="catalogue-link">View colour catalogue</a>
           </div>
           {% endif %}
-          {% if product.data.motorised %}
+          {% if product.data.control %}
           <div class="product-meta">
             <strong>Control</strong>
-            Cordless · Manual · Motorised
+            {{ product.data.control }}
+          </div>
+          {% elif product.data.motorised %}
+          <div class="product-meta">
+            <strong>Control</strong>
+            Cordless · Corded · Motorised
           </div>
           {% endif %}
           <div class="product-meta">

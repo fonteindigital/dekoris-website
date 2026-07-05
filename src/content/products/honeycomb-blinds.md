@@ -5,7 +5,9 @@ price: 1350
 image: "https://static.wixstatic.com/media/06bb1b_09b6bcab4f4e4ced883e914bd0600e01~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,enc_avif,quality_auto/06bb1b_09b6bcab4f4e4ced883e914bd0600e01~mv2.jpg"
 category: "Blinds"
 description: "Honeycomb 25mm Blinds"
-longDescription: "Insulating cellular blinds that trap air between honeycomb-shaped cells — keeping Windhoek summers cooler and winters warmer. Available in light-filtering or blockout fabrics, in 25mm or 38mm cell sizes. Cordless, manual, or motorised."
+longDescription: "Fabric cells form a honeycomb structure that traps air, providing excellent insulation against both heat and cold. Available in single, double, or triple cell configurations — the more cells, the better the thermal performance. Clean and modern in appearance."
+bestSuitedFor: "Bedrooms and living areas where energy efficiency is a priority, as well as conservatories and rooms with large glazed areas. Commercially, excellent for open-plan offices, healthcare facilities, and any building with high energy costs."
+control: "Cordless · Corded · Motorised"
 colours: ["White", "Cream", "Grey"]
 motorised: true
 order: 3
