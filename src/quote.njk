@@ -8,7 +8,7 @@ permalink: /quote/
     .process-section { background: var(--cream); padding: 60px 40px; }
     .process-inner { max-width: 1100px; margin: 0 auto; }
     .process-steps {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
       position: relative;
     }
     .process-steps::before {
@@ -77,7 +77,7 @@ permalink: /quote/
     }
     .radio-option input { display: none; }
 
-    .size-presets { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .size-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
     .size-preset {
       padding: 12px 8px; border: 1.5px solid var(--cream-dark);
       border-radius: 6px; text-align: center; cursor: pointer;
@@ -154,12 +154,12 @@ permalink: /quote/
         <div class="process-step">
           <div class="process-num">1</div>
           <div class="process-label">Consultation</div>
-          <div class="process-desc">A free on-site visit to understand your space</div>
+          <div class="process-desc">On-site visit to understand your space</div>
         </div>
         <div class="process-step">
           <div class="process-num">2</div>
           <div class="process-label">Measurement</div>
-          <div class="process-desc">We measure every window, no guesswork</div>
+          <div class="process-desc">Our team measures every window, no guesswork</div>
         </div>
         <div class="process-step">
           <div class="process-num">3</div>
@@ -169,12 +169,7 @@ permalink: /quote/
         <div class="process-step">
           <div class="process-num">4</div>
           <div class="process-label">Installation</div>
-          <div class="process-desc">Manufactured locally, installed by our team</div>
-        </div>
-        <div class="process-step">
-          <div class="process-num">5</div>
-          <div class="process-label">Aftercare</div>
-          <div class="process-desc">Ongoing support and a 12-month warranty</div>
+          <div class="process-desc">On-site installation by our team</div>
         </div>
       </div>
     </div>
@@ -211,6 +206,7 @@ permalink: /quote/
                   <option value="zebra-blinds">Zebra Blinds</option>
                   <option value="roller-blinds">Roller Blinds</option>
                   <option value="curtains">Curtains</option>
+                  <option value="no-drill-blinds">No-drill blinds</option>
                   <option value="other">Other</option>
                 </select>
               </div>
@@ -232,7 +228,7 @@ permalink: /quote/
             <div>
               <label>Operation Type</label>
               <div class="radio-group">
-                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="manual">Manual</label>
+                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="corded-cordless">Corded / Cordless</label>
                 <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="motorised">Motorised</label>
                 <label class="radio-option selected" onclick="selectRadio(this)"><input type="radio" name="operation" value="unsure" checked>Not sure yet</label>
               </div>
@@ -255,7 +251,9 @@ permalink: /quote/
                 <div class="size-preset" data-size="small" onclick="selectSize(this)"><strong>Small</strong>600 × 1000 mm</div>
                 <div class="size-preset selected" data-size="medium" onclick="selectSize(this)"><strong>Medium</strong>960 × 900 mm</div>
                 <div class="size-preset" data-size="large" onclick="selectSize(this)"><strong>Large</strong>1200 × 1600 mm</div>
-                <div class="size-preset" data-size="xl" onclick="selectSize(this)"><strong>XL / Slider</strong>2400 mm +</div>
+                <div class="size-preset" data-size="w1200" onclick="selectSize(this)"><strong>Wide</strong>1200 × 1200 mm</div>
+                <div class="size-preset" data-size="w1500" onclick="selectSize(this)"><strong>Wider</strong>1500 × 1200 mm</div>
+                <div class="size-preset" data-size="w1800" onclick="selectSize(this)"><strong>Widest</strong>1800 × 1200 mm</div>
                 <div class="size-preset" data-size="custom" onclick="selectSize(this)"><strong>Custom</strong>specify below</div>
               </div>
             </div>
@@ -285,7 +283,10 @@ permalink: /quote/
         </form>
         <div id="quoteSuccess" class="form-success" style="display:none">
           <h3>Thank you — request sent</h3>
-          <p>Your email client should have opened with the request pre-filled. If not, please email <a href="mailto:hello@dekoris.com.na" style="color:var(--gold)">hello@dekoris.com.na</a> directly. We'll be in touch within one working day.</p>
+          <p>Your request has been received successfully. Our team will review your details and be in touch within 1-2 working days.</p>
+          <p>If you don't hear from us, feel free to email us directly at <a href="mailto:hello@dekoris.com.na" style="color:var(--gold)">hello@dekoris.com.na</a>.</p>
+          <p style="margin-top: 16px;">We look forward to helping you create your beautiful space.</p>
+          <p style="font-size: 13px; color: var(--text-light); margin-top: 12px;">— The Dekoris team<br><em>Crafting Beautiful Spaces</em></p>
         </div>
       </div>
     </div>
