@@ -24,47 +24,6 @@ permalink: /inspiration/
 
     .blog-section { background: var(--cream); padding: 56px 40px 80px; }
 
-    .featured-post {
-      max-width: 1180px; margin: 0 auto 40px;
-      display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
-      border-radius: 12px; overflow: hidden;
-      background: var(--white);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-      text-decoration: none; color: inherit;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .featured-post:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.10);
-    }
-    .featured-post-image { height: 420px; overflow: hidden; }
-    .featured-post-image img { width: 100%; height: 100%; object-fit: cover; }
-    .featured-post-content {
-      padding: 48px; display: flex; flex-direction: column;
-      justify-content: center;
-    }
-    .featured-post-tag {
-      font-family: var(--font-body); font-size: 11px;
-      letter-spacing: 2px; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 12px;
-    }
-    .featured-post-title {
-      font-family: var(--font-heading); font-size: 28px;
-      font-weight: 500; color: var(--text-dark);
-      line-height: 1.2; margin-bottom: 16px;
-    }
-    .featured-post-excerpt {
-      font-size: 15px; color: var(--text-body);
-      line-height: 1.7; margin-bottom: 16px;
-    }
-    .featured-post-meta { font-size: 13px; color: var(--text-light); margin-bottom: 24px; }
-    .featured-post-cta {
-      align-self: flex-start;
-      padding: 12px 24px; background: var(--charcoal); color: var(--white);
-      font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase;
-      font-weight: 500; border-radius: 6px; border: none;
-    }
-
     .blog-grid {
       max-width: 1180px; margin: 0 auto;
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
@@ -141,10 +100,6 @@ permalink: /inspiration/
     .blog-newsletter-form button:hover { background: var(--charcoal-deep); }
 
     @media (max-width: 900px) {
-      .featured-post { grid-template-columns: 1fr; }
-      .featured-post-image { height: 280px; }
-      .featured-post-content { padding: 32px 24px; }
-      .featured-post-title { font-size: 24px; }
       .blog-grid { grid-template-columns: 1fr; }
       .blog-section { padding: 40px 24px 64px; }
       .blog-newsletter { padding: 48px 24px; }
@@ -166,25 +121,8 @@ permalink: /inspiration/
   </div>
 
   <section class="blog-section">
-    {% set featured = collections.blog | getFeatured %}
-    {% if featured %}
-    <a class="featured-post fade-up" href="/inspiration/{{ featured.data.slug }}/" data-category="{{ featured.data.category }}">
-      <div class="featured-post-image">
-        <img src="{{ featured.data.image }}" alt="{{ featured.data.title }}">
-      </div>
-      <div class="featured-post-content">
-        <div class="featured-post-tag">{{ featured.data.category }}</div>
-        <h2 class="featured-post-title">{{ featured.data.title }}</h2>
-        <p class="featured-post-excerpt">{{ featured.data.excerpt }}</p>
-        <div class="featured-post-meta">{{ featured.data.date | date('MMMM YYYY') }}{% if featured.data.readTime %} · {{ featured.data.readTime }}{% endif %}</div>
-        <span class="featured-post-cta">Read Article →</span>
-      </div>
-    </a>
-    {% endif %}
-
     <div class="blog-grid">
       {% for post in collections.blog %}
-        {% if not post.data.featured %}
         <a class="blog-card fade-up" href="/inspiration/{{ post.data.slug }}/" data-category="{{ post.data.category }}" style="transition-delay: {{ loop.index0 * 0.05 }}s">
           <div class="blog-card-image">
             <img src="{{ post.data.image }}" alt="{{ post.data.title }}">
@@ -196,7 +134,6 @@ permalink: /inspiration/
             <span class="blog-card-link">Read More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </a>
-        {% endif %}
       {% endfor %}
     </div>
   </section>
@@ -213,7 +150,7 @@ permalink: /inspiration/
   <script>
     (function() {
       const filters = document.querySelectorAll(".blog-filter");
-      const cards = document.querySelectorAll(".blog-card, .featured-post");
+      const cards = document.querySelectorAll(".blog-card");
       filters.forEach(btn => {
         btn.addEventListener("click", function() {
           filters.forEach(b => b.classList.remove("active"));

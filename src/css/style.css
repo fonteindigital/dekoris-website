@@ -124,12 +124,12 @@
     }
     .nav-links a:hover::after { width: 100%; }
     .nav-cta {
-      background: var(--charcoal) !important; color: var(--white) !important;
+      background: var(--gold-dark) !important; color: var(--white) !important;
       padding: 10px 24px !important; border-radius: 4px;
       font-weight: 500 !important; letter-spacing: 1px !important;
-      transition: background 0.3s !important;
+      transition: filter 0.3s !important;
     }
-    .nav-cta:hover { background: var(--charcoal-deep) !important; }
+    .nav-cta:hover { filter: brightness(0.9) !important; }
     .nav-cta::after { display: none !important; }
 
     .nav-mobile-toggle {
@@ -173,7 +173,7 @@
       font-weight: 500;
     }
     .hero h1 {
-      font-family: var(--font-heading); font-size: clamp(42px, 6vw, 72px);
+      font-family: var(--font-heading); font-size: var(--type-display);
       font-weight: 500; color: var(--white);
       line-height: 1.1; max-width: 650px; margin-bottom: 20px;
     }
@@ -217,7 +217,7 @@
       margin-bottom: 12px;
     }
     .section-title {
-      font-family: var(--font-heading); font-size: clamp(32px, 4vw, 48px);
+      font-family: var(--font-heading); font-size: var(--type-h2);
       font-weight: 500; color: var(--text-dark);
       line-height: 1.15; margin-bottom: 20px;
     }
@@ -293,25 +293,13 @@
     .signature-text .section-label { margin-bottom: 8px; }
     .signature-text h3 {
       font-family: var(--font-heading);
-      font-size: 22px; font-weight: 500;
+      font-size: var(--type-h3); font-weight: 500;
       color: var(--text-dark); line-height: 1.2;
       margin-bottom: 10px;
     }
     .signature-text p {
       font-size: 14px; color: var(--text-body);
-      line-height: 1.65; margin-bottom: 14px;
-    }
-    .signature-link {
-      display: inline-block;
-      font-size: 12px; letter-spacing: 1.2px;
-      text-transform: uppercase; color: var(--charcoal);
-      font-weight: 500;
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 2px;
-      transition: color 0.3s, border-color 0.3s;
-    }
-    .signature-col:hover .signature-link {
-      color: var(--gold-dark); border-color: var(--gold-dark);
+      line-height: 1.65;
     }
 
     @media (max-width: 900px) {
@@ -335,7 +323,7 @@
     }
     .value-icon svg { width: 22px; height: 22px; stroke: var(--charcoal); fill: none; stroke-width: 1.5; }
     .value-title {
-      font-family: var(--font-heading); font-size: 18px;
+      font-family: var(--font-heading); font-size: var(--type-h3);
       color: var(--text-dark); font-weight: 500; margin-bottom: 8px;
     }
     .value-desc { font-size: 13px; color: var(--text-body); line-height: 1.6; }
@@ -372,7 +360,7 @@
     .product-card:hover .product-image img { transform: scale(1.05); }
     .product-info { padding: 20px 24px; }
     .product-name {
-      font-family: var(--font-heading); font-size: 20px;
+      font-family: var(--font-heading); font-size: var(--type-h3);
       font-weight: 500; color: var(--text-dark); margin-bottom: 6px;
     }
     .product-price {
@@ -436,7 +424,7 @@
       padding: 32px;
     }
     .service-card-title {
-      font-family: var(--font-heading); font-size: 24px;
+      font-family: var(--font-heading); font-size: var(--type-h3);
       font-weight: 500; color: var(--white); margin-bottom: 8px;
     }
     .service-card-desc {
@@ -654,7 +642,7 @@
     }
     .page-hero .section-label { color: var(--gold-light); }
     .page-hero h1 {
-      font-family: var(--font-heading); font-size: clamp(36px, 5vw, 56px);
+      font-family: var(--font-heading); font-size: var(--type-h1);
       font-weight: 500; color: var(--white); line-height: 1.15; margin-bottom: 16px;
     }
     .page-hero p {
