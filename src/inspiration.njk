@@ -166,7 +166,7 @@ permalink: /inspiration/
   </div>
 
   <section class="blog-section">
-    {% set featured = collections.blog | selectattr("data.featured") | first %}
+    {% set featured = collections.blog | getFeatured %}
     {% if featured %}
     <a class="featured-post fade-up" href="/inspiration/{{ featured.data.slug }}/" data-category="{{ featured.data.category }}">
       <div class="featured-post-image">

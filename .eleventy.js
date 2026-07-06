@@ -26,6 +26,10 @@ module.exports = function(eleventyConfig) {
     });
   });
 
+  eleventyConfig.addFilter("getFeatured", function(posts) {
+    return (posts || []).find(function(p) { return p.data && p.data.featured; });
+  });
+
   eleventyConfig.addFilter("slug", function(str) {
     return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   });
