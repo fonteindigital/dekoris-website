@@ -244,7 +244,6 @@ eleventyComputed:
               <span class="size-label">{{ size.name }}</span>
               <div class="size-name">{{ product.data.title }}</div>
             </div>
-            <div class="size-price">N${{ size.price | commaNumber }}</div>
             <a class="size-enquire" href="/quote/?product={{ product.data.slug }}&size={{ size.sku }}">Enquire</a>
           </div>
           {% endfor %}

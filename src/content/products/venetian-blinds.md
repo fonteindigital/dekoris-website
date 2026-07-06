@@ -7,9 +7,9 @@ category: "Blinds"
 description: "Custom Venetian Blinds"
 longDescription: "Horizontal slats — typically in aluminium, wood, or faux wood — that tilt to control light and privacy. Clean, architectural, and highly functional. Wooden Venetians add warmth; aluminium offers a sleek, modern edge."
 bestSuitedFor: "Kitchens, bathrooms, and home offices where precise light control matters. Commercially, they're a staple in offices, meeting rooms, and retail spaces. Faux wood variants work especially well in moisture-prone areas. No-drill brackets available for rented homes."
-control: "Cordless · Corded · Motorised"
+control: "Cordless · Corded"
 colours: ["White", "Silver", "Wood"]
-motorised: true
+motorised: false
 order: 2
 sizes:
   - { name: "Small (600 × 1000 mm)", price: 1650, sku: "venetian-blinds-small" }

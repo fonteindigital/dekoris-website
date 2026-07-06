@@ -7,7 +7,7 @@ category: "Blinds"
 description: "Custom Zebra Blinds"
 longDescription: "An innovative design that alternates sheer and opaque fabric bands. By shifting the layers, you transition seamlessly from filtered daylight to full privacy — without ever losing the view entirely. Contemporary and striking in appearance."
 bestSuitedFor: "Living rooms and open-plan spaces where you want to enjoy natural light without sacrificing privacy. Also excellent for home cinemas, dining areas, and modern apartments. Commercially, they perform well in showrooms, lobbies, and restaurants where ambiance matters."
-control: "Cordless · Corded · Motorised"
+control: "Cordless · Corded · Motorised with Solar panel options"
 colours: ["White", "Beige", "Charcoal"]
 motorised: true
 order: 4

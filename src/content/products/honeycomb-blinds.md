@@ -7,7 +7,7 @@ category: "Blinds"
 description: "Honeycomb 25mm Blinds"
 longDescription: "Fabric cells form a honeycomb structure that traps air, providing excellent insulation against both heat and cold. Available in single, double, or triple cell configurations — the more cells, the better the thermal performance. Clean and modern in appearance."
 bestSuitedFor: "Bedrooms and living areas where energy efficiency is a priority, as well as conservatories and rooms with large glazed areas. Commercially, excellent for open-plan offices, healthcare facilities, and any building with high energy costs."
-control: "Cordless · Corded · Motorised"
+control: "Cordless · Corded · Motorised with Solar panel options"
 colours: ["White", "Cream", "Grey"]
 motorised: true
 order: 3

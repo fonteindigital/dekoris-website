@@ -70,7 +70,7 @@ permalink: /shop/
           {% if product.data.slug != "curtains" %}
           <div class="product-badges">
             <span class="badge badge-nodrill">No-Drill</span>
-            <span class="badge badge-motorised">Motorised</span>
+            {% if product.data.motorised %}<span class="badge badge-motorised">Motorised</span>{% endif %}
           </div>
           {% endif %}
           <div class="product-price"><span class="product-from">from</span>N${{ product.data.price | commaNumber }}</div>
