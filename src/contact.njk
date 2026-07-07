@@ -105,16 +105,17 @@ permalink: /contact/
           </a>
         </div>
 
-        <form class="contact-form fade-up" style="transition-delay: 0.15s" onsubmit="return false;">
+        <form class="contact-form fade-up" style="transition-delay: 0.15s" id="contactForm">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <div class="form-row">
-            <div><label>First Name</label><input type="text" placeholder="First Name" required></div>
-            <div><label>Last Name</label><input type="text" placeholder="Last Name" required></div>
+            <div><label>First Name</label><input type="text" name="first_name" placeholder="First Name" required></div>
+            <div><label>Last Name</label><input type="text" name="last_name" placeholder="Last Name" required></div>
           </div>
-          <div><label>Email</label><input type="email" placeholder="Email Address" required></div>
-          <div><label>Phone</label><input type="tel" placeholder="Phone Number"></div>
+          <div><label>Email</label><input type="email" name="email" placeholder="Email Address" required></div>
+          <div><label>Phone</label><input type="tel" name="phone" placeholder="Phone Number"></div>
           <div>
             <label>Enquiry Type</label>
-            <select>
+            <select name="enquiry_type">
               <option value="">Select an option...</option>
               <option>Residential Enquiry</option>
               <option>Commercial Enquiry</option>
@@ -122,9 +123,43 @@ permalink: /contact/
               <option>Request a Quote</option>
             </select>
           </div>
-          <div><label>Message</label><textarea placeholder="Tell us about your project..."></textarea></div>
+          <div><label>Message</label><textarea name="message" placeholder="Tell us about your project..."></textarea></div>
           <button type="submit" class="btn btn-gold">Send Message</button>
         </form>
+        <div id="contactSuccess" style="display:none; background: var(--cream); border-radius: 8px; padding: 32px;">
+          <h3 style="font-family: var(--font-heading); font-weight: 500; margin-bottom: 12px;">Thank you — message sent</h3>
+          <p>Your message has been received. Our team will be in touch within 1-2 working days.</p>
+          <p style="margin-top: 12px;">If you don't hear from us, feel free to email us directly at <a href="mailto:hello@dekoris.com.na" style="color:var(--gold)">hello@dekoris.com.na</a>.</p>
+        </div>
+        <script>
+          (function() {
+            const form = document.getElementById("contactForm");
+            const success = document.getElementById("contactSuccess");
+            form.addEventListener("submit", async function(e) {
+              e.preventDefault();
+              const btn = form.querySelector('button[type="submit"]');
+              btn.disabled = true; btn.textContent = "Sending…";
+              const fd = new FormData(form);
+              fd.append("access_key", "a9f51dbc-4d71-4ed6-8229-0d9be7af7224");
+              fd.append("subject", "Contact form — dekoris.com.na");
+              fd.append("from_name", "Dekoris Website");
+              try {
+                const res = await fetch("https://api.web3forms.com/submit", {
+                  method: "POST", body: fd, headers: { "Accept": "application/json" }
+                });
+                const data = await res.json();
+                if (data.success) {
+                  form.style.display = "none";
+                  success.style.display = "block";
+                  success.scrollIntoView({ behavior: "smooth", block: "center" });
+                } else { throw new Error(data.message || "Submission failed"); }
+              } catch (err) {
+                btn.disabled = false; btn.textContent = "Send Message";
+                alert("Sorry, something went wrong sending your message. Please email us at hello@dekoris.com.na or use WhatsApp.");
+              }
+            });
+          })();
+        </script>
       </div>
     </div>
   </section>

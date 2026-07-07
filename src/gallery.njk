@@ -45,6 +45,13 @@ permalink: /gallery/
       opacity: 0; transition: opacity 0.3s; transform: scale(0.8);
     }
     .gallery-item:hover .gallery-item-overlay svg { opacity: 1; transform: scale(1); }
+    .gallery-item-caption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 28px 14px 12px;
+      background: linear-gradient(transparent, rgba(42,38,36,0.78));
+      color: var(--white); font-size: 13px; letter-spacing: 0.4px;
+      pointer-events: none;
+    }
     .gallery-cta {
       background: var(--charcoal); text-align: center; padding: 80px 40px;
     }
@@ -99,6 +106,7 @@ permalink: /gallery/
       <div class="gallery-item" data-cat="{{ item.data.category }}" onclick="openLightbox(this)">
         <img src="{{ item.data.image }}" alt="{{ item.data.alt | default(item.data.title) }}">
         <div class="gallery-item-overlay"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        {% if item.data.category == "Completed Projects" %}<div class="gallery-item-caption">{{ item.data.title }}</div>{% endif %}
       </div>
       {% endfor %}
     </div>

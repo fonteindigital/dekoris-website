@@ -379,18 +379,37 @@ permalink: /quote/
         const notes = form.querySelector("textarea")?.value || "";
         if (notes) lines.push(`\nNotes:\n${notes}`);
 
-        const subject = encodeURIComponent(`Dekoris quote request — ${name || "new lead"}`);
-        const body = encodeURIComponent(lines.join("\n"));
-        const mailto = `mailto:hello@dekoris.com.na?subject=${subject}&body=${body}`;
+        // Submit via Web3Forms
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true; btn.textContent = "Sending…";
 
-        window.location.href = mailto;
-
-        // Show success state shortly after launching mail client
-        setTimeout(function() {
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            access_key: "a9f51dbc-4d71-4ed6-8229-0d9be7af7224",
+            subject: `Dekoris quote request — ${name || "new lead"}`,
+            from_name: "Dekoris Website — Quote form",
+            name: name,
+            email: email,
+            phone: phone,
+            message: lines.join("\n")
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (!data.success) throw new Error(data.message || "Submission failed");
           form.style.display = "none";
           successEl.style.display = "block";
           successEl.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 400);
+        })
+        .catch(() => {
+          // Fallback: open the user's mail client with the same details
+          btn.disabled = false; btn.textContent = "Send Quote Request";
+          const subject = encodeURIComponent(`Dekoris quote request — ${name || "new lead"}`);
+          const body = encodeURIComponent(lines.join("\n"));
+          window.location.href = `mailto:hello@dekoris.com.na?subject=${subject}&body=${body}`;
+        });
       });
 
       // Counter and radio/preset helpers (in case base.njk doesn't define them)

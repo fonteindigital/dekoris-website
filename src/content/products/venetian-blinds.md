@@ -2,7 +2,7 @@
 title: "Venetian Blinds"
 slug: "venetian-blinds"
 price: 1650
-image: "https://static.wixstatic.com/media/06bb1b_d338777339a04a068712cbe85ac8e528~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,enc_avif,quality_auto/06bb1b_d338777339a04a068712cbe85ac8e528~mv2.jpg"
+image: "/images/uploads/venetian-blinds-person.jpg"
 category: "Blinds"
 description: "Custom Venetian Blinds"
 longDescription: "Horizontal slats — typically in aluminium, wood, or faux wood — that tilt to control light and privacy. Clean, architectural, and highly functional. Wooden Venetians add warmth; aluminium offers a sleek, modern edge."
