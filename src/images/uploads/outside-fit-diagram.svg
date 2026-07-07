@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" font-family="Arial, Helvetica, sans-serif">
+  <rect width="300" height="240" fill="#FAF7F2"/>
+  <!-- wall -->
+  <rect x="0" y="0" width="300" height="240" fill="#EFE9E0"/>
+  <!-- window opening (behind blind, edges visible) -->
+  <rect x="90" y="60" width="120" height="110" fill="#FFFFFF" stroke="#C9C2B6" stroke-width="2"/>
+  <!-- blind mounted on the wall, overlapping the opening -->
+  <rect x="62" y="38" width="176" height="16" rx="2" fill="#545454"/>
+  <g fill="#AF9B6B">
+    <rect x="62" y="57" width="176" height="13"/>
+    <rect x="62" y="74" width="176" height="13"/>
+    <rect x="62" y="91" width="176" height="13"/>
+    <rect x="62" y="108" width="176" height="13"/>
+    <rect x="62" y="125" width="176" height="13"/>
+  </g>
+  <line x1="150" y1="142" x2="150" y2="162" stroke="#545454" stroke-width="2"/>
+  <circle cx="150" cy="165" r="3" fill="#545454"/>
+  <!-- label -->
+  <text x="150" y="215" text-anchor="middle" font-size="15" fill="#545454" font-weight="bold">Outside fit</text>
+  <text x="150" y="232" text-anchor="middle" font-size="11" fill="#767676">Blind mounts on the wall, covering the opening</text>
+</svg>

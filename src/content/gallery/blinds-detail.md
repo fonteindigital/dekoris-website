@@ -1,6 +1,6 @@
 ---
-title: "Blinds Detail"
+title: "Roman Blinds — Fabric Detail"
 image: "/images/uploads/roman-blinds-detail.jpg"
 category: "Blinds"
-alt: "Blinds detail"
+alt: "Roman blind fabric detail"
 ---

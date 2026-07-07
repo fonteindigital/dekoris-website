@@ -1,6 +1,6 @@
 ---
-title: "Venetian Blind Close-Up"
+title: "Venetian Blinds — Close-Up"
 image: "/images/uploads/venetian-blind-detail-01.jpg"
 category: "Blinds"
-alt: "Close-up of graphite aluminium venetian blind slats"
+alt: "Close-up of graphite venetian blind slats"
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Interior Space"
+title: "Honeycomb Blinds — Styled Detail"
 image: "/images/uploads/honeycomb-fern-table.jpg"
-category: "Spaces"
-alt: "Interior space"
+category: "Blinds"
+alt: "Honeycomb blind styled with plant and glass table"
 ---

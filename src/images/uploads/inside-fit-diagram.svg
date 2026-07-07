@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" font-family="Arial, Helvetica, sans-serif">
+  <rect width="300" height="240" fill="#FAF7F2"/>
+  <!-- wall -->
+  <rect x="0" y="0" width="300" height="240" fill="#EFE9E0"/>
+  <!-- window recess opening -->
+  <rect x="70" y="45" width="160" height="140" fill="#FFFFFF" stroke="#C9C2B6" stroke-width="2"/>
+  <!-- recess shadow (depth) -->
+  <rect x="70" y="45" width="160" height="8" fill="#DDD5C8"/>
+  <rect x="70" y="45" width="8" height="140" fill="#E6DFD3"/>
+  <!-- blind inside the recess -->
+  <rect x="82" y="53" width="136" height="14" rx="2" fill="#545454"/>
+  <g fill="#AF9B6B">
+    <rect x="82" y="70" width="136" height="12"/>
+    <rect x="82" y="86" width="136" height="12"/>
+    <rect x="82" y="102" width="136" height="12"/>
+    <rect x="82" y="118" width="136" height="12"/>
+  </g>
+  <line x1="150" y1="130" x2="150" y2="150" stroke="#545454" stroke-width="2"/>
+  <circle cx="150" cy="153" r="3" fill="#545454"/>
+  <!-- label -->
+  <text x="150" y="215" text-anchor="middle" font-size="15" fill="#545454" font-weight="bold">Inside fit</text>
+  <text x="150" y="232" text-anchor="middle" font-size="11" fill="#767676">Blind sits within the window recess</text>
+</svg>

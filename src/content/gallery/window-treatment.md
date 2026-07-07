@@ -1,6 +1,6 @@
 ---
-title: "Window Treatment"
+title: "Zebra Blinds — Room Installation"
 image: "/images/uploads/zebra-room.jpg"
-category: "Spaces"
-alt: "Window treatment"
+category: "Blinds"
+alt: "Zebra blinds installed in a room"
 ---

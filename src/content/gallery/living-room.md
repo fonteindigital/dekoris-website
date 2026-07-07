@@ -1,6 +1,6 @@
 ---
-title: "Living Room Installation"
+title: "Honeycomb Blinds — Corner Installation"
 image: "/images/uploads/interior-corner.jpg"
-category: "Spaces"
-alt: "Living room installation"
+category: "Blinds"
+alt: "Corner installation with honeycomb blinds"
 ---
