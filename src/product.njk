@@ -198,6 +198,23 @@ eleventyComputed:
     <div class="product-detail-inner">
       <div class="product-detail-media fade-up">
         <img src="{{ product.data.image }}" alt="{{ product.data.title }}">
+        {% if product.data.photos %}
+        <div class="product-photo-strip">
+          {% for photo in product.data.photos %}
+          <img src="{{ photo.src }}" alt="{{ photo.alt }}" loading="lazy">
+          {% endfor %}
+        </div>
+        <style>
+          .product-photo-strip {
+            display: grid; grid-template-columns: repeat({{ product.data.photos.length }}, 1fr);
+            gap: 10px; margin-top: 10px;
+          }
+          .product-photo-strip img {
+            width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+            border-radius: 6px; display: block;
+          }
+        </style>
+        {% endif %}
       </div>
 
       <div class="product-detail-content fade-up" style="transition-delay: 0.08s">
@@ -213,10 +230,10 @@ eleventyComputed:
         {% endif %}
 
         <div class="product-meta-row">
-          {% if product.data.colours and product.data.colours.length %}
+          {% if (product.data.colours and product.data.colours.length) or product.data.colourCatalogue %}
           <div class="product-meta">
             <strong>Colours</strong>
-            {{ product.data.colours | join(" · ") }} · <a href="mailto:hello@dekoris.com.na?subject=Colour%20catalogue%20request&body=Hi%20Dekoris%2C%20please%20send%20me%20the%20full%20colour%20and%20fabric%20catalogue." class="catalogue-link">View colour catalogue</a>
+            {% if product.data.colours and product.data.colours.length %}{{ product.data.colours | join(" · ") }} · {% endif %}<a href="mailto:hello@dekoris.com.na?subject=Colour%20catalogue%20request&body=Hi%20Dekoris%2C%20please%20send%20me%20the%20full%20colour%20and%20fabric%20catalogue." class="catalogue-link">View colour catalogue</a>
           </div>
           {% endif %}
           {% if product.data.control %}
