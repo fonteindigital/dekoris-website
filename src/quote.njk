@@ -79,9 +79,10 @@ permalink: /quote/
 
     .size-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
     .size-preset {
-      padding: 12px 8px; border: 1.5px solid var(--cream-dark);
+      padding: 16px 8px; border: 1.5px solid var(--cream-dark);
       border-radius: 6px; text-align: center; cursor: pointer;
-      transition: all 0.3s; font-size: 12px; color: var(--text-body);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; font-size: 13px; color: var(--text-body);
     }
     .size-preset:hover { border-color: var(--gold); }
     .size-preset.selected { background: var(--charcoal); color: var(--white); border-color: var(--charcoal); }
@@ -248,13 +249,13 @@ permalink: /quote/
             <div style="margin-bottom: 20px;">
               <label>Approximate Window Size</label>
               <div class="size-presets">
-                <div class="size-preset" data-size="small" onclick="selectSize(this)"><strong>Small</strong>600 × 1000 mm</div>
-                <div class="size-preset selected" data-size="medium" onclick="selectSize(this)"><strong>Medium</strong>960 × 900 mm</div>
-                <div class="size-preset" data-size="w1200" onclick="selectSize(this)"><strong>Wide</strong>1200 × 1200 mm</div>
-                <div class="size-preset" data-size="large" onclick="selectSize(this)"><strong>Large</strong>1200 × 1600 mm</div>
-                <div class="size-preset" data-size="w1500" onclick="selectSize(this)"><strong>Wider</strong>1500 × 1200 mm</div>
-                <div class="size-preset" data-size="w1800" onclick="selectSize(this)"><strong>Widest</strong>1800 × 1200 mm</div>
-                <div class="size-preset" data-size="custom" onclick="selectSize(this)"><strong>Custom</strong>specify below</div>
+                <div class="size-preset" data-size="small" onclick="selectSize(this)">600 × 1000 mm</div>
+                <div class="size-preset selected" data-size="medium" onclick="selectSize(this)">960 × 900 mm</div>
+                <div class="size-preset" data-size="w1200" onclick="selectSize(this)">1200 × 1200 mm</div>
+                <div class="size-preset" data-size="large" onclick="selectSize(this)">1200 × 1600 mm</div>
+                <div class="size-preset" data-size="w1500" onclick="selectSize(this)">1500 × 1200 mm</div>
+                <div class="size-preset" data-size="w1800" onclick="selectSize(this)">1800 × 1200 mm</div>
+                <div class="size-preset" data-size="custom" onclick="selectSize(this)"><strong>Custom</strong> specify below</div>
               </div>
             </div>
             <div>
@@ -366,7 +367,7 @@ permalink: /quote/
         lines.push(`Windows: ${count}`);
 
         // Selected size
-        const selSize = document.querySelector(".size-preset.selected strong")?.textContent || "";
+        const selSize = document.querySelector(".size-preset.selected")?.textContent?.trim() || "";
         if (selSize) lines.push(`Window size: ${selSize}`);
 
         // Space type — third select

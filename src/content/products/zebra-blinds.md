@@ -12,7 +12,7 @@ colours: ["White", "Beige", "Charcoal"]
 motorised: true
 order: 4
 sizes:
-  - { name: "Small (600 × 1000 mm)", price: 1350, sku: "zebra-blinds-small" }
-  - { name: "Medium (960 × 900 mm)", price: 1900, sku: "zebra-blinds-medium" }
-  - { name: "Large (1200 × 1600 mm)", price: 3400, sku: "zebra-blinds-large" }
+  - { name: "600 × 1000 mm", price: 1350, sku: "zebra-blinds-small" }
+  - { name: "960 × 900 mm", price: 1900, sku: "zebra-blinds-medium" }
+  - { name: "1200 × 1600 mm", price: 3400, sku: "zebra-blinds-large" }
 ---

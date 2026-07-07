@@ -12,7 +12,7 @@ colours: ["White", "Silver", "Wood"]
 motorised: false
 order: 2
 sizes:
-  - { name: "Small (600 × 1000 mm)", price: 1650, sku: "venetian-blinds-small" }
-  - { name: "Medium (960 × 900 mm)", price: 2300, sku: "venetian-blinds-medium" }
-  - { name: "Large (1200 × 1600 mm)", price: 4100, sku: "venetian-blinds-large" }
+  - { name: "600 × 1000 mm", price: 1650, sku: "venetian-blinds-small" }
+  - { name: "960 × 900 mm", price: 2300, sku: "venetian-blinds-medium" }
+  - { name: "1200 × 1600 mm", price: 4100, sku: "venetian-blinds-large" }
 ---

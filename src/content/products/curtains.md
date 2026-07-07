@@ -10,7 +10,7 @@ colours: ["White", "Cream", "Gold", "Charcoal"]
 motorised: false
 order: 6
 sizes:
-  - { name: "Small (600 × 1000 mm)", price: 1200, sku: "curtains-small" }
-  - { name: "Medium (960 × 900 mm)", price: 1700, sku: "curtains-medium" }
-  - { name: "Large (1200 × 1600 mm)", price: 3000, sku: "curtains-large" }
+  - { name: "600 × 1000 mm", price: 1200, sku: "curtains-small" }
+  - { name: "960 × 900 mm", price: 1700, sku: "curtains-medium" }
+  - { name: "1200 × 1600 mm", price: 3000, sku: "curtains-large" }
 ---

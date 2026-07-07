@@ -12,7 +12,7 @@ colours: ["White", "Cream", "Black"]
 motorised: true
 order: 5
 sizes:
-  - { name: "Small (600 × 1000 mm)", price: 850, sku: "roller-blinds-small" }
-  - { name: "Medium (960 × 900 mm)", price: 1200, sku: "roller-blinds-medium" }
-  - { name: "Large (1200 × 1600 mm)", price: 2100, sku: "roller-blinds-large" }
+  - { name: "600 × 1000 mm", price: 850, sku: "roller-blinds-small" }
+  - { name: "960 × 900 mm", price: 1200, sku: "roller-blinds-medium" }
+  - { name: "1200 × 1600 mm", price: 2100, sku: "roller-blinds-large" }
 ---

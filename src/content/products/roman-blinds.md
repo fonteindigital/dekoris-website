@@ -12,7 +12,7 @@ colours: ["White", "Cream", "Charcoal"]
 motorised: true
 order: 1
 sizes:
-  - { name: "Small (600 × 1000 mm)", price: 1450, sku: "roman-blinds-small" }
-  - { name: "Medium (960 × 900 mm)", price: 2050, sku: "roman-blinds-medium" }
-  - { name: "Large (1200 × 1600 mm)", price: 3600, sku: "roman-blinds-large" }
+  - { name: "600 × 1000 mm", price: 1450, sku: "roman-blinds-small" }
+  - { name: "960 × 900 mm", price: 2050, sku: "roman-blinds-medium" }
+  - { name: "1200 × 1600 mm", price: 3600, sku: "roman-blinds-large" }
 ---

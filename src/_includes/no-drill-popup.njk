@@ -1,0 +1,114 @@
+<!-- No-Drill signature-feature pop-up. Shows once per browser session, on a short delay, on every page except /no-drill/ itself and /quote/. -->
+<div id="noDrillPopup" class="ndp-overlay" role="dialog" aria-modal="true" aria-labelledby="ndpTitle">
+  <div class="ndp-card">
+    <button type="button" class="ndp-close" aria-label="Close">&times;</button>
+    <div class="ndp-eyebrow">Signature Installation</div>
+    <h3 id="ndpTitle">No holes. No damage. No compromise.</h3>
+    <p>Our no-drill system fits blinds using precision tension brackets — zero wall damage, ideal for renters, complexes, and aluminium-framed windows.</p>
+    <div class="ndp-actions">
+      <a href="/quote/?product=no-drill-blinds" class="btn btn-gold">Book a free consultation</a>
+      <a href="/no-drill/" class="ndp-learn-more">See how it works →</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ndp-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 28, 26, 0.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .ndp-overlay.active { display: flex; }
+  .ndp-card {
+    position: relative;
+    background: var(--cream, #FAF7F2);
+    max-width: 440px;
+    width: 100%;
+    padding: 40px 36px;
+    border-radius: 4px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    text-align: left;
+  }
+  .ndp-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--charcoal, #545454);
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  .ndp-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold-dark, #8B7B54);
+    margin-bottom: 10px;
+  }
+  .ndp-card h3 {
+    font-family: var(--font-accent, "TAN Mon Cheri", serif);
+    font-size: var(--type-h3, clamp(22px, 3vw, 28px));
+    color: var(--charcoal, #545454);
+    margin-bottom: 14px;
+    line-height: 1.15;
+  }
+  .ndp-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-light, #767676);
+    margin-bottom: 24px;
+  }
+  .ndp-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .ndp-actions .btn { width: 100%; text-align: center; }
+  .ndp-learn-more {
+    font-size: 14px;
+    color: var(--charcoal, #545454);
+    text-decoration: underline;
+  }
+  @media (max-width: 480px) {
+    .ndp-card { padding: 32px 24px; }
+  }
+</style>
+
+<script>
+  (function() {
+    var path = window.location.pathname;
+    if (path.indexOf("/no-drill/") === 0 || path.indexOf("/quote/") === 0) return;
+    if (sessionStorage.getItem("dekorisNoDrillPopupSeen")) return;
+
+    var popup = document.getElementById("noDrillPopup");
+    if (!popup) return;
+
+    function show() {
+      popup.classList.add("active");
+      sessionStorage.setItem("dekorisNoDrillPopupSeen", "1");
+    }
+    function hide() {
+      popup.classList.remove("active");
+    }
+
+    var timer = setTimeout(show, 4000);
+
+    popup.querySelector(".ndp-close").addEventListener("click", hide);
+    popup.addEventListener("click", function(e) {
+      if (e.target === popup) hide();
+    });
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") hide();
+    });
+  })();
+</script>

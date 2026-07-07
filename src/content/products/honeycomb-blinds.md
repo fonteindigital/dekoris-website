@@ -12,7 +12,7 @@ colours: ["White", "Cream", "Grey"]
 motorised: true
 order: 3
 sizes:
-  - { name: "Small (600 × 1000 mm)", price: 1350, sku: "honeycomb-blinds-small" }
-  - { name: "Medium (960 × 900 mm)", price: 1900, sku: "honeycomb-blinds-medium" }
-  - { name: "Large (1200 × 1600 mm)", price: 3400, sku: "honeycomb-blinds-large" }
+  - { name: "600 × 1000 mm", price: 1350, sku: "honeycomb-blinds-small" }
+  - { name: "960 × 900 mm", price: 1900, sku: "honeycomb-blinds-medium" }
+  - { name: "1200 × 1600 mm", price: 3400, sku: "honeycomb-blinds-large" }
 ---
