@@ -1,7 +1,7 @@
 ---
 title: "Venetian Blinds"
 slug: "venetian-blinds"
-price: 1650
+price: 900
 image: "/images/uploads/venetian-blinds-person.jpg"
 category: "Blinds"
 description: "Custom Venetian Blinds"
@@ -12,7 +12,7 @@ colours: ["White", "Silver", "Wood"]
 motorised: false
 order: 2
 sizes:
-  - { name: "600 × 1000 mm", price: 1650, sku: "venetian-blinds-small" }
+  - { name: "600 × 1000 mm", price: 900, sku: "venetian-blinds-small" }
   - { name: "960 × 900 mm", price: 2300, sku: "venetian-blinds-medium" }
   - { name: "1200 × 1600 mm", price: 4100, sku: "venetian-blinds-large" }
 ---

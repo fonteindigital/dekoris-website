@@ -1,7 +1,7 @@
 ---
 title: "Roller Blinds"
 slug: "roller-blinds"
-price: 850
+price: 1250
 image: "/images/uploads/roller-blinds-fern.jpg"
 category: "Blinds"
 description: "Custom Roller Blinds"
@@ -12,7 +12,7 @@ colours: ["White", "Cream", "Black"]
 motorised: true
 order: 5
 sizes:
-  - { name: "600 × 1000 mm", price: 850, sku: "roller-blinds-small" }
+  - { name: "600 × 1000 mm", price: 1250, sku: "roller-blinds-small" }
   - { name: "960 × 900 mm", price: 1200, sku: "roller-blinds-medium" }
   - { name: "1200 × 1600 mm", price: 2100, sku: "roller-blinds-large" }
 ---

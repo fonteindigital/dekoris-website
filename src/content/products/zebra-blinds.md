@@ -1,7 +1,7 @@
 ---
 title: "Zebra Blinds"
 slug: "zebra-blinds"
-price: 1350
+price: 1450
 image: "/images/uploads/zebra-texture.jpg"
 category: "Blinds"
 description: "Custom Zebra Blinds"
@@ -12,7 +12,7 @@ colours: ["White", "Beige", "Charcoal"]
 motorised: true
 order: 4
 sizes:
-  - { name: "600 × 1000 mm", price: 1350, sku: "zebra-blinds-small" }
+  - { name: "600 × 1000 mm", price: 1450, sku: "zebra-blinds-small" }
   - { name: "960 × 900 mm", price: 1900, sku: "zebra-blinds-medium" }
   - { name: "1200 × 1600 mm", price: 3400, sku: "zebra-blinds-large" }
 ---
