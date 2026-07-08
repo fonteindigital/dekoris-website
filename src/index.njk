@@ -133,7 +133,7 @@ permalink: /
               {% if product.data.motorised %}<span class="badge badge-motorised">Motorised</span>{% endif %}
             </div>
             {% endif %}
-            <div class="product-price"><span class="product-from">from</span>N${{ product.data.price | commaNumber }}</div>
+            {% if product.data.priceNote %}<div class="product-price" style="font-size: 15px;">{{ product.data.priceNote }}</div>{% else %}<div class="product-price"><span class="product-from">from</span>N${{ product.data.price | commaNumber }}</div>{% endif %}
             <span class="product-buy">View Sizes →</span>
           </div>
         </a>

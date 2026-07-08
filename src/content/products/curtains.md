@@ -2,6 +2,7 @@
 title: "Curtains"
 slug: "curtains"
 price: 1200
+priceNote: "Price depends on material type"
 image: "/images/uploads/keetmanshoop-hospital-curtains-01.jpg"
 category: "Curtains"
 description: "Custom Curtains"

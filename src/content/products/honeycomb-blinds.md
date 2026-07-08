@@ -1,7 +1,7 @@
 ---
 title: "Honeycomb Blinds"
 slug: "honeycomb-blinds"
-price: 1550
+price: 1350
 image: "/images/uploads/honeycomb-window.jpg"
 category: "Blinds"
 description: "Honeycomb 25mm Blinds"
@@ -12,7 +12,7 @@ colours: ["White", "Cream", "Grey"]
 motorised: true
 order: 3
 sizes:
-  - { name: "600 × 1000 mm", price: 1550, sku: "honeycomb-blinds-small" }
+  - { name: "600 × 1000 mm", price: 1350, sku: "honeycomb-blinds-small" }
   - { name: "960 × 900 mm", price: 1900, sku: "honeycomb-blinds-medium" }
   - { name: "1200 × 1600 mm", price: 3400, sku: "honeycomb-blinds-large" }
 ---

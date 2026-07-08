@@ -1,7 +1,7 @@
 ---
 title: "Roman Blinds"
 slug: "roman-blinds"
-price: 1950
+price: 1450
 image: "/images/uploads/roman-blinds-full.jpg"
 category: "Blinds"
 description: "Custom Roman Blinds"
@@ -12,7 +12,7 @@ colours: ["White", "Cream", "Charcoal"]
 motorised: true
 order: 1
 sizes:
-  - { name: "600 × 1000 mm", price: 1950, sku: "roman-blinds-small" }
+  - { name: "600 × 1000 mm", price: 1450, sku: "roman-blinds-small" }
   - { name: "960 × 900 mm", price: 2050, sku: "roman-blinds-medium" }
   - { name: "1200 × 1600 mm", price: 3600, sku: "roman-blinds-large" }
 ---
