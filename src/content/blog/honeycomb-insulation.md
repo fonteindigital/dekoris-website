@@ -4,7 +4,7 @@ slug: "honeycomb-insulation"
 category: "Product Spotlights"
 date: 2026-06-11
 excerpt: "Honeycomb blinds don't just look beautiful — they actively work to keep your home comfortable and reduce your energy bills. Here's the science."
-image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80"
+image: "/images/uploads/blog-honeycomb-pleat-fan.jpg"
 readTime: "6 min read"
 order: 3
 ---

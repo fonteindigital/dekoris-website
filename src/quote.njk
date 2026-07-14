@@ -207,13 +207,20 @@ permalink: /quote/
                   <option value="zebra-blinds">Zebra Blinds</option>
                   <option value="roller-blinds">Roller Blinds</option>
                   <option value="curtains">Curtains</option>
-                  <option value="no-drill-blinds">No-drill blinds</option>
                   <option value="other">Other</option>
                 </select>
               </div>
               <div>
-                <label>Colour Preference</label>
-                <select>
+                <label>Installation Type</label>
+                <select id="quoteInstall" name="installation" required disabled>
+                  <option value="">Choose a product first...</option>
+                </select>
+                <p id="installHint" class="field-hint">Pick a product type and we'll show the fitting options available for it.</p>
+              </div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <label>Colour Preference</label>
+                <select id="quoteColour">
                   <option value="">Select a colour...</option>
                   <option>White</option>
                   <option>Cream</option>
@@ -224,7 +231,6 @@ permalink: /quote/
                   <option>Black</option>
                   <option>Other (specify in notes)</option>
                 </select>
-              </div>
             </div>
             <div>
               <label>Operation Type</label>
@@ -248,19 +254,20 @@ permalink: /quote/
             </div>
             <div style="margin-bottom: 20px;">
               <label>Approximate Window Size</label>
-              <div class="size-presets">
+              <div class="size-presets" id="sizePresets">
                 <div class="size-preset" data-size="small" onclick="selectSize(this)">600 × 1000 mm</div>
-                <div class="size-preset selected" data-size="medium" onclick="selectSize(this)">960 × 900 mm</div>
+                <div class="size-preset" data-size="medium" onclick="selectSize(this)">960 × 900 mm</div>
                 <div class="size-preset" data-size="w1200" onclick="selectSize(this)">1200 × 1200 mm</div>
                 <div class="size-preset" data-size="large" onclick="selectSize(this)">1200 × 1600 mm</div>
                 <div class="size-preset" data-size="w1500" onclick="selectSize(this)">1500 × 1200 mm</div>
                 <div class="size-preset" data-size="w1800" onclick="selectSize(this)">1800 × 1200 mm</div>
                 <div class="size-preset" data-size="custom" onclick="selectSize(this)"><strong>Custom</strong> specify below</div>
               </div>
+              <p id="sizeHint" class="field-hint">Choose the closest size — pick <strong>Custom</strong> if none of these fit.</p>
             </div>
             <div>
               <label>Space Type</label>
-              <select>
+              <select id="quoteSpace">
                 <option value="">Select space type...</option>
                 <option>Living Room</option>
                 <option>Bedroom</option>
@@ -300,10 +307,68 @@ permalink: /quote/
       const sizeSlug = params.get("size");
 
       const productSelect = document.getElementById("quoteProduct");
+      const installSelect = document.getElementById("quoteInstall");
+      const installHint   = document.getElementById("installHint");
       const banner = document.getElementById("prefillBanner");
       const bannerText = document.getElementById("prefillText");
 
       let bannerLabel = "";
+
+      /* ---- Installation options cascade off the chosen product ---- */
+      const INSTALL_LABELS = {
+        "no-drill": "No-drill (tension fit \u2014 no holes in the wall)",
+        "drilled":  "Drilled (standard bracket fit)",
+        "track":    "Rod / track mounted",
+        "unsure":   "Not sure \u2014 please advise"
+      };
+      const BLIND_FITTINGS = ["no-drill", "drilled", "unsure"];
+      const INSTALL_BY_PRODUCT = {
+        "roman-blinds":     BLIND_FITTINGS,
+        "venetian-blinds":  BLIND_FITTINGS,
+        "honeycomb-blinds": BLIND_FITTINGS,
+        "zebra-blinds":     BLIND_FITTINGS,
+        "roller-blinds":    BLIND_FITTINGS,
+        "curtains":         ["track", "unsure"],
+        "other":            ["unsure"]
+      };
+
+      let pendingInstall = params.get("install") || "";
+      if (productSlug === "no-drill-blinds") pendingInstall = "no-drill";
+
+      function populateInstall(product) {
+        const opts = INSTALL_BY_PRODUCT[product];
+        installSelect.innerHTML = "";
+
+        if (!opts) {
+          installSelect.disabled = true;
+          installSelect.innerHTML = '<option value="">Choose a product first...</option>';
+          installHint.textContent = "Pick a product type and we'll show the fitting options available for it.";
+          return;
+        }
+
+        installSelect.disabled = false;
+        installSelect.insertAdjacentHTML("beforeend", '<option value="">Select how it should be fitted...</option>');
+        opts.forEach(function(key) {
+          const o = document.createElement("option");
+          o.value = key;
+          o.textContent = INSTALL_LABELS[key];
+          installSelect.appendChild(o);
+        });
+
+        if (product === "curtains") {
+          installHint.textContent = "Curtains are mounted on a rod or track \u2014 no-drill tension fitting isn't available for these.";
+        } else if (product === "other") {
+          installHint.textContent = "Tell us more in the notes below and we'll advise on the best fitting.";
+        } else {
+          installHint.textContent = "No-drill uses tension brackets \u2014 no holes, no damage. Ideal for rentals.";
+        }
+
+        if (pendingInstall && opts.indexOf(pendingInstall) !== -1) {
+          installSelect.value = pendingInstall;
+        }
+      }
+
+      productSelect.addEventListener("change", function() { populateInstall(productSelect.value); });
 
       if (productSlug && productSelect) {
         const opt = productSelect.querySelector(`option[value="${productSlug}"]`);
@@ -311,6 +376,11 @@ permalink: /quote/
           productSelect.value = productSlug;
           bannerLabel = opt.textContent.trim();
         }
+      }
+      populateInstall(productSelect.value);
+
+      if (pendingInstall === "no-drill" && !productSelect.value) {
+        bannerLabel = "No-drill blinds \u2014 choose your blind type below";
       }
 
       if (sizeSlug) {
@@ -336,8 +406,16 @@ permalink: /quote/
       const successEl = document.getElementById("quoteSuccess");
       form.addEventListener("submit", function(e) {
         e.preventDefault();
-        const fd = new FormData(form);
-        const inputs = form.querySelectorAll("input, select, textarea");
+
+        const sizeEl = document.querySelector(".size-preset.selected");
+        const sizeHint = document.getElementById("sizeHint");
+        if (!sizeEl) {
+          sizeHint.classList.add("field-hint-error");
+          sizeHint.textContent = "Please choose an approximate window size (or Custom).";
+          document.getElementById("sizePresets").scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
         const lines = [];
 
         // Pre-fill context
@@ -351,11 +429,12 @@ permalink: /quote/
         lines.push(`Phone: ${phone}`);
         lines.push(`Email: ${email}`);
 
-        // Product + colour
+        // Product + installation + colour
         const product = productSelect ? productSelect.options[productSelect.selectedIndex].text : "";
-        const colourSel = form.querySelectorAll("select")[1];
-        const colour = colourSel ? colourSel.value : "";
+        const install = installSelect && installSelect.value ? INSTALL_LABELS[installSelect.value] : "";
+        const colour = document.getElementById("quoteColour") ? document.getElementById("quoteColour").value : "";
         lines.push(`Product: ${product}`);
+        if (install) lines.push(`Installation: ${install}`);
         if (colour) lines.push(`Colour: ${colour}`);
 
         // Operation
@@ -366,12 +445,11 @@ permalink: /quote/
         const count = document.getElementById("windowCount")?.textContent || "1";
         lines.push(`Windows: ${count}`);
 
-        // Selected size
-        const selSize = document.querySelector(".size-preset.selected")?.textContent?.trim() || "";
-        if (selSize) lines.push(`Window size: ${selSize}`);
+        // Selected size (validated above)
+        lines.push(`Window size: ${sizeEl.textContent.trim()}`);
 
-        // Space type — third select
-        const spaceSel = form.querySelectorAll("select")[2];
+        // Space type
+        const spaceSel = document.getElementById("quoteSpace");
         const space = spaceSel ? spaceSel.value : "";
         if (space) lines.push(`Space: ${space}`);
 
@@ -423,9 +501,14 @@ permalink: /quote/
         el.classList.add("selected");
         el.querySelector("input").checked = true;
       };
-      window.selectSize = window.selectSize || function(el) {
+      window.selectSize = function(el) {
         el.parentNode.querySelectorAll(".size-preset").forEach(o => o.classList.remove("selected"));
         el.classList.add("selected");
+        const sizeHint = document.getElementById("sizeHint");
+        if (sizeHint) {
+          sizeHint.classList.remove("field-hint-error");
+          sizeHint.innerHTML = "Choose the closest size \u2014 pick <strong>Custom</strong> if none of these fit.";
+        }
       };
     })();
   </script>

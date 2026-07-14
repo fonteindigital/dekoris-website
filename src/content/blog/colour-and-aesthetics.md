@@ -4,7 +4,7 @@ slug: "colour-and-aesthetics"
 category: "Tips & Guides"
 date: 2026-06-11
 excerpt: "Your blinds are one of the largest blocks of colour and texture in any room. Choose well and they'll elevate a space; choose poorly and even the most expensively decorated room feels disjointed."
-image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80"
+image: "/images/uploads/blog-colour-fabric-stack.jpg"
 readTime: "7 min read"
 order: 2
 ---

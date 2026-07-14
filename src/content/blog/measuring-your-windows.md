@@ -4,7 +4,7 @@ slug: "measuring-your-windows"
 category: "Tips & Guides"
 date: 2026-06-11
 excerpt: "Measuring your windows correctly is more important than choosing the fabric, the colour, or even the style of blind itself. Here's how to get it right."
-image: "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1200&q=80"
+image: "/images/uploads/blog-measuring-roman-windows.jpg"
 readTime: "8 min read"
 featured: true
 order: 1

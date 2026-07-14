@@ -679,3 +679,21 @@
       .nav-mobile-toggle.active span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
       .page-hero { padding: 60px 24px 48px; }
     }
+
+/* ---- Quote form: dependent Installation field + size validation hint ---- */
+.field-hint {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-light);
+}
+.field-hint-error {
+  color: #b3261e;
+  font-weight: 500;
+}
+.quote-form select:disabled {
+  background-color: #f4f4f4;
+  color: var(--text-light);
+  cursor: not-allowed;
+  opacity: 1;
+}
