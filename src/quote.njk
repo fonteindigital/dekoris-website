@@ -401,9 +401,30 @@ permalink: /quote/
         banner.style.display = "flex";
       }
 
+      // ── Order basket handoff (from the shop configurator) ──
+      let orderItems = [];
+      try { orderItems = JSON.parse(localStorage.getItem("dekorisOrder")) || []; } catch (err) {}
+      const hasOrder = params.get("order") && orderItems.length;
+
       // Form submission: build a mailto with all fields, opens user's mail client
       const form = document.getElementById("quoteForm");
       const successEl = document.getElementById("quoteSuccess");
+
+      if (hasOrder) {
+        const itemCount = orderItems.reduce((n, it) => n + it.qty, 0);
+        const summary = orderItems.map(it =>
+          `• ${it.qty} × ${it.product} — ${it.fabric ? it.fabric + ", " : ""}${it.code ? it.code + " " + it.colour : (it.colour || "")}, ${it.size}`
+        ).join("\n");
+        const ta = form.querySelector("textarea");
+        if (ta && !ta.value) ta.value = "MY ORDER\n" + summary;
+        bannerText.textContent = `Quoting: your order (${itemCount} item${itemCount === 1 ? "" : "s"}) — details below`;
+        banner.style.display = "flex";
+        // sizes are already specified per item; pre-select Custom so validation passes
+        const customPreset = document.querySelector('.size-preset[data-size="custom"]');
+        if (customPreset && !document.querySelector(".size-preset.selected")) {
+          customPreset.classList.add("selected");
+        }
+      }
       form.addEventListener("submit", function(e) {
         e.preventDefault();
 
@@ -477,6 +498,7 @@ permalink: /quote/
         .then(res => res.json())
         .then(data => {
           if (!data.success) throw new Error(data.message || "Submission failed");
+          try { localStorage.removeItem("dekorisOrder"); } catch (err) {}
           form.style.display = "none";
           successEl.style.display = "block";
           successEl.scrollIntoView({ behavior: "smooth", block: "center" });

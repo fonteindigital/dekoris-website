@@ -1,0 +1,179 @@
+<!-- Mini order basket — localStorage, no payment. Items are sent to /quote/ as a quote request. -->
+<button id="obFab" class="ob-fab" type="button" aria-label="My order" style="display:none">
+  My Order <span id="obCount">0</span>
+</button>
+
+<div id="obOverlay" class="ob-overlay"></div>
+<aside id="obDrawer" class="ob-drawer" role="dialog" aria-label="My order">
+  <div class="ob-head">
+    <h3>My Order</h3>
+    <button type="button" class="ob-close" aria-label="Close">&times;</button>
+  </div>
+  <div class="ob-items" id="obItems"></div>
+  <div class="ob-foot">
+    <p class="ob-hint">No payment online. Send your list as a quote request — we confirm colours from physical samples, measure on site, and share final pricing.</p>
+    <button type="button" class="ob-send" id="obSend">Send Order → Free Quote</button>
+  </div>
+</aside>
+
+<style>
+  .ob-fab {
+    position: fixed; bottom: 22px; right: 22px; z-index: 900;
+    background: var(--charcoal, #545454); color: var(--white, #fff);
+    border: none; border-radius: 26px; padding: 13px 22px;
+    font-family: var(--font-body); font-size: 12px; letter-spacing: 1.5px;
+    text-transform: uppercase; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+  }
+  .ob-fab span {
+    background: var(--gold, #AF9B6B); border-radius: 50%;
+    display: inline-flex; width: 20px; height: 20px;
+    align-items: center; justify-content: center;
+    font-size: 11px; margin-left: 6px;
+  }
+  .ob-overlay {
+    position: fixed; inset: 0; background: rgba(30,28,26,0.5);
+    z-index: 990; display: none;
+  }
+  .ob-overlay.open { display: block; }
+  .ob-drawer {
+    position: fixed; top: 0; right: -420px; width: 400px; max-width: 92vw;
+    height: 100vh; background: var(--white, #fff); z-index: 991;
+    transition: right 0.3s ease; display: flex; flex-direction: column;
+    box-shadow: -12px 0 40px rgba(0,0,0,0.18);
+  }
+  .ob-drawer.open { right: 0; }
+  .ob-head {
+    padding: 20px 24px; border-bottom: 1px solid var(--cream-dark, #eee);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .ob-head h3 {
+    font-family: var(--font-body); font-size: 14px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--text-dark, #545454); font-weight: 600;
+  }
+  .ob-close { border: none; background: none; font-size: 24px; cursor: pointer; color: var(--text-dark, #545454); }
+  .ob-items { flex: 1; overflow-y: auto; padding: 14px 24px; }
+  .ob-empty { text-align: center; color: var(--text-light, #767676); font-size: 13.5px; margin-top: 40px; line-height: 1.6; }
+  .ob-item { display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--cream, #f5f0e8); }
+  .ob-chip { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
+  .ob-info { flex: 1; font-size: 12.5px; color: var(--text-light, #767676); }
+  .ob-info b { color: var(--text-dark, #545454); display: block; font-size: 13px; margin-bottom: 2px; }
+  .ob-remove { border: none; background: none; color: #a96b62; cursor: pointer; font-size: 11px; letter-spacing: 0.5px; }
+  .ob-foot { padding: 16px 24px 22px; border-top: 1px solid var(--cream-dark, #eee); background: var(--cream, #FAF7F2); }
+  .ob-hint { font-size: 11.5px; color: var(--text-light, #767676); line-height: 1.55; margin: 0 0 12px; }
+  .ob-send {
+    width: 100%; background: var(--charcoal, #545454); color: var(--white, #fff);
+    border: none; padding: 15px; font-family: var(--font-body);
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer;
+  }
+  .ob-send:hover { background: var(--charcoal-deep, #3d3d3d); }
+</style>
+
+<script>
+  (function() {
+    var KEY = "dekorisOrder";
+    function read() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
+    function write(items) { localStorage.setItem(KEY, JSON.stringify(items)); render(); }
+
+    var fab = document.getElementById("obFab");
+    var drawer = document.getElementById("obDrawer");
+    var overlay = document.getElementById("obOverlay");
+
+    function open(o) { drawer.classList.toggle("open", o); overlay.classList.toggle("open", o); }
+    fab.addEventListener("click", function() { open(true); });
+    overlay.addEventListener("click", function() { open(false); });
+    drawer.querySelector(".ob-close").addEventListener("click", function() { open(false); });
+
+    function render() {
+      var items = read();
+      var n = items.reduce(function(a, i) { return a + i.qty; }, 0);
+      document.getElementById("obCount").textContent = n;
+      fab.style.display = items.length ? "block" : "none";
+      var wrap = document.getElementById("obItems");
+      if (!items.length) {
+        wrap.innerHTML = '<div class="ob-empty">Nothing here yet.<br>Pick a colour and size, then Add to Order.</div>';
+        return;
+      }
+      wrap.innerHTML = items.map(function(it, i) {
+        return '<div class="ob-item">' +
+          '<div class="ob-chip" style="background:' + (it.hex || "#ddd") + '"></div>' +
+          '<div class="ob-info"><b>' + it.qty + " × " + it.product + "</b>" +
+          (it.fabric ? it.fabric + " · " : "") + (it.code ? it.code + " " + it.colour : it.colour || "") +
+          "<br>" + it.size + "</div>" +
+          '<button class="ob-remove" data-i="' + i + '">remove</button></div>';
+      }).join("");
+      wrap.querySelectorAll(".ob-remove").forEach(function(b) {
+        b.addEventListener("click", function() {
+          var items = read(); items.splice(+b.dataset.i, 1); write(items);
+        });
+      });
+    }
+
+    document.getElementById("obSend").addEventListener("click", function() {
+      if (!read().length) return;
+      window.location.href = "/quote/?order=1";
+    });
+
+    window.dekorisBasket = {
+      add: function(item) { var items = read(); items.push(item); write(items); open(true); }
+    };
+    render();
+  })();
+
+  /* ── Product configurator (runs only when the page defines CFG_PRODUCT) ── */
+  (function() {
+    if (!window.CFG_PRODUCT) return;
+    var P = window.CFG_PRODUCT;
+    var fi = 0, ci = 0, qty = 1;
+
+    var ftWrap = document.getElementById("cfgFabric");
+    var swWrap = document.getElementById("cfgSwatches");
+    var nameEl = document.getElementById("cfgColourName");
+
+    function drawFabrics() {
+      ftWrap.innerHTML = "";
+      P.fabricTypes.forEach(function(ft, i) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = ft.name;
+        b.className = i === fi ? "on" : "";
+        b.addEventListener("click", function() { fi = i; ci = 0; drawFabrics(); drawSwatches(); });
+        ftWrap.appendChild(b);
+      });
+    }
+    function drawSwatches() {
+      swWrap.innerHTML = "";
+      P.fabricTypes[fi].colours.forEach(function(c, i) {
+        var d = document.createElement("div");
+        d.className = "swatch" + (c.texture === "linen" ? " linen" : "") + (i === ci ? " on" : "");
+        d.innerHTML = '<div class="sw-tile" style="background:' + c.hex + '"></div><span>' + c.code + "</span>";
+        d.addEventListener("click", function() { ci = i; drawSwatches(); });
+        swWrap.appendChild(d);
+      });
+      var c = P.fabricTypes[fi].colours[ci];
+      nameEl.textContent = c.code + " · " + c.name;
+    }
+    document.querySelectorAll("#cfgSizes .size-chip").forEach(function(ch) {
+      ch.addEventListener("click", function() {
+        document.querySelectorAll("#cfgSizes .size-chip").forEach(function(x) { x.classList.remove("on"); });
+        ch.classList.add("on");
+      });
+    });
+    window.cfgQty = function(d) {
+      qty = Math.max(1, qty + d);
+      document.getElementById("cfgQtyVal").textContent = qty;
+    };
+    window.cfgAdd = function() {
+      var c = P.fabricTypes[fi].colours[ci];
+      var size = document.querySelector("#cfgSizes .size-chip.on");
+      window.dekorisBasket.add({
+        product: P.title,
+        fabric: P.fabricTypes[fi].name,
+        code: c.code, colour: c.name, hex: c.hex,
+        size: size ? size.textContent.trim() : "Custom — we measure",
+        qty: qty
+      });
+      qty = 1; document.getElementById("cfgQtyVal").textContent = 1;
+    };
+    drawFabrics(); drawSwatches();
+  })();
+</script>
