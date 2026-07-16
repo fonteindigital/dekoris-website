@@ -47,6 +47,10 @@ permalink: /shop/
       padding: 13px; transition: bottom 0.25s ease;
     }
     .ed-card:hover .ed-quick { bottom: 0; }
+    /* Touch devices have no hover — keep the button visible */
+    @media (hover: none) {
+      .ed-quick { bottom: 0; }
+    }
     .ed-title {
       font-size: 12.5px; letter-spacing: 2.5px; text-transform: uppercase;
       color: var(--text-dark); font-weight: 600; margin: 18px 0 6px;
