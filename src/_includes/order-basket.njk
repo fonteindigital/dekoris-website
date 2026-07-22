@@ -1,18 +1,22 @@
-<!-- Mini order basket — localStorage, no payment. Items are sent to /quote/ as a quote request. -->
-<button id="obFab" class="ob-fab" type="button" aria-label="My order" style="display:none">
-  My Order <span id="obCount">0</span>
+<!-- Mini cart — localStorage, no payment. Items are sent to /quote/ as an invoice request. -->
+<button id="obFab" class="ob-fab" type="button" aria-label="My cart" style="display:none">
+  My Cart <span id="obCount">0</span>
 </button>
 
 <div id="obOverlay" class="ob-overlay"></div>
-<aside id="obDrawer" class="ob-drawer" role="dialog" aria-label="My order">
+<aside id="obDrawer" class="ob-drawer" role="dialog" aria-label="My cart">
   <div class="ob-head">
-    <h3>My Order</h3>
+    <h3>Your Cart</h3>
     <button type="button" class="ob-close" aria-label="Close">&times;</button>
   </div>
   <div class="ob-items" id="obItems"></div>
   <div class="ob-foot">
-    <p class="ob-hint">No payment online. Send your list as a quote request — we confirm colours from physical samples, measure on site, and share final pricing.</p>
-    <button type="button" class="ob-send" id="obSend">Send Order → Free Quote</button>
+    <div class="ob-subtotal" id="obSubtotal" style="display:none">
+      <span>Indicative subtotal</span>
+      <b id="obSubtotalVal">N$0</b>
+    </div>
+    <p class="ob-hint">Indicative only — no payment is taken online. Checkout sends this as an invoice request; we confirm colours from physical samples, measure on site, and finalise your invoice.</p>
+    <button type="button" class="ob-send" id="obSend">Checkout → Request Invoice</button>
   </div>
 </aside>
 
@@ -58,8 +62,16 @@
   .ob-chip { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
   .ob-info { flex: 1; font-size: 12.5px; color: var(--text-light, #767676); }
   .ob-info b { color: var(--text-dark, #545454); display: block; font-size: 13px; margin-bottom: 2px; }
+  .ob-price { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 500; color: var(--gold-dark, #8B7B54); }
+  .ob-price-tbd { color: var(--text-light, #767676); font-weight: 400; font-style: italic; }
   .ob-remove { border: none; background: none; color: #a96b62; cursor: pointer; font-size: 11px; letter-spacing: 0.5px; }
   .ob-foot { padding: 16px 24px 22px; border-top: 1px solid var(--cream-dark, #eee); background: var(--cream, #FAF7F2); }
+  .ob-subtotal {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--cream-dark, #eee);
+  }
+  .ob-subtotal span { font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-light, #767676); }
+  .ob-subtotal b { font-family: var(--font-heading); font-size: 18px; font-weight: 500; color: var(--text-dark, #545454); }
   .ob-hint { font-size: 11.5px; color: var(--text-light, #767676); line-height: 1.55; margin: 0 0 12px; }
   .ob-send {
     width: 100%; background: var(--charcoal, #545454); color: var(--white, #fff);
@@ -84,24 +96,38 @@
     overlay.addEventListener("click", function() { open(false); });
     drawer.querySelector(".ob-close").addEventListener("click", function() { open(false); });
 
+    function money(n) { return "N$" + Number(n).toLocaleString(); }
+
     function render() {
       var items = read();
       var n = items.reduce(function(a, i) { return a + i.qty; }, 0);
       document.getElementById("obCount").textContent = n;
       fab.style.display = items.length ? "block" : "none";
       var wrap = document.getElementById("obItems");
+      var sub = document.getElementById("obSubtotal");
       if (!items.length) {
-        wrap.innerHTML = '<div class="ob-empty">Nothing here yet.<br>Pick a colour and size, then Add to Order.</div>';
+        wrap.innerHTML = '<div class="ob-empty">Nothing here yet.<br>Pick a colour and size, then Add to Cart.</div>';
+        if (sub) sub.style.display = "none";
         return;
       }
+      var subtotal = 0;
       wrap.innerHTML = items.map(function(it, i) {
+        var line = (typeof it.price === "number" && it.price > 0) ? it.price * it.qty : null;
+        if (line !== null) subtotal += line;
+        var priceHtml = line !== null
+          ? '<span class="ob-price">' + money(line) + '</span>'
+          : '<span class="ob-price ob-price-tbd">Priced after measure</span>';
         return '<div class="ob-item">' +
           '<div class="ob-chip" style="background:' + (it.hex || "#ddd") + '"></div>' +
           '<div class="ob-info"><b>' + it.qty + " × " + it.product + "</b>" +
           (it.fabric ? it.fabric + " · " : "") + (it.code ? it.code + " " + it.colour : it.colour || "") +
-          "<br>" + it.size + "</div>" +
+          "<br>" + it.size + priceHtml + "</div>" +
           '<button class="ob-remove" data-i="' + i + '">remove</button></div>';
       }).join("");
+      if (sub) {
+        document.getElementById("obSubtotalVal").textContent = money(subtotal);
+        sub.style.display = "flex";
+      }
       wrap.querySelectorAll(".ob-remove").forEach(function(b) {
         b.addEventListener("click", function() {
           var items = read(); items.splice(+b.dataset.i, 1); write(items);
@@ -165,11 +191,15 @@
     window.cfgAdd = function() {
       var c = P.fabricTypes[fi].colours[ci];
       var size = document.querySelector("#cfgSizes .size-chip.on");
+      var priceAttr = size ? size.getAttribute("data-price") : "";
+      var price = priceAttr ? parseInt(priceAttr, 10) : null;
       window.dekorisBasket.add({
         product: P.title,
+        slug: P.slug,
         fabric: P.fabricTypes[fi].name,
         code: c.code, colour: c.name, hex: c.hex,
         size: size ? size.textContent.trim() : "Custom — we measure",
+        price: price,
         qty: qty
       });
       qty = 1; document.getElementById("cfgQtyVal").textContent = 1;

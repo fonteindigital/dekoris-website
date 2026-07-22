@@ -269,22 +269,23 @@ eleventyComputed:
         <div class="cfg-step">3 · Approximate size</div>
         <div class="size-chips" id="cfgSizes">
           {% for size in product.data.sizes %}
-          <div class="size-chip{% if loop.first %} on{% endif %}">{{ size.name }}</div>
+          <div class="size-chip{% if loop.first %} on{% endif %}" data-price="{{ size.price }}">{{ size.name }}</div>
           {% endfor %}
-          <div class="size-chip">Custom — we measure</div>
+          <div class="size-chip" data-price="">Custom — we measure</div>
         </div>
 
         <div class="cfg-buy">
           <div class="cfg-qty">
             <button type="button" onclick="cfgQty(-1)">−</button><span id="cfgQtyVal">1</span><button type="button" onclick="cfgQty(1)">+</button>
           </div>
-          <button type="button" class="add-order-btn" onclick="cfgAdd()">Add to Order</button>
+          <button type="button" class="add-order-btn" onclick="cfgAdd()">Add to Cart</button>
         </div>
-        <div class="cfg-note">No payment is taken online. Your order list is sent to our team as a quote request — we confirm colours against physical samples, measure your windows, and share final pricing before manufacture.</div>
+        <div class="cfg-note">No payment is taken online. Your selection becomes an invoice request — we confirm colours against physical samples, measure your windows, and finalise your invoice before manufacture.</div>
 
         <script>
           window.CFG_PRODUCT = {
             title: {{ product.data.title | dump | safe }},
+            slug: {{ product.data.slug | dump | safe }},
             fabricTypes: {{ product.data.fabricTypes | dump | safe }}
           };
         </script>

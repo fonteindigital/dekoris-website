@@ -1,6 +1,6 @@
 ---
 layout: base.njk
-pageTitle: "Quote — Dekoris"
+pageTitle: "Checkout — Request an Invoice — Dekoris"
 activePage: quote
 permalink: /quote/
 ---
@@ -110,6 +110,45 @@ permalink: /quote/
       width: 100%; padding: 16px; font-size: 14px;
     }
 
+    /* ═══ Order summary (invoice mode) ═══ */
+    .order-summary { border: 1px solid var(--cream-dark); border-radius: 8px; overflow: hidden; }
+    .os-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px; border-bottom: 1px solid var(--cream);
+    }
+    .os-item:last-child { border-bottom: none; }
+    .os-chip { width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
+    .os-info { flex: 1; font-size: 13px; color: var(--text-light); }
+    .os-info b { display: block; color: var(--text-dark); font-size: 13.5px; margin-bottom: 2px; }
+    .os-info span { font-size: 12px; }
+    .os-line { font-size: 13.5px; font-weight: 500; color: var(--gold-dark); white-space: nowrap; }
+    .os-foot { padding: 16px 18px; background: var(--cream); }
+    .os-subtotal { display: flex; justify-content: space-between; align-items: baseline; }
+    .os-subtotal span { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-light); }
+    .os-subtotal b { font-family: var(--font-heading); font-size: 20px; font-weight: 500; color: var(--text-dark); }
+    .os-indicative { font-size: 12px; color: var(--text-light); line-height: 1.55; margin-top: 8px; }
+    .os-custom-note { font-size: 12px; color: var(--gold-dark); margin-top: 6px; }
+    .os-edit { display: inline-block; margin-top: 14px; font-size: 12px; color: var(--text-light); letter-spacing: 0.5px; }
+    .os-edit:hover { color: var(--gold); }
+
+    .empty-banner {
+      padding: 20px 22px; margin-bottom: 24px;
+      background: var(--cream); border-left: 3px solid var(--gold);
+      border-radius: 6px; font-size: 14px; color: var(--text-body);
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .empty-banner a { color: var(--text-dark); border-bottom: 1px solid var(--gold); font-weight: 500; white-space: nowrap; }
+    .empty-banner a:hover { color: var(--gold); }
+
+    .no-pay-note {
+      display: none; align-items: flex-start; gap: 10px;
+      margin-top: 14px; padding: 14px 16px;
+      background: var(--cream); border-radius: 6px;
+      font-size: 13px; color: var(--text-body); line-height: 1.55;
+    }
+    .no-pay-note svg { flex-shrink: 0; margin-top: 1px; }
+    .no-pay-note strong { color: var(--text-dark); font-weight: 600; }
+
     @media (max-width: 768px) {
       .process-steps { grid-template-columns: repeat(3, 1fr); gap: 24px; }
       .process-steps::before { display: none; }
@@ -144,9 +183,9 @@ permalink: /quote/
 
 
   <div class="page-hero">
-    <div class="section-label">Free Quote</div>
-    <h1>Request a Quote</h1>
-    <p>Tell us about your space and we'll get back to you with a tailored solution.</p>
+    <div class="section-label">Checkout</div>
+    <h1 id="checkoutTitle">Request an Invoice</h1>
+    <p id="checkoutIntro">Review your selection and send it to us — we confirm, measure and email your invoice. No payment is taken online.</p>
   </div>
 
   <section class="process-section">
@@ -154,22 +193,22 @@ permalink: /quote/
       <div class="process-steps">
         <div class="process-step">
           <div class="process-num">1</div>
-          <div class="process-label">Consultation</div>
-          <div class="process-desc">On-site visit to understand your space</div>
+          <div class="process-label">Select</div>
+          <div class="process-desc">Choose your products, colours and sizes online</div>
         </div>
         <div class="process-step">
           <div class="process-num">2</div>
-          <div class="process-label">Measurement</div>
-          <div class="process-desc">Our team measures every window, no guesswork</div>
+          <div class="process-label">Measure</div>
+          <div class="process-desc">We visit and measure every window, no guesswork</div>
         </div>
         <div class="process-step">
           <div class="process-num">3</div>
-          <div class="process-label">Selection</div>
-          <div class="process-desc">Choose fabrics, colours, and operation</div>
+          <div class="process-label">Invoice</div>
+          <div class="process-desc">We email your itemised invoice to confirm</div>
         </div>
         <div class="process-step">
           <div class="process-num">4</div>
-          <div class="process-label">Installation</div>
+          <div class="process-label">Install</div>
           <div class="process-desc">On-site installation by our team</div>
         </div>
       </div>
@@ -185,6 +224,29 @@ permalink: /quote/
             <a href="/quote/">clear</a>
           </div>
 
+          <!-- Empty-cart banner (quote mode) -->
+          <div id="emptyBanner" class="empty-banner" style="display:none">
+            <span>Your cart is empty. Browse the shop to choose products, colours and sizes — or request a free measurement below and we'll help you decide.</span>
+            <a href="/shop/">Browse Shop →</a>
+          </div>
+
+          <!-- Order summary (invoice mode) -->
+          <div class="form-group" id="orderSummaryGroup" style="display:none">
+            <div class="form-group-title">Your Selection</div>
+            <div class="order-summary">
+              <div id="osItems"></div>
+              <div class="os-foot">
+                <div class="os-subtotal">
+                  <span>Indicative subtotal</span>
+                  <b id="osSubtotalVal">N$0</b>
+                </div>
+                <p class="os-indicative">Indicative only — your final invoice is confirmed after we measure on site and check colours against physical samples.</p>
+                <p class="os-custom-note" id="osCustomNote" style="display:none">Some items are custom-sized and will be priced on your invoice after measurement.</p>
+              </div>
+            </div>
+            <a href="/shop/" class="os-edit">← Add or change items in the shop</a>
+          </div>
+
           <div class="form-group fade-up">
             <div class="form-group-title">Your Details</div>
             <div class="form-row form-row-2" style="margin-bottom: 16px;">
@@ -194,12 +256,13 @@ permalink: /quote/
             <div><label>Email</label><input type="email" placeholder="Email Address" required></div>
           </div>
 
-          <div class="form-group fade-up">
-            <div class="form-group-title">Product Selection</div>
+          <!-- Product picker (quote mode only) -->
+          <div class="form-group fade-up" id="productPickGroup" style="display:none">
+            <div class="form-group-title">What You're After</div>
             <div class="form-row form-row-2" style="margin-bottom: 16px;">
               <div>
                 <label>Product Type</label>
-                <select id="quoteProduct" name="product" required>
+                <select id="quoteProduct" name="product">
                   <option value="">Select a product...</option>
                   <option value="roman-blinds">Roman Blinds</option>
                   <option value="venetian-blinds">Venetian Blinds</option>
@@ -211,15 +274,7 @@ permalink: /quote/
                 </select>
               </div>
               <div>
-                <label>Installation Type</label>
-                <select id="quoteInstall" name="installation" required disabled>
-                  <option value="">Choose a product first...</option>
-                </select>
-                <p id="installHint" class="field-hint">Pick a product type and we'll show the fitting options available for it.</p>
-              </div>
-            </div>
-            <div style="margin-bottom: 16px;">
-              <label>Colour Preference</label>
+                <label>Colour Preference</label>
                 <select id="quoteColour">
                   <option value="">Select a colour...</option>
                   <option>White</option>
@@ -231,28 +286,9 @@ permalink: /quote/
                   <option>Black</option>
                   <option>Other (specify in notes)</option>
                 </select>
+              </div>
             </div>
             <div>
-              <label>Operation Type</label>
-              <div class="radio-group">
-                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="corded-cordless">Corded / Cordless</label>
-                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="motorised">Motorised</label>
-                <label class="radio-option selected" onclick="selectRadio(this)"><input type="radio" name="operation" value="unsure" checked>Not sure yet</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group fade-up">
-            <div class="form-group-title">Window Details</div>
-            <div style="margin-bottom: 20px;">
-              <label>Number of Windows</label>
-              <div class="window-counter">
-                <button type="button" class="counter-btn" onclick="changeCount(-1)">−</button>
-                <div class="counter-value" id="windowCount">1</div>
-                <button type="button" class="counter-btn" onclick="changeCount(1)">+</button>
-              </div>
-            </div>
-            <div style="margin-bottom: 20px;">
               <label>Approximate Window Size</label>
               <div class="size-presets" id="sizePresets">
                 <div class="size-preset" data-size="small" onclick="selectSize(this)">600 × 1000 mm</div>
@@ -265,20 +301,50 @@ permalink: /quote/
               </div>
               <p id="sizeHint" class="field-hint">Choose the closest size — pick <strong>Custom</strong> if none of these fit.</p>
             </div>
-            <div>
-              <label>Space Type</label>
-              <select id="quoteSpace">
-                <option value="">Select space type...</option>
-                <option>Living Room</option>
-                <option>Bedroom</option>
-                <option>Kitchen</option>
-                <option>Bathroom</option>
-                <option>Office</option>
-                <option>Conference Room</option>
-                <option>Healthcare Facility</option>
-                <option>Hotel / Lodge</option>
-                <option>Other</option>
-              </select>
+          </div>
+
+          <div class="form-group fade-up">
+            <div class="form-group-title">Fitting &amp; Site</div>
+            <div style="margin-bottom: 20px;">
+              <label>Installation</label>
+              <div class="radio-group">
+                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="installation" value="no-drill">No-Drill (tension fit)</label>
+                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="installation" value="permanent">Permanent (drilled)</label>
+                <label class="radio-option selected" onclick="selectRadio(this)"><input type="radio" name="installation" value="unsure" checked>Not sure yet</label>
+              </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label>Operation</label>
+              <div class="radio-group">
+                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="corded-cordless">Corded / Cordless</label>
+                <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="operation" value="motorised">Motorised</label>
+                <label class="radio-option selected" onclick="selectRadio(this)"><input type="radio" name="operation" value="unsure" checked>Not sure yet</label>
+              </div>
+            </div>
+            <div class="form-row form-row-2" style="margin-bottom: 0;">
+              <div>
+                <label>Number of Windows</label>
+                <div class="window-counter">
+                  <button type="button" class="counter-btn" onclick="changeCount(-1)">−</button>
+                  <div class="counter-value" id="windowCount">1</div>
+                  <button type="button" class="counter-btn" onclick="changeCount(1)">+</button>
+                </div>
+              </div>
+              <div>
+                <label>Space Type</label>
+                <select id="quoteSpace">
+                  <option value="">Select space type...</option>
+                  <option>Living Room</option>
+                  <option>Bedroom</option>
+                  <option>Kitchen</option>
+                  <option>Bathroom</option>
+                  <option>Office</option>
+                  <option>Conference Room</option>
+                  <option>Healthcare Facility</option>
+                  <option>Hotel / Lodge</option>
+                  <option>Other</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -287,11 +353,15 @@ permalink: /quote/
             <textarea placeholder="Any special requirements, custom dimensions, or questions..."></textarea>
           </div>
 
-          <button type="submit" class="btn btn-gold fade-up">Send Quote Request</button>
+          <button type="submit" id="submitBtn" class="btn btn-gold fade-up">Request Invoice</button>
+          <div class="no-pay-note" id="noPayNote">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AF9B6B" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            <div><strong>No payment is taken online.</strong> This sends your selection to Dekoris as an invoice request — we confirm details, measure on site, and email you an itemised invoice to settle by EFT.</div>
+          </div>
         </form>
         <div id="quoteSuccess" class="form-success" style="display:none">
           <h3>Thank you — request sent</h3>
-          <p>Your request has been received successfully. Our team will review your details and be in touch within 1-2 working days.</p>
+          <p>Your request has been received successfully. Our team will review your details and be in touch within 1-2 working days with your invoice and next steps.</p>
           <p>If you don't hear from us, feel free to email us directly at <a href="mailto:hello@dekoris.com.na" style="color:var(--gold)">hello@dekoris.com.na</a>.</p>
           <p style="margin-top: 16px;">We look forward to helping you create your beautiful space.</p>
           <p style="font-size: 13px; color: var(--text-light); margin-top: 12px;">— The Dekoris team<br><em>Crafting Beautiful Spaces</em></p>
@@ -303,183 +373,164 @@ permalink: /quote/
   <script>
     (function() {
       const params = new URLSearchParams(window.location.search);
-      const productSlug = params.get("product");
-      const sizeSlug = params.get("size");
+      const money = n => "N$" + Number(n).toLocaleString();
+      const el = id => document.getElementById(id);
 
-      const productSelect = document.getElementById("quoteProduct");
-      const installSelect = document.getElementById("quoteInstall");
-      const installHint   = document.getElementById("installHint");
-      const banner = document.getElementById("prefillBanner");
-      const bannerText = document.getElementById("prefillText");
+      // ── Read the cart ──
+      let cart = [];
+      try { cart = JSON.parse(localStorage.getItem("dekorisOrder")) || []; } catch (e) {}
+      const invoiceMode = cart.length > 0;
 
+      const form = el("quoteForm");
+      const successEl = el("quoteSuccess");
+      const productSelect = el("quoteProduct");
+      const banner = el("prefillBanner");
+      const bannerText = el("prefillText");
       let bannerLabel = "";
 
-      /* ---- Installation options cascade off the chosen product ---- */
       const INSTALL_LABELS = {
-        "no-drill": "No-drill (tension fit \u2014 no holes in the wall)",
-        "drilled":  "Drilled (standard bracket fit)",
-        "track":    "Rod / track mounted",
-        "unsure":   "Not sure \u2014 please advise"
+        "no-drill": "No-drill (tension fit — no holes in the wall)",
+        "permanent": "Permanent (drilled bracket fit)",
+        "unsure": "Not sure — please advise"
       };
-      const BLIND_FITTINGS = ["no-drill", "drilled", "unsure"];
-      const INSTALL_BY_PRODUCT = {
-        "roman-blinds":     BLIND_FITTINGS,
-        "venetian-blinds":  BLIND_FITTINGS,
-        "honeycomb-blinds": BLIND_FITTINGS,
-        "zebra-blinds":     BLIND_FITTINGS,
-        "roller-blinds":    BLIND_FITTINGS,
-        "curtains":         ["track", "unsure"],
-        "other":            ["unsure"]
+      const OPERATION_LABELS = {
+        "corded-cordless": "Corded / Cordless",
+        "motorised": "Motorised",
+        "unsure": "Not sure — please advise"
       };
 
-      let pendingInstall = params.get("install") || "";
-      if (productSlug === "no-drill-blinds") pendingInstall = "no-drill";
-
-      function populateInstall(product) {
-        const opts = INSTALL_BY_PRODUCT[product];
-        installSelect.innerHTML = "";
-
-        if (!opts) {
-          installSelect.disabled = true;
-          installSelect.innerHTML = '<option value="">Choose a product first...</option>';
-          installHint.textContent = "Pick a product type and we'll show the fitting options available for it.";
-          return;
-        }
-
-        installSelect.disabled = false;
-        installSelect.insertAdjacentHTML("beforeend", '<option value="">Select how it should be fitted...</option>');
-        opts.forEach(function(key) {
-          const o = document.createElement("option");
-          o.value = key;
-          o.textContent = INSTALL_LABELS[key];
-          installSelect.appendChild(o);
-        });
-
-        if (product === "curtains") {
-          installHint.textContent = "Curtains are mounted on a rod or track \u2014 no-drill tension fitting isn't available for these.";
-        } else if (product === "other") {
-          installHint.textContent = "Tell us more in the notes below and we'll advise on the best fitting.";
-        } else {
-          installHint.textContent = "No-drill uses tension brackets \u2014 no holes, no damage. Ideal for rentals.";
-        }
-
-        if (pendingInstall && opts.indexOf(pendingInstall) !== -1) {
-          installSelect.value = pendingInstall;
-        }
+      // ── Render the cart summary (invoice mode) ──
+      function renderSummary() {
+        let subtotal = 0, hasCustom = false;
+        el("osItems").innerHTML = cart.map(function(it) {
+          const line = (typeof it.price === "number" && it.price > 0) ? it.price * it.qty : null;
+          if (line !== null) subtotal += line; else hasCustom = true;
+          return '<div class="os-item">' +
+            '<div class="os-chip" style="background:' + (it.hex || "#ddd") + '"></div>' +
+            '<div class="os-info"><b>' + it.qty + " × " + it.product + "</b><span>" +
+            (it.fabric ? it.fabric + " · " : "") + (it.code ? it.code + " " + it.colour : (it.colour || "")) +
+            " · " + it.size + "</span></div>" +
+            '<div class="os-line">' + (line !== null ? money(line) : "after measure") + "</div>" +
+          "</div>";
+        }).join("");
+        el("osSubtotalVal").textContent = money(subtotal);
+        el("osCustomNote").style.display = hasCustom ? "block" : "none";
       }
 
-      productSelect.addEventListener("change", function() { populateInstall(productSelect.value); });
+      // ── Mode toggle ──
+      if (invoiceMode) {
+        renderSummary();
+        el("orderSummaryGroup").style.display = "block";
+        el("emptyBanner").style.display = "none";
+        el("productPickGroup").style.display = "none";
+        el("submitBtn").textContent = "Request Invoice";
+        el("checkoutTitle").textContent = "Request an Invoice";
+        el("checkoutIntro").textContent = "Review your selection and send it to us — we confirm, measure and email your invoice. No payment is taken online.";
+      } else {
+        el("orderSummaryGroup").style.display = "none";
+        el("emptyBanner").style.display = "flex";
+        el("productPickGroup").style.display = "block";
+        el("submitBtn").textContent = "Request Quote";
+        el("checkoutTitle").textContent = "Request a Quote";
+        el("checkoutIntro").textContent = "Tell us about your space and we'll get back to you with a tailored solution. No payment is taken online.";
 
-      if (productSlug && productSelect) {
-        const opt = productSelect.querySelector(`option[value="${productSlug}"]`);
-        if (opt) {
-          productSelect.value = productSlug;
-          bannerLabel = opt.textContent.trim();
+        // Prefill product / size from Enquire deep links
+        const productSlug = params.get("product");
+        const sizeSlug = params.get("size");
+        if (productSlug && productSelect) {
+          const opt = productSelect.querySelector('option[value="' + productSlug + '"]');
+          if (opt) { productSelect.value = productSlug; bannerLabel = opt.textContent.trim(); }
+        }
+        if (sizeSlug) {
+          const sizeKey = sizeSlug.split("-").pop();
+          const match = document.querySelector('.size-preset[data-size="' + sizeKey + '"]');
+          if (match) {
+            document.querySelectorAll(".size-preset").forEach(p => p.classList.remove("selected"));
+            match.classList.add("selected");
+            const strong = match.querySelector("strong");
+            const label = strong ? strong.textContent : match.textContent.trim();
+            bannerLabel += bannerLabel ? (" — " + label) : label;
+          }
+        }
+        if (bannerLabel) {
+          bannerText.textContent = "Quoting: " + bannerLabel;
+          banner.style.display = "flex";
         }
       }
-      populateInstall(productSelect.value);
+      el("noPayNote").style.display = "flex";
 
-      if (pendingInstall === "no-drill" && !productSelect.value) {
-        bannerLabel = "No-drill blinds \u2014 choose your blind type below";
-      }
-
-      if (sizeSlug) {
-        // sizeSlug looks like 'roman-blinds-small' — pull the last segment
-        const sizeKey = sizeSlug.split("-").pop();
-        const presets = document.querySelectorAll(".size-preset");
-        presets.forEach(p => p.classList.remove("selected"));
-        const match = document.querySelector(`.size-preset[data-size="${sizeKey}"]`);
-        if (match) {
-          match.classList.add("selected");
-          const label = match.querySelector("strong").textContent;
-          bannerLabel += bannerLabel ? ` — ${label}` : label;
+      // ── Installation prefill from deep links (e.g. /quote/?install=no-drill) ──
+      const installParam = params.get("install");
+      if (installParam) {
+        const installMap = { "no-drill": "no-drill", "drilled": "permanent", "permanent": "permanent" };
+        const target = installMap[installParam];
+        if (target) {
+          const input = form.querySelector('input[name="installation"][value="' + target + '"]');
+          if (input) {
+            form.querySelectorAll('input[name="installation"]').forEach(r => r.closest(".radio-option").classList.remove("selected"));
+            input.checked = true;
+            input.closest(".radio-option").classList.add("selected");
+          }
         }
       }
 
-      if (bannerLabel) {
-        bannerText.textContent = `Quoting: ${bannerLabel}`;
-        banner.style.display = "flex";
-      }
-
-      // ── Order basket handoff (from the shop configurator) ──
-      let orderItems = [];
-      try { orderItems = JSON.parse(localStorage.getItem("dekorisOrder")) || []; } catch (err) {}
-      const hasOrder = params.get("order") && orderItems.length;
-
-      // Form submission: build a mailto with all fields, opens user's mail client
-      const form = document.getElementById("quoteForm");
-      const successEl = document.getElementById("quoteSuccess");
-
-      if (hasOrder) {
-        const itemCount = orderItems.reduce((n, it) => n + it.qty, 0);
-        const summary = orderItems.map(it =>
-          `• ${it.qty} × ${it.product} — ${it.fabric ? it.fabric + ", " : ""}${it.code ? it.code + " " + it.colour : (it.colour || "")}, ${it.size}`
-        ).join("\n");
-        const ta = form.querySelector("textarea");
-        if (ta && !ta.value) ta.value = "MY ORDER\n" + summary;
-        bannerText.textContent = `Quoting: your order (${itemCount} item${itemCount === 1 ? "" : "s"}) — details below`;
-        banner.style.display = "flex";
-        // sizes are already specified per item; pre-select Custom so validation passes
-        const customPreset = document.querySelector('.size-preset[data-size="custom"]');
-        if (customPreset && !document.querySelector(".size-preset.selected")) {
-          customPreset.classList.add("selected");
-        }
-      }
+      // ── Submit ──
       form.addEventListener("submit", function(e) {
         e.preventDefault();
 
-        const sizeEl = document.querySelector(".size-preset.selected");
-        const sizeHint = document.getElementById("sizeHint");
-        if (!sizeEl) {
-          sizeHint.classList.add("field-hint-error");
-          sizeHint.textContent = "Please choose an approximate window size (or Custom).";
-          document.getElementById("sizePresets").scrollIntoView({ behavior: "smooth", block: "center" });
-          return;
-        }
+        const name = form.querySelector('input[type="text"]') ? form.querySelector('input[type="text"]').value : "";
+        const phone = form.querySelector('input[type="tel"]') ? form.querySelector('input[type="tel"]').value : "";
+        const email = form.querySelector('input[type="email"]') ? form.querySelector('input[type="email"]').value : "";
 
         const lines = [];
 
-        // Pre-fill context
-        if (bannerLabel) lines.push(`From page: ${bannerLabel}`);
+        if (invoiceMode) {
+          lines.push("INVOICE REQUEST");
+          lines.push("");
+          let subtotal = 0, hasCustom = false;
+          cart.forEach(function(it) {
+            const line = (typeof it.price === "number" && it.price > 0) ? it.price * it.qty : null;
+            if (line !== null) subtotal += line; else hasCustom = true;
+            lines.push("• " + it.qty + " × " + it.product +
+              (it.fabric ? " — " + it.fabric : "") +
+              (it.code ? ", " + it.code + " " + it.colour : (it.colour ? ", " + it.colour : "")) +
+              ", " + it.size +
+              (line !== null ? "  = " + money(line) : "  (priced after measure)"));
+          });
+          lines.push("");
+          lines.push("Indicative subtotal: " + money(subtotal) + (hasCustom ? " (+ custom items priced after measurement)" : ""));
+          lines.push("(Indicative only — final invoice confirmed after on-site measurement)");
+          lines.push("");
+        } else {
+          if (bannerLabel) lines.push("From page: " + bannerLabel);
+        }
 
-        // Name / Phone / Email — first three text/email/tel inputs
-        const name = form.querySelector('input[type="text"]')?.value || "";
-        const phone = form.querySelector('input[type="tel"]')?.value || "";
-        const email = form.querySelector('input[type="email"]')?.value || "";
-        lines.push(`Name: ${name}`);
-        lines.push(`Phone: ${phone}`);
-        lines.push(`Email: ${email}`);
+        lines.push("Name: " + name);
+        lines.push("Phone: " + phone);
+        lines.push("Email: " + email);
 
-        // Product + installation + colour
-        const product = productSelect ? productSelect.options[productSelect.selectedIndex].text : "";
-        const install = installSelect && installSelect.value ? INSTALL_LABELS[installSelect.value] : "";
-        const colour = document.getElementById("quoteColour") ? document.getElementById("quoteColour").value : "";
-        lines.push(`Product: ${product}`);
-        if (install) lines.push(`Installation: ${install}`);
-        if (colour) lines.push(`Colour: ${colour}`);
+        if (!invoiceMode) {
+          const product = productSelect && productSelect.value ? productSelect.options[productSelect.selectedIndex].text : "";
+          const colour = el("quoteColour") ? el("quoteColour").value : "";
+          const sizeEl = document.querySelector(".size-preset.selected");
+          if (product) lines.push("Product: " + product);
+          if (colour) lines.push("Colour: " + colour);
+          if (sizeEl) lines.push("Window size: " + sizeEl.textContent.trim());
+        }
 
-        // Operation
-        const op = form.querySelector('input[name="operation"]:checked')?.value || "";
-        if (op) lines.push(`Operation: ${op}`);
+        const install = form.querySelector('input[name="installation"]:checked');
+        if (install) lines.push("Installation: " + (INSTALL_LABELS[install.value] || install.value));
+        const op = form.querySelector('input[name="operation"]:checked');
+        if (op) lines.push("Operation: " + (OPERATION_LABELS[op.value] || op.value));
+        const count = el("windowCount") ? el("windowCount").textContent : "1";
+        lines.push("Windows: " + count);
+        const space = el("quoteSpace") ? el("quoteSpace").value : "";
+        if (space) lines.push("Space: " + space);
+        const notes = form.querySelector("textarea") ? form.querySelector("textarea").value : "";
+        if (notes) lines.push("\nNotes:\n" + notes);
 
-        // Window count
-        const count = document.getElementById("windowCount")?.textContent || "1";
-        lines.push(`Windows: ${count}`);
-
-        // Selected size (validated above)
-        lines.push(`Window size: ${sizeEl.textContent.trim()}`);
-
-        // Space type
-        const spaceSel = document.getElementById("quoteSpace");
-        const space = spaceSel ? spaceSel.value : "";
-        if (space) lines.push(`Space: ${space}`);
-
-        // Notes
-        const notes = form.querySelector("textarea")?.value || "";
-        if (notes) lines.push(`\nNotes:\n${notes}`);
-
-        // Submit via Web3Forms
-        const btn = form.querySelector('button[type="submit"]');
+        const btn = el("submitBtn");
+        const requestKind = invoiceMode ? "invoice request" : "quote request";
         btn.disabled = true; btn.textContent = "Sending…";
 
         fetch("https://api.web3forms.com/submit", {
@@ -487,8 +538,8 @@ permalink: /quote/
           headers: { "Content-Type": "application/json", "Accept": "application/json" },
           body: JSON.stringify({
             access_key: "a9f51dbc-4d71-4ed6-8229-0d9be7af7224",
-            subject: `Dekoris quote request — ${name || "new lead"}`,
-            from_name: "Dekoris Website — Quote form",
+            subject: "Dekoris " + requestKind + " — " + (name || "new lead"),
+            from_name: "Dekoris Website — Checkout",
             name: name,
             email: email,
             phone: phone,
@@ -504,34 +555,26 @@ permalink: /quote/
           successEl.scrollIntoView({ behavior: "smooth", block: "center" });
         })
         .catch(() => {
-          // Fallback: open the user's mail client with the same details
-          btn.disabled = false; btn.textContent = "Send Quote Request";
-          const subject = encodeURIComponent(`Dekoris quote request — ${name || "new lead"}`);
+          btn.disabled = false; btn.textContent = invoiceMode ? "Request Invoice" : "Request Quote";
+          const subject = encodeURIComponent("Dekoris " + requestKind + " — " + (name || "new lead"));
           const body = encodeURIComponent(lines.join("\n"));
-          window.location.href = `mailto:hello@dekoris.com.na?subject=${subject}&body=${body}`;
+          window.location.href = "mailto:hello@dekoris.com.na?subject=" + subject + "&body=" + body;
         });
       });
 
-      // Counter and radio/preset helpers (in case base.njk doesn't define them)
+      // Helpers
       window.changeCount = window.changeCount || function(delta) {
-        const el = document.getElementById("windowCount");
-        const next = Math.max(1, (parseInt(el.textContent, 10) || 1) + delta);
-        el.textContent = next;
+        const c = el("windowCount");
+        c.textContent = Math.max(1, (parseInt(c.textContent, 10) || 1) + delta);
       };
-      window.selectRadio = window.selectRadio || function(el) {
-        el.parentNode.querySelectorAll(".radio-option").forEach(o => o.classList.remove("selected"));
-        el.classList.add("selected");
-        el.querySelector("input").checked = true;
+      window.selectRadio = window.selectRadio || function(elm) {
+        elm.parentNode.querySelectorAll(".radio-option").forEach(o => o.classList.remove("selected"));
+        elm.classList.add("selected");
+        elm.querySelector("input").checked = true;
       };
-      window.selectSize = function(el) {
-        el.parentNode.querySelectorAll(".size-preset").forEach(o => o.classList.remove("selected"));
-        el.classList.add("selected");
-        const sizeHint = document.getElementById("sizeHint");
-        if (sizeHint) {
-          sizeHint.classList.remove("field-hint-error");
-          sizeHint.innerHTML = "Choose the closest size \u2014 pick <strong>Custom</strong> if none of these fit.";
-        }
+      window.selectSize = function(elm) {
+        elm.parentNode.querySelectorAll(".size-preset").forEach(o => o.classList.remove("selected"));
+        elm.classList.add("selected");
       };
     })();
   </script>
-
