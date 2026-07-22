@@ -131,6 +131,8 @@ eleventyComputed:
     }
     .add-order-btn:hover { background: var(--charcoal); color: var(--white); }
     .cfg-note { font-size: 12px; color: var(--text-light); margin-top: 12px; line-height: 1.6; }
+    .cfg-hint { font-size: 11.5px; color: var(--text-light); margin-top: 8px; line-height: 1.5; }
+    .cfg-choice { flex-wrap: wrap; }
 
     /* Legacy size rows (products without swatch data yet) */
     .sizes-heading {
@@ -274,6 +276,21 @@ eleventyComputed:
           <div class="size-chip" data-price="">Custom — we measure</div>
         </div>
 
+        <div class="cfg-step">4 · Installation</div>
+        <div class="fabric-toggle cfg-choice" id="cfgInstall">
+          <button type="button" data-v="No-Drill (tension fit)">No-Drill</button>
+          <button type="button" data-v="Drilled (permanent)">Drilled</button>
+          <button type="button" class="on" data-v="Not sure — please advise">Not sure</button>
+        </div>
+        <div class="cfg-hint">No-Drill uses tension brackets — no holes, no damage. Ideal for rentals.</div>
+
+        <div class="cfg-step">5 · Operation</div>
+        <div class="fabric-toggle cfg-choice" id="cfgOperation">
+          <button type="button" data-v="Corded / Cordless">Corded / Cordless</button>
+          {% if product.data.motorised %}<button type="button" data-v="Motorised">Motorised</button>{% endif %}
+          <button type="button" class="on" data-v="Not sure — please advise">Not sure</button>
+        </div>
+
         <div class="cfg-buy">
           <div class="cfg-qty">
             <button type="button" onclick="cfgQty(-1)">−</button><span id="cfgQtyVal">1</span><button type="button" onclick="cfgQty(1)">+</button>
@@ -328,4 +345,4 @@ eleventyComputed:
     </div>
   </section>
 
-  {% include "order-basket.njk" %}
+<!-- Cart drawer is included site-wide via base.njk -->

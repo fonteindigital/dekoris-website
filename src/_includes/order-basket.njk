@@ -65,6 +65,10 @@
   .ob-price { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 500; color: var(--gold-dark, #8B7B54); }
   .ob-price-tbd { color: var(--text-light, #767676); font-weight: 400; font-style: italic; }
   .ob-remove { border: none; background: none; color: #a96b62; cursor: pointer; font-size: 11px; letter-spacing: 0.5px; }
+  .ob-line-ctrl { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+  .ob-qty { display: inline-flex; align-items: center; border: 1px solid var(--cream-dark, #eee); background: var(--white, #fff); border-radius: 4px; }
+  .ob-qty button { border: none; background: none; font-size: 14px; padding: 3px 10px; cursor: pointer; color: var(--text-dark, #545454); line-height: 1.4; }
+  .ob-qty em { font-style: normal; min-width: 22px; text-align: center; font-size: 12.5px; color: var(--text-dark, #545454); }
   .ob-foot { padding: 16px 24px 22px; border-top: 1px solid var(--cream-dark, #eee); background: var(--cream, #FAF7F2); }
   .ob-subtotal {
     display: flex; justify-content: space-between; align-items: baseline;
@@ -117,17 +121,28 @@
         var priceHtml = line !== null
           ? '<span class="ob-price">' + money(line) + '</span>'
           : '<span class="ob-price ob-price-tbd">Priced after measure</span>';
+        var extras = [it.install, it.operation].filter(function(x){ return x && x.indexOf("Not sure") === -1; }).join(" · ");
         return '<div class="ob-item">' +
           '<div class="ob-chip" style="background:' + (it.hex || "#ddd") + '"></div>' +
-          '<div class="ob-info"><b>' + it.qty + " × " + it.product + "</b>" +
+          '<div class="ob-info"><b>' + it.product + "</b>" +
           (it.fabric ? it.fabric + " · " : "") + (it.code ? it.code + " " + it.colour : it.colour || "") +
-          "<br>" + it.size + priceHtml + "</div>" +
-          '<button class="ob-remove" data-i="' + i + '">remove</button></div>';
+          "<br>" + it.size + (extras ? "<br>" + extras : "") + priceHtml +
+          '<div class="ob-line-ctrl"><span class="ob-qty"><button type="button" class="ob-step" data-i="' + i + '" data-d="-1">−</button><em>' + it.qty + '</em><button type="button" class="ob-step" data-i="' + i + '" data-d="1">+</button></span>' +
+          '<button class="ob-remove" data-i="' + i + '">remove</button></div></div>';
       }).join("");
       if (sub) {
         document.getElementById("obSubtotalVal").textContent = money(subtotal);
         sub.style.display = "flex";
       }
+      wrap.querySelectorAll(".ob-step").forEach(function(b) {
+        b.addEventListener("click", function() {
+          var items = read();
+          var it = items[+b.dataset.i];
+          if (!it) return;
+          it.qty = Math.max(1, it.qty + (+b.dataset.d));
+          write(items);
+        });
+      });
       wrap.querySelectorAll(".ob-remove").forEach(function(b) {
         b.addEventListener("click", function() {
           var items = read(); items.splice(+b.dataset.i, 1); write(items);
@@ -141,7 +156,19 @@
     });
 
     window.dekorisBasket = {
-      add: function(item) { var items = read(); items.push(item); write(items); open(true); }
+      add: function(item) {
+        var items = read();
+        var match = null;
+        for (var i = 0; i < items.length; i++) {
+          var x = items[i];
+          if (x.slug === item.slug && x.fabric === item.fabric && x.code === item.code &&
+              x.size === item.size && x.install === item.install && x.operation === item.operation) {
+            match = x; break;
+          }
+        }
+        if (match) { match.qty += item.qty; } else { items.push(item); }
+        write(items); open(true);
+      }
     };
     render();
   })();
@@ -184,6 +211,21 @@
         ch.classList.add("on");
       });
     });
+    ["cfgInstall", "cfgOperation"].forEach(function(gid) {
+      var g = document.getElementById(gid);
+      if (!g) return;
+      g.querySelectorAll("button").forEach(function(b) {
+        b.addEventListener("click", function() {
+          g.querySelectorAll("button").forEach(function(x) { x.classList.remove("on"); });
+          b.classList.add("on");
+        });
+      });
+    });
+    function choiceOf(gid) {
+      var g = document.getElementById(gid);
+      var on = g ? g.querySelector("button.on") : null;
+      return on ? on.getAttribute("data-v") : "";
+    }
     window.cfgQty = function(d) {
       qty = Math.max(1, qty + d);
       document.getElementById("cfgQtyVal").textContent = qty;
@@ -199,6 +241,8 @@
         fabric: P.fabricTypes[fi].name,
         code: c.code, colour: c.name, hex: c.hex,
         size: size ? size.textContent.trim() : "Custom — we measure",
+        install: choiceOf("cfgInstall"),
+        operation: choiceOf("cfgOperation"),
         price: price,
         qty: qty
       });

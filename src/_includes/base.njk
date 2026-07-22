@@ -35,6 +35,8 @@
 
   {% include "no-drill-popup.njk" %}
 
+  {% if activePage != "quote" %}{% include "order-basket.njk" %}{% endif %}
+
   <!-- Common scripts -->
   <script>
     // Nav scroll effect

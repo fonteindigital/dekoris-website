@@ -303,7 +303,7 @@ permalink: /quote/
             </div>
           </div>
 
-          <div class="form-group fade-up">
+          <div class="form-group fade-up" id="fittingGroup">
             <div class="form-group-title">Fitting &amp; Site</div>
             <div style="margin-bottom: 20px;">
               <label>Installation</label>
@@ -405,11 +405,12 @@ permalink: /quote/
         el("osItems").innerHTML = cart.map(function(it) {
           const line = (typeof it.price === "number" && it.price > 0) ? it.price * it.qty : null;
           if (line !== null) subtotal += line; else hasCustom = true;
+          const extras = [it.install, it.operation].filter(x => x && x.indexOf("Not sure") === -1).join(" · ");
           return '<div class="os-item">' +
             '<div class="os-chip" style="background:' + (it.hex || "#ddd") + '"></div>' +
             '<div class="os-info"><b>' + it.qty + " × " + it.product + "</b><span>" +
             (it.fabric ? it.fabric + " · " : "") + (it.code ? it.code + " " + it.colour : (it.colour || "")) +
-            " · " + it.size + "</span></div>" +
+            " · " + it.size + (extras ? "<br>" + extras : "") + "</span></div>" +
             '<div class="os-line">' + (line !== null ? money(line) : "after measure") + "</div>" +
           "</div>";
         }).join("");
@@ -423,6 +424,7 @@ permalink: /quote/
         el("orderSummaryGroup").style.display = "block";
         el("emptyBanner").style.display = "none";
         el("productPickGroup").style.display = "none";
+        el("fittingGroup").style.display = "none";
         el("submitBtn").textContent = "Request Invoice";
         el("checkoutTitle").textContent = "Request an Invoice";
         el("checkoutIntro").textContent = "Review your selection and send it to us — we confirm, measure and email your invoice. No payment is taken online.";
@@ -495,6 +497,8 @@ permalink: /quote/
               (it.fabric ? " — " + it.fabric : "") +
               (it.code ? ", " + it.code + " " + it.colour : (it.colour ? ", " + it.colour : "")) +
               ", " + it.size +
+              (it.install ? ", " + it.install : "") +
+              (it.operation ? ", " + it.operation : "") +
               (line !== null ? "  = " + money(line) : "  (priced after measure)"));
           });
           lines.push("");
@@ -518,14 +522,16 @@ permalink: /quote/
           if (sizeEl) lines.push("Window size: " + sizeEl.textContent.trim());
         }
 
-        const install = form.querySelector('input[name="installation"]:checked');
-        if (install) lines.push("Installation: " + (INSTALL_LABELS[install.value] || install.value));
-        const op = form.querySelector('input[name="operation"]:checked');
-        if (op) lines.push("Operation: " + (OPERATION_LABELS[op.value] || op.value));
-        const count = el("windowCount") ? el("windowCount").textContent : "1";
-        lines.push("Windows: " + count);
-        const space = el("quoteSpace") ? el("quoteSpace").value : "";
-        if (space) lines.push("Space: " + space);
+        if (!invoiceMode) {
+          const install = form.querySelector('input[name="installation"]:checked');
+          if (install) lines.push("Installation: " + (INSTALL_LABELS[install.value] || install.value));
+          const op = form.querySelector('input[name="operation"]:checked');
+          if (op) lines.push("Operation: " + (OPERATION_LABELS[op.value] || op.value));
+          const count = el("windowCount") ? el("windowCount").textContent : "1";
+          lines.push("Windows: " + count);
+          const space = el("quoteSpace") ? el("quoteSpace").value : "";
+          if (space) lines.push("Space: " + space);
+        }
         const notes = form.querySelector("textarea") ? form.querySelector("textarea").value : "";
         if (notes) lines.push("\nNotes:\n" + notes);
 
