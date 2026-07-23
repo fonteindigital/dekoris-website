@@ -406,8 +406,11 @@ permalink: /quote/
           const line = (typeof it.price === "number" && it.price > 0) ? it.price * it.qty : null;
           if (line !== null) subtotal += line; else hasCustom = true;
           const extras = [it.install, it.operation].filter(x => x && x.indexOf("Not sure") === -1).join(" · ");
+          const chipStyle = it.swatch
+            ? "background:" + (it.hex || "#ddd") + " url('" + it.swatch + "') center/cover no-repeat"
+            : "background:" + (it.hex || "#ddd");
           return '<div class="os-item">' +
-            '<div class="os-chip" style="background:' + (it.hex || "#ddd") + '"></div>' +
+            '<div class="os-chip" style="' + chipStyle + '"></div>' +
             '<div class="os-info"><b>' + it.qty + " × " + it.product + "</b><span>" +
             (it.fabric ? it.fabric + " · " : "") + (it.code ? it.code + " " + it.colour : (it.colour || "")) +
             " · " + it.size + (extras ? "<br>" + extras : "") + "</span></div>" +

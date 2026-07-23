@@ -12,23 +12,23 @@ colours: ["White", "Beige", "Charcoal"]
 fabricTypes:
   - name: "Blackout"
     colours:
-      - { code: "SSB01", name: "White", hex: "#F4F4F2" }
-      - { code: "FWB06", name: "Beige", hex: "#DDD5C4" }
-      - { code: "FWB03", name: "Light Gray", hex: "#B9B8B4" }
-      - { code: "SSB09", name: "Gray", hex: "#8B8B8D" }
-      - { code: "FWB13", name: "Light Brown", hex: "#C7B491" }
-      - { code: "MSB15", name: "Dark Brown", hex: "#6B5B49" }
-      - { code: "SSB10", name: "Black", hex: "#2E2C2A" }
+      - { code: "SSB01", name: "White", hex: "#F4F4F2", swatch: "/images/uploads/swatches/zebra/SSB01.jpg" }
+      - { code: "FWB06", name: "Beige", hex: "#DDD5C4", swatch: "/images/uploads/swatches/zebra/FWB06.jpg" }
+      - { code: "FWB03", name: "Light Gray", hex: "#B9B8B4", swatch: "/images/uploads/swatches/zebra/FWB03.jpg" }
+      - { code: "SSB09", name: "Gray", hex: "#8B8B8D", swatch: "/images/uploads/swatches/zebra/SSB09.jpg" }
+      - { code: "FWB13", name: "Light Brown", hex: "#C7B491", swatch: "/images/uploads/swatches/zebra/FWB13.jpg" }
+      - { code: "MSB15", name: "Dark Brown", hex: "#6B5B49", swatch: "/images/uploads/swatches/zebra/MSB15.jpg" }
+      - { code: "SSB10", name: "Black", hex: "#2E2C2A", swatch: "/images/uploads/swatches/zebra/SSB10.jpg" }
   - name: "Light Filtering"
     colours:
-      - { code: "YSL91", name: "Pure White", hex: "#FBFAF7" }
-      - { code: "SSL01", name: "White", hex: "#F7F6F2" }
-      - { code: "XKL16", name: "Light Beige", hex: "#E8E0CC" }
-      - { code: "XKL17", name: "Dark Beige", hex: "#D6C6A4" }
-      - { code: "SSL09", name: "Gray", hex: "#A7A7A9" }
-      - { code: "YSL08", name: "Brown", hex: "#B39B72" }
-      - { code: "SSL08", name: "Dark Brown", hex: "#6E5F52" }
-      - { code: "SSL10", name: "Black", hex: "#3A3835" }
+      - { code: "YSL91", name: "Pure White", hex: "#FBFAF7", swatch: "/images/uploads/swatches/zebra/YSL91.jpg" }
+      - { code: "SSL01", name: "White", hex: "#F7F6F2", swatch: "/images/uploads/swatches/zebra/SSL01.jpg" }
+      - { code: "XKL16", name: "Light Beige", hex: "#E8E0CC", swatch: "/images/uploads/swatches/zebra/XKL16.jpg" }
+      - { code: "XKL17", name: "Dark Beige", hex: "#D6C6A4", swatch: "/images/uploads/swatches/zebra/XKL17.jpg" }
+      - { code: "SSL09", name: "Gray", hex: "#A7A7A9", swatch: "/images/uploads/swatches/zebra/SSL09.jpg" }
+      - { code: "YSL08", name: "Brown", hex: "#B39B72", swatch: "/images/uploads/swatches/zebra/YSL08.jpg" }
+      - { code: "SSL08", name: "Dark Brown", hex: "#6E5F52", swatch: "/images/uploads/swatches/zebra/SSL08.jpg" }
+      - { code: "SSL10", name: "Black", hex: "#3A3835", swatch: "/images/uploads/swatches/zebra/SSL10.jpg" }
 motorised: true
 order: 4
 sizes:

@@ -122,8 +122,11 @@
           ? '<span class="ob-price">' + money(line) + '</span>'
           : '<span class="ob-price ob-price-tbd">Priced after measure</span>';
         var extras = [it.install, it.operation].filter(function(x){ return x && x.indexOf("Not sure") === -1; }).join(" · ");
+        var chipStyle = it.swatch
+          ? "background:" + (it.hex || "#ddd") + " url('" + it.swatch + "') center/cover no-repeat"
+          : "background:" + (it.hex || "#ddd");
         return '<div class="ob-item">' +
-          '<div class="ob-chip" style="background:' + (it.hex || "#ddd") + '"></div>' +
+          '<div class="ob-chip" style="' + chipStyle + '"></div>' +
           '<div class="ob-info"><b>' + it.product + "</b>" +
           (it.fabric ? it.fabric + " · " : "") + (it.code ? it.code + " " + it.colour : it.colour || "") +
           "<br>" + it.size + (extras ? "<br>" + extras : "") + priceHtml +
@@ -193,12 +196,18 @@
         ftWrap.appendChild(b);
       });
     }
+    function tileStyle(c) {
+      // Real fabric photo when available; hex fallback while a book is pending
+      return c.swatch
+        ? "background:" + (c.hex || "#ddd") + " url('" + c.swatch + "') center/cover no-repeat"
+        : "background:" + c.hex;
+    }
     function drawSwatches() {
       swWrap.innerHTML = "";
       P.fabricTypes[fi].colours.forEach(function(c, i) {
         var d = document.createElement("div");
-        d.className = "swatch" + (c.texture === "linen" ? " linen" : "") + (i === ci ? " on" : "");
-        d.innerHTML = '<div class="sw-tile" style="background:' + c.hex + '"></div><span>' + c.code + "</span>";
+        d.className = "swatch" + (c.texture === "linen" && !c.swatch ? " linen" : "") + (i === ci ? " on" : "");
+        d.innerHTML = '<div class="sw-tile" style="' + tileStyle(c) + '"></div><span>' + c.code + "</span>";
         d.addEventListener("click", function() { ci = i; drawSwatches(); });
         swWrap.appendChild(d);
       });
@@ -239,7 +248,7 @@
         product: P.title,
         slug: P.slug,
         fabric: P.fabricTypes[fi].name,
-        code: c.code, colour: c.name, hex: c.hex,
+        code: c.code, colour: c.name, hex: c.hex, swatch: c.swatch || "",
         size: size ? size.textContent.trim() : "Custom — we measure",
         install: choiceOf("cfgInstall"),
         operation: choiceOf("cfgOperation"),

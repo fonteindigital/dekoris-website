@@ -12,18 +12,18 @@ colours: ["White", "Cream", "Black"]
 fabricTypes:
   - name: "Fabric colours"
     colours:
-      - { code: "JL0901", name: "White", hex: "#F5F5F2", texture: "linen" }
-      - { code: "JL2016", name: "Light Beige", hex: "#E9E2D2", texture: "linen" }
-      - { code: "JL0906", name: "Beige", hex: "#D9C49A", texture: "linen" }
-      - { code: "JL2017", name: "Dark Beige", hex: "#CBBFA6", texture: "linen" }
-      - { code: "JL0913", name: "Light Brown", hex: "#C4AE8B", texture: "linen" }
-      - { code: "JL0908", name: "Brown", hex: "#7C6F58", texture: "linen" }
-      - { code: "JL2812", name: "Khaki", hex: "#B6A67E", texture: "linen" }
-      - { code: "JL2103", name: "Light Gray", hex: "#C3C3C1", texture: "linen" }
-      - { code: "JL0909", name: "Gray", hex: "#9A9A98", texture: "linen" }
-      - { code: "JL2120", name: "Dark Gray", hex: "#6A6A68", texture: "linen" }
-      - { code: "JL2121", name: "Black Gray", hex: "#4B4B4B", texture: "linen" }
-      - { code: "JL0910", name: "Black", hex: "#2B2B2B", texture: "linen" }
+      - { code: "JL0901", name: "White", hex: "#F5F5F2", texture: "linen", swatch: "/images/uploads/swatches/roller/JL0901.jpg" }
+      - { code: "JL2016", name: "Light Beige", hex: "#E9E2D2", texture: "linen", swatch: "/images/uploads/swatches/roller/JL2016.jpg" }
+      - { code: "JL0906", name: "Beige", hex: "#D9C49A", texture: "linen", swatch: "/images/uploads/swatches/roller/JL0906.jpg" }
+      - { code: "JL2017", name: "Dark Beige", hex: "#CBBFA6", texture: "linen", swatch: "/images/uploads/swatches/roller/JL2017.jpg" }
+      - { code: "JL0913", name: "Light Brown", hex: "#C4AE8B", texture: "linen", swatch: "/images/uploads/swatches/roller/JL0913.jpg" }
+      - { code: "JL0908", name: "Brown", hex: "#7C6F58", texture: "linen", swatch: "/images/uploads/swatches/roller/JL0908.jpg" }
+      - { code: "JL2812", name: "Khaki", hex: "#B6A67E", texture: "linen", swatch: "/images/uploads/swatches/roller/JL2812.jpg" }
+      - { code: "JL2103", name: "Light Gray", hex: "#C3C3C1", texture: "linen", swatch: "/images/uploads/swatches/roller/JL2103.jpg" }
+      - { code: "JL0909", name: "Gray", hex: "#9A9A98", texture: "linen", swatch: "/images/uploads/swatches/roller/JL0909.jpg" }
+      - { code: "JL2120", name: "Dark Gray", hex: "#6A6A68", texture: "linen", swatch: "/images/uploads/swatches/roller/JL2120.jpg" }
+      - { code: "JL2121", name: "Black Gray", hex: "#4B4B4B", texture: "linen", swatch: "/images/uploads/swatches/roller/JL2121.jpg" }
+      - { code: "JL0910", name: "Black", hex: "#2B2B2B", texture: "linen", swatch: "/images/uploads/swatches/roller/JL0910.jpg" }
 motorised: true
 order: 5
 sizes:
