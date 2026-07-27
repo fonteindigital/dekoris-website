@@ -56,12 +56,13 @@ permalink: /shop/
       color: var(--text-dark); font-weight: 600; margin: 18px 0 6px;
     }
     .ed-price { font-size: 13.5px; color: var(--text-light); }
-    .ed-dots { display: flex; justify-content: center; gap: 5px; margin-top: 10px; min-height: 13px; }
+    .ed-dots { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 10px; min-height: 20px; }
     .ed-dots i {
-      width: 13px; height: 13px; border-radius: 50%;
+      width: 20px; height: 20px; border-radius: 3px;
+      background-size: cover; background-position: center;
       box-shadow: 0 0 0 1px rgba(0,0,0,0.12); display: inline-block;
     }
-    .ed-dots em { font-style: normal; font-size: 11px; color: var(--text-light); line-height: 13px; }
+    .ed-dots em { font-style: normal; font-size: 11px; color: var(--text-light); line-height: 20px; }
     .ed-badges { margin-top: 8px; }
     .ed-badges span {
       font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase;
@@ -111,9 +112,10 @@ permalink: /shop/
         {% endif %}
         <div class="ed-dots">
           {% if product.data.fabricTypes %}
-            {% set shown = 0 %}
-            {% for c in product.data.fabricTypes[0].colours %}
-              {% if loop.index <= 5 %}<i style="background: {{ c.hex }}"></i>{% set shown = shown + 1 %}{% endif %}
+            {% set cols = product.data.fabricTypes[0].colours %}
+            {% set n = cols.length %}
+            {% for c in cols %}
+              {% if n <= 5 or ((loop.index0 * 5) // n) > (((loop.index0 - 1) * 5) // n) %}<i title="{{ c.code }} · {{ c.name }}" style="background-color: {{ c.hex }}{% if c.swatch %}; background-image: url('{{ c.swatch }}'){% endif %}"></i>{% endif %}
             {% endfor %}
             {% set total = 0 %}
             {% for ft in product.data.fabricTypes %}{% set total = total + ft.colours.length %}{% endfor %}
